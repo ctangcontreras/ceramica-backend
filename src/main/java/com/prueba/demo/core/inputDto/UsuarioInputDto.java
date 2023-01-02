@@ -5,6 +5,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class UsuarioInputDto {
-    public String idUsuario;
+    public String usuario;
     private String password;
 }
