@@ -38,18 +38,6 @@ public class DemoController {
 		return ResponseEntity.ok("hola");
 	}
  
-	@ApiOperation(value = "lista parametro")
-	@RequestMapping(value = "/getListaParametro", method = RequestMethod.GET)
-	public ResponseEntity<Object> getListaParametro() {
-		
-		try {
-			return ResponseEntity.ok(demoService.getListaParametro());
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			return ResponseEntity.ok(e);
-		}
-	}
-
 	@ApiOperation(value = "lista persona")
 	@RequestMapping(value = "/getListaPersona", method = RequestMethod.GET)
 	public ResponseEntity<Object> getListaPersona() {

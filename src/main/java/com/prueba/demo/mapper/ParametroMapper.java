@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.prueba.demo.core.model.DetalleParametro;
 import com.prueba.demo.core.model.Parametro;
 
 @Mapper
 public interface ParametroMapper {
-    List<Parametro>  getListaParametro();
+    public List<DetalleParametro> listDetParametro(Parametro param) throws Exception;
 }

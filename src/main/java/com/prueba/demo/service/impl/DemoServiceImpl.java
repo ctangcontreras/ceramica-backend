@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.prueba.demo.core.model.Parametro;
 import com.prueba.demo.core.model.Persona;
-import com.prueba.demo.mapper.ParametroMapper;
 import com.prueba.demo.mapper.PersonaMapper;
 import com.prueba.demo.service.DemoService;
 import com.prueba.demo.support.dto.Respuesta;
@@ -27,14 +25,6 @@ public class DemoServiceImpl implements DemoService {
 	@Autowired
 	private PersonaMapper personaMapper;
 
-	@Autowired
-	private ParametroMapper parametroMapper;
- 
-	@Override
-	public Respuesta<?> getListaParametro() throws Exception {
-		List<Parametro> lista = parametroMapper.getListaParametro();
-		return new Respuesta<>(true, lista);
-	}
 
 	@Override
 	public Respuesta<?> getListaPersona() throws Exception {
