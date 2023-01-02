@@ -25,6 +25,9 @@ public class ParametroServiceImpl implements ParametroService{
         parametro.setCodigo(codigo);
         List<DetalleParametro> list = parametroMapper.listDetParametro(parametro);
 
+    
+    
+
         if (!list.isEmpty()) {
             Respuesta resp = new Respuesta<>();
             resp.setSuccess(true);
