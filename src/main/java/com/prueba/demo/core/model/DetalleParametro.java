@@ -6,8 +6,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Parametro extends ModeloBase{
+public class DetalleParametro extends ModeloBase{
     
+    private Integer idDetalleParametro;
     private Integer idParametro;
     private String codigo;
     private String descripcion;
