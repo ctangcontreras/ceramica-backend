@@ -1,0 +1,32 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prueba.demo.mapper.PersonaMapper">
+
+	<resultMap id="resPersona" type="Persona">
+		<result property="idPersona" 	    column="PERSONA_ID" />
+		<result property="dni" 	        	column="NUMERO_DNI" />
+        <result property="apellidoPaterno" 	column="APELLIDO_PATERNO" />
+        <result property="apellidoMaterno"  column="APELLIDO_MATERNO" />
+        <result property="direccion"  	 	column="DIRECCION" />
+        <result property="nombre"  	 		column="NOMBRE" />
+  
+	</resultMap>
+
+	<select id="getListaPersona" resultMap="resPersona">
+		  
+			SELECT PERSONA_ID,
+				NUMERO_DNI,
+				APELLIDO_PATERNO,
+				APELLIDO_MATERNO,
+				DIRECCION,
+				NOMBRE
+			FROM PERSONA.PERSONA
+	</select>
+
+	<select id="getListaPersonaProcedure"  statementType="CALLABLE" parameterType="java.util.Map">
+  		{ call PERSONA.PKG_PERSONA.SP_LISTA(
+  			#{resultado, jdbcType=CURSOR, javaType=ResultSet, mode=OUT, resultMap=resPersona}
+  		)}
+  	</select>
+
+	 
+</mapper>
