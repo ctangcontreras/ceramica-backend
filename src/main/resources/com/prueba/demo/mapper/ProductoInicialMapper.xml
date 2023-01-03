@@ -1,0 +1,42 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prueba.demo.mapper.ProductoInicialMapper">
+	<resultMap id="resListarProductoInicial" type="ProductoInicial">
+			<result property="idProductoInicial" 	    column="N_PRODUCTO_INICIAL_PK" />
+			<result property="fechaRegistroDesc" 	   	column="FECHA_REGISTRO" />
+			<result property="prensaDesc"  	    		column="C_PRENSA" />
+			<result property="tipoLadrilloDesc"         column="C_TIPO_LADRILLO" />
+			<result property="cantidadProducido"        column="N_CANTIDAD_PRODUCIDO" />
+			<result property="cantidadEstimada"  	    column="N_CANTIDAD_ESTIMADA" />
+			<result property="activo"  					column="N_ACTIVO" />
+			<result property="cCodigo"  				column="C_CODIGO" />
+	</resultMap>
+
+	<select id="getRegistrarProductoInicial" parameterType="com.prueba.demo.core.model.ProductoInicial" statementType="CALLABLE"
+			>
+		{CALL sp_producto_inicial_ins(
+			#{idProductoInicial, jdbcType = INTEGER, mode = IN},
+			#{fechaRegistro, jdbcType = DATE, mode = IN},
+			#{prensa, jdbcType = VARCHAR, mode = IN},
+			#{tipoLadrillo, jdbcType = VARCHAR, mode = IN},
+			#{cantidadProducido, jdbcType = INTEGER, mode = IN},
+			#{cantidadEstimada, jdbcType = INTEGER, mode = IN},
+			#{activo, jdbcType = INTEGER, mode = IN},
+			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
+			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
+	<select id="getListarProductoInicial" parameterType="com.prueba.demo.core.model.ProductoInicial" statementType="CALLABLE"
+			resultMap="resListarProductoInicial">
+		{CALL sp_producto_inicial_lis(
+			#{idProductoInicial, jdbcType = INTEGER, mode = IN},
+			#{fechaRegistro, jdbcType = DATE, mode = IN},
+			#{prensa, jdbcType = VARCHAR, mode = IN},
+			#{tipoLadrillo, jdbcType = VARCHAR, mode = IN}
+		)
+		}
+	</select>
+
+	 
+</mapper>

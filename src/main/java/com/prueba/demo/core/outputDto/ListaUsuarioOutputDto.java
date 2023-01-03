@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ListaUsuarioOutputDto {
-    private String idUsuario;
+    private Integer idUsuario;
     private Integer idSucursal;
     private Integer idPerfil;
     private String password;

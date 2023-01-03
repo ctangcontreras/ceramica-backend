@@ -10,5 +10,5 @@ import com.prueba.demo.core.model.Usuario;
 @Mapper
 public interface UsuarioMapper {
    
-    List<Usuario>  getListaUsuario();
+    List<Usuario>  getListaUsuario(Usuario param);
 }

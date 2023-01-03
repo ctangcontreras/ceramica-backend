@@ -12,8 +12,8 @@ import lombok.Setter;
 public class ModeloBase {
 	private Integer activo;
 	private String estado;
-	private String usuarioCreacion;
-	private String usuarioModificacion;
+	private Integer usuarioCreacion;
+	private Integer usuarioModificacion;
 	private Date fechaCreacion;
 	private Date fechaModificacion;
 	private Integer totalRegistroPorPagina;

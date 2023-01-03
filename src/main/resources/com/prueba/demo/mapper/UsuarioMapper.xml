@@ -10,7 +10,7 @@
         <result property="apellidoPaterno"  	column="C_APELLIDO_PATERNO" />
         <result property="apellidoMaterno"  	column="C_APELLIDO_MATERNO" />
         <result property="activo"  	        	column="N_ACTIVO" />
-		<result property="usuarioCreacion"  	column="C_USUARIO_CREACION" />
+		<result property="usuarioCreacion"  	column="N_USUARIO_CREACION" />
 		<result property="fechaCreacion"        column="D_FECHA_CREACION" />
 		
   
