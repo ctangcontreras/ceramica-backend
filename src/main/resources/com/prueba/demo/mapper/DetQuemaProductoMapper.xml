@@ -1,0 +1,19 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prueba.demo.mapper.DetQuemaProductoMapper">
+
+	
+    <select id="registrarDetQuemaProducto" parameterType="com.prueba.demo.core.model.DetalleQuemaProducto" statementType="CALLABLE"
+			>
+		{CALL sp_det_quema_producto_ins(
+			#{idDetalleQuemaProducto, jdbcType = INTEGER, mode = IN},
+			#{idQuemaProducto, jdbcType = INTEGER, mode = IN},
+			#{lado, jdbcType = VARCHAR, mode = IN},
+			#{fechaDetalle, jdbcType = DATE, mode = IN},
+			#{activo, jdbcType = INTEGER, mode = IN},
+			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
+			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
+</mapper>
