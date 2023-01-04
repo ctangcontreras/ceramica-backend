@@ -4,7 +4,7 @@
 	<select id="registrarQuemaProducto" parameterType="com.prueba.demo.core.model.QuemaProducto" statementType="CALLABLE"
 			>
 		{CALL sp_quema_producto_ins(
-			#{idQuemaProducto, jdbcType = INTEGER, mode = IN},
+			#{idQuemaProducto, jdbcType = INTEGER, mode = INOUT},
 			#{fechaRegistro, jdbcType = DATE, mode = IN},
 			#{horno, jdbcType = VARCHAR, mode = IN},
 			#{cantidadPaquete, jdbcType = INTEGER, mode = IN},
