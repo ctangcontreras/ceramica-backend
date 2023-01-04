@@ -17,6 +17,7 @@ public class ProductoInicial extends ModeloBase{
     private String tipoLadrillo;
     private Integer cantidadProducido;
     private Integer cantidadEstimada;
+    private String codigoProductoInicial;
 
     private String fechaRegistroDesc;
     private String tipoLadrilloDesc;
