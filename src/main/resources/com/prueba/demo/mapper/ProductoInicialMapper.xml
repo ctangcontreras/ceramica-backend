@@ -9,6 +9,7 @@
 			<result property="cantidadEstimada"  	    column="N_CANTIDAD_ESTIMADA" />
 			<result property="activo"  					column="N_ACTIVO" />
 			<result property="cCodigo"  				column="C_CODIGO" />
+			<result property="codigoProductoInicial"  	column="CODIGO_PRODUCTO_INICIAL" />
 	</resultMap>
 
 	<select id="getRegistrarProductoInicial" parameterType="com.prueba.demo.core.model.ProductoInicial" statementType="CALLABLE"
@@ -22,6 +23,7 @@
 			#{cantidadEstimada, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
+			#{codigoProductoInicial, jdbcType = VARCHAR, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
 		)
 		}

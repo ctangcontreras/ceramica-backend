@@ -14,7 +14,6 @@ import com.prueba.demo.core.model.ProductoInicial;
 import com.prueba.demo.core.outputDto.ListaProductoInicialOutputDto;
 import com.prueba.demo.mapper.ProductoInicialMapper;
 import com.prueba.demo.service.ProductoInicialService;
-import com.prueba.demo.support.dto.Constantes;
 import com.prueba.demo.support.dto.Respuesta;
 
 
@@ -37,8 +36,8 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 			productoInicial.setCantidadProducido(param.getCantidadProducido());
 			productoInicial.setCantidadEstimada(param.getCantidadEstimada());
 			productoInicial.setUsuarioCreacion(param.getUsuarioCreacion());
-			productoInicial.setActivo(Constantes.ESTADO_ACTIVO);
-			productoInicial.setFechaCreacion(new Date());
+			productoInicial.setActivo(1);
+			productoInicial.setCodigoProductoInicial(param.getCodigoProductoInicial());
 			productoInicialMapper.getRegistrarProductoInicial(productoInicial);
 
 
@@ -69,6 +68,7 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 			listaProductoInicialOutputDto.setCantidadProducido(listaProductoInicial.get(0).getCantidadProducido());
 			listaProductoInicialOutputDto.setActivo(1);
 			listaProductoInicialOutputDto.setCCodigo(listaProductoInicial.get(0).getCCodigo());
+			listaProductoInicialOutputDto.setCodigoProductoInicial(listaProductoInicial.get(0).getCodigoProductoInicial());
 
 			Respuesta resp = new Respuesta<>();
 			resp.setSuccess(true);

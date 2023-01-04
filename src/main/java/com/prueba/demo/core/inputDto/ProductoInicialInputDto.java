@@ -17,4 +17,5 @@ public class ProductoInicialInputDto {
     private Integer cantidadProducido;
     private Integer cantidadEstimada;
     private Integer usuarioCreacion;
+    private String codigoProductoInicial;
 }
