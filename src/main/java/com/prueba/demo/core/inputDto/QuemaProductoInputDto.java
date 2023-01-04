@@ -20,7 +20,6 @@ public class QuemaProductoInputDto {
     private Date fechaRegistro;
     private String horno;
     private Integer cantidadPaquete;
-    private String codigo;
     private Integer usuarioCreacion;
 
     private List<DetQuemaProductoInputDto> registrarDetalle;

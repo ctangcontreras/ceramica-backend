@@ -1,5 +1,7 @@
 package com.prueba.demo.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.prueba.demo.core.model.QuemaProducto;
@@ -8,5 +10,5 @@ import com.prueba.demo.core.model.QuemaProducto;
 public interface QuemaProductoMapper {
 
     void  registrarQuemaProducto(QuemaProducto param);
-    
+    List<QuemaProducto> listarQuemaProducto(QuemaProducto param);
 }

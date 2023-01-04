@@ -29,6 +29,16 @@ public class QuemaProductoController {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);
 			}
-		}
+	}
+
+	@PostMapping("/listaQuemaProducto")
+		public ResponseEntity<?> getListaUsuario(@RequestBody QuemaProductoInputDto input){
+			try {
+				return ResponseEntity.ok(quemaProductoService.listarQuemaProducto(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+	}
     
 }

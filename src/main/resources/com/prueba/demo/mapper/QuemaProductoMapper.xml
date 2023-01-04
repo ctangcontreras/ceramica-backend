@@ -1,6 +1,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.prueba.demo.mapper.QuemaProductoMapper">
 
+	<resultMap id="resListarQuemaProducto" type="QuemaProducto">
+			<result property="idQuemaProducto" 	    column="N_QUEMA_PRODUCTO_PK" />
+			<result property="descFechaRegistro" 	column="FECHA_REGISTRO" />
+			<result property="descHorno"  	    	column="DESCRIPCION_HORNO" />
+			<result property="cantidadPaquete"      column="N_CANTIDAD_PAQUETE" />
+			<result property="codigo"        		column="C_CODIGO" />
+			<result property="fechaInicio"       	column="FECHA_INICIO" />
+			<result property="fechaFin"  	    	column="FECHA_FIN" />
+			<result property="descripcionEstado"  	column="DESC_N_ACTIVO" />
+	</resultMap>
+
 	<select id="registrarQuemaProducto" parameterType="com.prueba.demo.core.model.QuemaProducto" statementType="CALLABLE"
 			>
 		{CALL sp_quema_producto_ins(
@@ -8,10 +19,19 @@
 			#{fechaRegistro, jdbcType = DATE, mode = IN},
 			#{horno, jdbcType = VARCHAR, mode = IN},
 			#{cantidadPaquete, jdbcType = INTEGER, mode = IN},
-			#{codigo, jdbcType = VARCHAR, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
+	<select id="listarQuemaProducto" parameterType="com.prueba.demo.core.model.QuemaProducto" statementType="CALLABLE"
+			resultMap="resListarQuemaProducto">
+		{CALL sp_quema_producto_lis(
+			#{idQuemaProducto, jdbcType = INTEGER, mode = IN},
+			#{fechaRegistro, jdbcType = DATE, mode = IN},
+			#{horno, jdbcType = VARCHAR, mode = IN}
 		)
 		}
 	</select>
