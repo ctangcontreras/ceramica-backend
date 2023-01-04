@@ -1,6 +1,7 @@
 package com.prueba.demo.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 			productoInicial.setCantidadEstimada(param.getCantidadEstimada());
 			productoInicial.setUsuarioCreacion(param.getUsuarioCreacion());
 			productoInicial.setActivo(1);
-			productoInicial.setCodigoProductoInicial(param.getCodigoProductoInicial());
+			
 			productoInicialMapper.getRegistrarProductoInicial(productoInicial);
 
 
@@ -57,23 +58,28 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 			listProductoInicial.setTipoLadrillo(param.getTipoLadrillo());
 			List<ProductoInicial> listaProductoInicial = productoInicialMapper.getListarProductoInicial(listProductoInicial);
 
-		if (listaProductoInicial != null && !listaProductoInicial.isEmpty()) {
-
-			ListaProductoInicialOutputDto listaProductoInicialOutputDto = new ListaProductoInicialOutputDto();
-			listaProductoInicialOutputDto.setIdProductoInicial(listaProductoInicial.get(0).getIdProductoInicial());
-			listaProductoInicialOutputDto.setFechaRegistroDesc(listaProductoInicial.get(0).getFechaRegistroDesc());
-			listaProductoInicialOutputDto.setPrensaDesc(listaProductoInicial.get(0).getPrensaDesc());
-			listaProductoInicialOutputDto.setTipoLadrilloDesc(listaProductoInicial.get(0).getTipoLadrilloDesc());
-			listaProductoInicialOutputDto.setCantidadEstimada(listaProductoInicial.get(0).getCantidadEstimada());
-			listaProductoInicialOutputDto.setCantidadProducido(listaProductoInicial.get(0).getCantidadProducido());
-			listaProductoInicialOutputDto.setActivo(1);
-			listaProductoInicialOutputDto.setCCodigo(listaProductoInicial.get(0).getCCodigo());
-			listaProductoInicialOutputDto.setCodigoProductoInicial(listaProductoInicial.get(0).getCodigoProductoInicial());
+			List<ListaProductoInicialOutputDto> listaInicial = new ArrayList<>();
+			if (!listaProductoInicial.isEmpty()) {
+				ListaProductoInicialOutputDto lista = new ListaProductoInicialOutputDto();
+			for (ProductoInicial element : listaProductoInicial) {
+				lista = new ListaProductoInicialOutputDto();
+				lista.setIdProductoInicial(element.getIdProductoInicial());
+				lista.setFechaRegistroDesc(element.getFechaRegistroDesc());
+				lista.setPrensaDesc(element.getPrensaDesc());
+				lista.setCantidadProducido(element.getCantidadProducido());
+				lista.setCantidadEstimada(element.getCantidadEstimada());
+				lista.setActivo(1);
+				lista.setDescripcionActivo(element.getDescripcionActivo());
+				lista.setCCodigo(element.getCCodigo());
+				lista.setCodigoProductoInicial(element.getCodigoProductoInicial());
+				lista.setTipoLadrilloDesc(element.getTipoLadrilloDesc());
+				listaInicial.add(lista);
+			}
 
 			Respuesta resp = new Respuesta<>();
 			resp.setSuccess(true);
-            resp.setMessage("Se validaron correctamente los datos");
-            resp.setDato(listaProductoInicialOutputDto);
+            resp.setMessage("Se listo correctamente los datos");
+            resp.setDato(listaInicial);
             return resp;
 		} else {	
 			Respuesta resp = new Respuesta<>();

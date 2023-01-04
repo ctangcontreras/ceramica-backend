@@ -28,5 +28,6 @@ public class ModeloBase {
 	
 	@JsonIgnore
 	private String mensajeInterno;
+	private String descripcionActivo;
 
 }
