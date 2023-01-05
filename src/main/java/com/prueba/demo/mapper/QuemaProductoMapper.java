@@ -10,5 +10,6 @@ import com.prueba.demo.core.model.QuemaProducto;
 public interface QuemaProductoMapper {
 
     void  registrarQuemaProducto(QuemaProducto param);
+    void  eliminarQuemaProducto(QuemaProducto param);
     List<QuemaProducto> listarQuemaProducto(QuemaProducto param);
 }

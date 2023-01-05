@@ -10,6 +10,7 @@
 			<result property="fechaInicio"       	column="FECHA_INICIO" />
 			<result property="fechaFin"  	    	column="FECHA_FIN" />
 			<result property="descripcionEstado"  	column="DESC_N_ACTIVO" />
+			<result property="activo"			  	column="N_ACTIVO" />
 	</resultMap>
 
 	<select id="registrarQuemaProducto" parameterType="com.prueba.demo.core.model.QuemaProducto" statementType="CALLABLE"
@@ -21,6 +22,17 @@
 			#{cantidadPaquete, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
+			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
+	<select id="eliminarQuemaProducto" parameterType="com.prueba.demo.core.model.QuemaProducto" statementType="CALLABLE"
+			>
+		{CALL sp_quema_producto_eli(
+			#{idQuemaProducto, jdbcType = INTEGER, mode = IN},
+			#{activo, jdbcType = INTEGER, mode = IN},
+			#{usuarioElimina, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
 		)
 		}

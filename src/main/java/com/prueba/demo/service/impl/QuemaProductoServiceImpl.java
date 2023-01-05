@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.prueba.demo.core.inputDto.DetQuemaProductoInputDto;
+import com.prueba.demo.core.inputDto.EliminarQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.QuemaProductoInputDto;
 import com.prueba.demo.core.model.DetalleQuemaProducto;
 import com.prueba.demo.core.model.QuemaProducto;
@@ -61,6 +62,23 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
 		
   }
 
+  @Override
+	public Respuesta<?> eliminarQuemaProducto(EliminarQuemaProductoInputDto param) throws Exception {
+
+        QuemaProducto quemaProducto = new QuemaProducto();
+        quemaProducto.setIdQuemaProducto(param.getIdQuemaProducto());
+        quemaProducto.setActivo(Constantes.ESTADO_INACTIVO);
+        quemaProducto.setUsuarioElimina(param.getUsuarioElimina());
+        quemaProductoMapper.eliminarQuemaProducto(quemaProducto);
+
+ 
+        Respuesta resp = new Respuesta<>();
+        resp.setSuccess(quemaProducto.getResultado().equals(1)?true:false);
+        resp.setMessage("Se eliminó el registro correctamente");
+        return resp;
+		
+  }
+
     @Override
     @Transactional
 	public Respuesta<?> listarQuemaProducto(QuemaProductoInputDto param) throws Exception {
@@ -85,6 +103,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     e.setFechaFin(element.getFechaFin());
                     e.setDescripcionEstado(element.getDescripcionEstado());
                     e.setCodigo(element.getCodigo());
+                    e.setActivo(element.getActivo());
                     lista.add(e);
                 }
                 Respuesta resp = new Respuesta<>();

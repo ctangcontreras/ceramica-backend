@@ -17,4 +17,5 @@ public class ListaQuemaProductoOutputDto {
     private String fechaInicio;
     private String fechaFin;
     private String descripcionEstado;
+    private Integer activo;
 }
