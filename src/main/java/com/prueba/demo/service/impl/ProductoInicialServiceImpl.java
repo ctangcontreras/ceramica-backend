@@ -1,9 +1,17 @@
 package com.prueba.demo.service.impl;
 
 
+import java.security.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,20 +65,25 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 			listProductoInicial.setPrensa(param.getPrensa());
 			listProductoInicial.setTipoLadrillo(param.getTipoLadrillo());
 			List<ProductoInicial> listaProductoInicial = productoInicialMapper.getListarProductoInicial(listProductoInicial);
-
+		
 			List<ListaProductoInicialOutputDto> listaInicial = new ArrayList<>();
 			if (!listaProductoInicial.isEmpty()) {
 				ListaProductoInicialOutputDto lista = new ListaProductoInicialOutputDto();
 			for (ProductoInicial element : listaProductoInicial) {
+				String strDate = "29/12/96";
+				Date date = new SimpleDateFormat("dd/mm/yyyy")
+				.parse(element.getFechaRegistroDesc());
 				lista = new ListaProductoInicialOutputDto();
 				lista.setIdProductoInicial(element.getIdProductoInicial());
-				lista.setFechaRegistroDesc(element.getFechaRegistroDesc());
+				lista.setFechaRegistro(date);
 				lista.setPrensaDesc(element.getPrensaDesc());
 				lista.setCantidadProducido(element.getCantidadProducido());
 				lista.setCantidadEstimada(element.getCantidadEstimada());
 				lista.setActivo(1);
 				lista.setDescripcionActivo(element.getDescripcionActivo());
-				lista.setCCodigo(element.getCCodigo());
+				//lista.setCCodigo(element.getCCodigo());
+				lista.setTipoLadrillo(element.getTipoLadrillo());
+				lista.setPrensa(element.getPrensa());
 				lista.setCodigoProductoInicial(element.getCodigoProductoInicial());
 				lista.setTipoLadrilloDesc(element.getTipoLadrilloDesc());
 				listaInicial.add(lista);

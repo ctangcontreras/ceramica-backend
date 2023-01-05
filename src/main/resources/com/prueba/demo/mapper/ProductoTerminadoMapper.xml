@@ -1,0 +1,38 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prueba.demo.mapper.ProductoTerminadoMapper">
+
+	<resultMap id="resListarProductoTerminado" type="ProductoTerminado">
+			<result property="idProductoTerminado" 	    column="N_PRODUCTO_TERMINADO_PK" />
+			<result property="horno" 					column="C_HORNO" />
+			<result property="fechaRegistro"  	    	column="FECHA_REGISTRO" />
+			<result property="paquete"      			column="N_PAQUETE" />
+			<result property="descContenido"        	column="CONTENIDO" />
+			<result property="descripcionActivo"       	column="DESC_ESTADO_ACTIVO" />
+	</resultMap>
+
+	<select id="registrarProductoTerminado" parameterType="com.prueba.demo.core.model.ProductoTerminado" statementType="CALLABLE"
+			>
+		{CALL sp_producto_terminado_ins(
+			#{idProductoTerminado, jdbcType = INTEGER, mode = INOUT},
+			#{horno, jdbcType = VARCHAR, mode = IN},
+			#{fechaRegistro, jdbcType = DATE, mode = IN},
+			#{paquete, jdbcType = INTEGER, mode = IN},
+			#{total, jdbcType = INTEGER, mode = IN},
+			#{activo, jdbcType = INTEGER, mode = IN},
+			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
+			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
+	<select id="listarProductoTerminado" parameterType="com.prueba.demo.core.model.ProductoTerminado" statementType="CALLABLE"
+			resultMap="resListarProductoTerminado">
+		{CALL sp_producto_terminado_lis(
+			#{idProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{fechaRegistro, jdbcType = DATE, mode = IN},
+			#{horno, jdbcType = VARCHAR, mode = IN}
+		)
+		}
+	</select>
+
+</mapper>

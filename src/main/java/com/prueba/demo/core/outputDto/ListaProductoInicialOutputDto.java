@@ -17,7 +17,6 @@ public class ListaProductoInicialOutputDto {
     private Integer activo;
     private String descripcionActivo;
     private String codigoProductoInicial;
-
     private String fechaRegistroDesc;
     private String tipoLadrilloDesc;
     private String prensaDesc;
