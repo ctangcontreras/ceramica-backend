@@ -14,8 +14,10 @@ public class ModeloBase {
 	private String estado;
 	private Integer usuarioCreacion;
 	private Integer usuarioModificacion;
+	private Integer usuarioElimina;
 	private Date fechaCreacion;
 	private Date fechaModificacion;
+	private Date fechaElimina;
 	private Integer totalRegistroPorPagina;
 	private Integer pagina;
 	private Integer totalPaginas;
