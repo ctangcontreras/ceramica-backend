@@ -49,6 +49,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     detalle.setIdQuemaProducto(quemaProducto.getIdQuemaProducto());
                     detalle.setLado(element.getLado());
                     detalle.setFechaDetalle(element.getFechaDetalle());
+                    detalle.setTipo(element.getTipo());
                     detalle.setActivo(Constantes.ESTADO_ACTIVO);
                     detalle.setUsuarioCreacion(element.getUsuarioCreacion());
                     detQuemaProductoMapper.registrarDetQuemaProducto(detalle);
@@ -104,6 +105,12 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     e.setDescripcionEstado(element.getDescripcionEstado());
                     e.setCodigo(element.getCodigo());
                     e.setActivo(element.getActivo());
+                    e.setHorno(element.getHorno());
+                    e.setLadoInicio(element.getLadoInicio());
+                    e.setLadoFin(element.getLadoFin());
+                    e.setFechaRegistro(element.getFechaRegistro());
+                    e.setDescFechaInicio(element.getDescFechaInicio());
+                    e.setDescFechaFin(element.getDescFechaFin());
                     lista.add(e);
                 }
                 Respuesta resp = new Respuesta<>();

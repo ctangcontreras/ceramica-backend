@@ -3,14 +3,20 @@
 
 	<resultMap id="resListarQuemaProducto" type="QuemaProducto">
 			<result property="idQuemaProducto" 	    column="N_QUEMA_PRODUCTO_PK" />
-			<result property="descFechaRegistro" 	column="FECHA_REGISTRO" />
+			<result property="descFechaRegistro" 	column="C_FECHA_REGISTRO" />
 			<result property="descHorno"  	    	column="DESCRIPCION_HORNO" />
 			<result property="cantidadPaquete"      column="N_CANTIDAD_PAQUETE" />
 			<result property="codigo"        		column="C_CODIGO" />
-			<result property="fechaInicio"       	column="FECHA_INICIO" />
-			<result property="fechaFin"  	    	column="FECHA_FIN" />
 			<result property="descripcionEstado"  	column="DESC_N_ACTIVO" />
 			<result property="activo"			  	column="N_ACTIVO" />
+			<result property="horno"			  	column="C_HORNO" />
+			<result property="fechaRegistro"		column="D_FECHA_REGISTRO" />
+			<result property="fechaInicio"			column="D_FECHA_INICIO"/>
+			<result property="fechaFin"			  	column="D_FECHA_FIN" />
+			<result property="descFechaInicio"      column="C_FECHA_INICIO" />
+			<result property="descFechaFin"  	    column="C_FECHA_FIN" />
+			<result property="ladoInicio"			column="C_LADO_INICIO" />
+			<result property="ladoFin"			  	column="C_LADO_FIN" />
 	</resultMap>
 
 	<select id="registrarQuemaProducto" parameterType="com.prueba.demo.core.model.QuemaProducto" statementType="CALLABLE"

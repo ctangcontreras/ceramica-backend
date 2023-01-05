@@ -1,5 +1,7 @@
 package com.prueba.demo.core.outputDto;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,12 +12,17 @@ public class ListaQuemaProductoOutputDto {
     private Integer idQuemaProducto;
     private Integer cantidadPaquete;
     private String codigo;
-
-
+    private Integer activo;
+    private String horno;
+    private Date fechaRegistro;
+    private Date fechaInicio;
+    private Date fechaFin;
     private String descFechaRegistro;
     private String descHorno;
-    private String fechaInicio;
-    private String fechaFin;
+    private String descFechaInicio;
+    private String descFechaFin;
     private String descripcionEstado;
-    private Integer activo;
+    private String ladoInicio;
+    private String ladoFin;
+
 }

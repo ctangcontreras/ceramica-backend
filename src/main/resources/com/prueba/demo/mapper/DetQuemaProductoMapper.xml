@@ -9,6 +9,7 @@
 			#{idQuemaProducto, jdbcType = INTEGER, mode = IN},
 			#{lado, jdbcType = VARCHAR, mode = IN},
 			#{fechaDetalle, jdbcType = DATE, mode = IN},
+			#{tipo, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
