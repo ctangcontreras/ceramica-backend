@@ -13,4 +13,5 @@ public interface ProductoInicialMapper {
    
     void  getRegistrarProductoInicial(ProductoInicial param);
     List<ProductoInicial>  getListarProductoInicial(ProductoInicial param);
+    void  eliminarProductoInicial(ProductoInicial param);
 }

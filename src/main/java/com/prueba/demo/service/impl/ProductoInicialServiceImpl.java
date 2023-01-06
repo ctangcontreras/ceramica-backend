@@ -18,11 +18,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.prueba.demo.core.inputDto.EliminarProductoInicialInputDto;
 import com.prueba.demo.core.inputDto.ProductoInicialInputDto;
 import com.prueba.demo.core.model.ProductoInicial;
 import com.prueba.demo.core.outputDto.ListaProductoInicialOutputDto;
 import com.prueba.demo.mapper.ProductoInicialMapper;
 import com.prueba.demo.service.ProductoInicialService;
+import com.prueba.demo.support.dto.Constantes;
 import com.prueba.demo.support.dto.Respuesta;
 
 
@@ -70,16 +72,17 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 			if (!listaProductoInicial.isEmpty()) {
 				ListaProductoInicialOutputDto lista = new ListaProductoInicialOutputDto();
 			for (ProductoInicial element : listaProductoInicial) {
-				String strDate = "29/12/96";
-				Date date = new SimpleDateFormat("dd/mm/yyyy")
-				.parse(element.getFechaRegistroDesc());
+
+				Date date = new SimpleDateFormat("dd/mm/yyyy").parse(element.getFechaRegistroDate());
+
 				lista = new ListaProductoInicialOutputDto();
 				lista.setIdProductoInicial(element.getIdProductoInicial());
 				lista.setFechaRegistro(date);
+				lista.setFechaRegistroDesc(element.getFechaRegistroDesc());;
 				lista.setPrensaDesc(element.getPrensaDesc());
 				lista.setCantidadProducido(element.getCantidadProducido());
 				lista.setCantidadEstimada(element.getCantidadEstimada());
-				lista.setActivo(1);
+				lista.setActivo(element.getActivo());
 				lista.setDescripcionActivo(element.getDescripcionActivo());
 				//lista.setCCodigo(element.getCCodigo());
 				lista.setTipoLadrillo(element.getTipoLadrillo());
@@ -100,6 +103,23 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
             resp.setMessage("No se encontró registros");
             return resp;
 		} 
+  }
+
+  @Override
+	public Respuesta<?> eliminarProductoInicial(EliminarProductoInicialInputDto param) throws Exception {
+
+        ProductoInicial productoInicial = new ProductoInicial();
+        productoInicial.setIdProductoInicial(param.getIdProductoInicial());
+        productoInicial.setActivo(Constantes.ESTADO_INACTIVO);
+        productoInicial.setUsuarioElimina(param.getUsuarioElimina());
+        productoInicialMapper.eliminarProductoInicial(productoInicial);
+
+ 
+        Respuesta resp = new Respuesta<>();
+        resp.setSuccess(productoInicial.getResultado().equals(1)?true:false);
+        resp.setMessage("Se eliminó el registro correctamente");
+        return resp;
+		
   }
 
 }

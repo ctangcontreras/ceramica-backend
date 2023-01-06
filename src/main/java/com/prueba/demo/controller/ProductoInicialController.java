@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.prueba.demo.core.inputDto.EliminarProductoInicialInputDto;
 import com.prueba.demo.core.inputDto.ProductoInicialInputDto;
 import com.prueba.demo.service.ProductoInicialService;
 
@@ -44,4 +45,14 @@ public class ProductoInicialController {
 				return ResponseEntity.ok(e);
 			}
 		}
+
+		@PostMapping("/eliminarProductoInicial")
+		public ResponseEntity<?> eliminarProductoInicial(@RequestBody EliminarProductoInicialInputDto input){
+			try {
+				return ResponseEntity.ok(productoInicialService.eliminarProductoInicial(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+	}
 }

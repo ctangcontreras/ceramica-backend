@@ -19,6 +19,7 @@ public class ProductoInicial extends ModeloBase{
     private Integer cantidadEstimada;
     private String codigoProductoInicial;
 
+    private String fechaRegistroDate;
     private String fechaRegistroDesc;
     private String tipoLadrilloDesc;
     private String prensaDesc;
