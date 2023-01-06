@@ -23,6 +23,7 @@ public class ProductoTerminadoInputDto {
     private Integer total;
     private Integer activo;
     private Integer usuarioCreacion;
+    private Integer crudo;
     
 
 

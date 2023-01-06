@@ -1,36 +1,29 @@
 package com.prueba.demo.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.prueba.demo.core.inputDto.RegistrarDetQuemaProductoInputDto;
+import com.prueba.demo.core.inputDto.DetProductoTerminadoInputDto;
 import com.prueba.demo.core.inputDto.ProductoTerminadoInputDto;
-import com.prueba.demo.core.model.DetalleQuemaProducto;
+import com.prueba.demo.core.model.DetalleProductoTerminado;
 import com.prueba.demo.core.model.ProductoTerminado;
-import com.prueba.demo.core.model.QuemaProducto;
-import com.prueba.demo.core.outputDto.ListaQuemaProductoOutputDto;
-import com.prueba.demo.mapper.DetQuemaProductoMapper;
+import com.prueba.demo.mapper.DetProductoTerminadoMapper;
 import com.prueba.demo.mapper.ProductoTerminadoMapper;
-import com.prueba.demo.mapper.QuemaProductoMapper;
 import com.prueba.demo.service.ProductoTerminadoService;
-import com.prueba.demo.service.QuemaProductoService;
 import com.prueba.demo.support.dto.Constantes;
 import com.prueba.demo.support.dto.Respuesta;
 
-/* @Service
+@Service
 public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
     
     @Autowired
     ProductoTerminadoMapper productoTerminadoMapper;
 
     @Autowired
-    DetQuemaProductoMapper detQuemaProductoMapper; */
+    DetProductoTerminadoMapper detProductoTerminadoMapper;
 
-    /* @Override
+    @Override
     @Transactional
 	public Respuesta<?> registarProductoTerminado(ProductoTerminadoInputDto param) throws Exception {
 
@@ -39,32 +32,38 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
             productoTerminado.setHorno(param.getHorno());
             productoTerminado.setFechaRegistro(param.getFechaRegistro());
             productoTerminado.setPaquete(param.getPaquete());
+            productoTerminado.setTotal(param.getTotal());
             productoTerminado.setActivo(Constantes.ESTADO_ACTIVO);
             productoTerminado.setUsuarioCreacion(param.getUsuarioCreacion());
-            productoTerminado.registrarProductoTerminado(productoTerminado);
+            productoTerminado.setCrudo(param.getCrudo());
+            productoTerminadoMapper.registrarProductoTerminado(productoTerminado);
 
-            DetalleQuemaProducto detalle = new DetalleQuemaProducto();
+            DetalleProductoTerminado detalle = new DetalleProductoTerminado();
 
             if (param.getRegistrarDetalle() != null && !param.getRegistrarDetalle().isEmpty()) {
-                for (DetQuemaProductoInputDto element : param.getRegistrarDetalle()) {
-                    detalle.setIdDetalleQuemaProducto(element.getIdDetalleQuemaProducto());
-                    detalle.setIdQuemaProducto(quemaProducto.getIdQuemaProducto());
-                    detalle.setLado(element.getLado());
-                    detalle.setFechaDetalle(element.getFechaDetalle());
+                for (DetProductoTerminadoInputDto element : param.getRegistrarDetalle()) {
+                    detalle.setIdDetalleProductoTerminado(element.getIdDetalleProductoTerminado());
+                    detalle.setIdProductoTerminado(productoTerminado.getIdProductoTerminado());
+                    detalle.setNro(element.getNro());
+                    detalle.setTipoLadrillo(element.getTipoLadrillo());
+                    detalle.setCantidadPaquete(element.getCantidadPaquete());
+                    detalle.setCantidadCrudo(element.getCantidadCrudo());
+                    detalle.setTotal(element.getTotal());
                     detalle.setActivo(Constantes.ESTADO_ACTIVO);
                     detalle.setUsuarioCreacion(element.getUsuarioCreacion());
-                    detQuemaProductoMapper.registrarDetQuemaProducto(detalle);
+                    detalle.setEstado(element.getEstado());
+                    detProductoTerminadoMapper.registrarDetProductoTerminado(detalle);
                 }
             }
             
 			Respuesta resp = new Respuesta<>();
-			resp.setSuccess(quemaProducto.getResultado().equals(1)?true:false);
+			resp.setSuccess(productoTerminado.getResultado().equals(1)?true:false);
             resp.setMessage("Se registraron correctamente los datos");
             return resp;
 		
-  } */
+  }
 
-   /*  @Override
+    /* @Override
     @Transactional
 	public Respuesta<?> listarQuemaProducto(QuemaProductoInputDto param) throws Exception {
 			QuemaProducto quemaProducto = new QuemaProducto();
@@ -103,4 +102,4 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
             } 
   }
  */
-/* } */
+}

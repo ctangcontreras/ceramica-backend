@@ -20,5 +20,9 @@ public class DetProductoTerminadoInputDto {
     private Integer nro;
     private String tipoLadrillo;
     private String estado;
+    private Integer cantidadPaquete;
     private Integer usuarioCreacion;
+    private Integer cantidadCrudo;
+    private Integer total;
+    
 }
