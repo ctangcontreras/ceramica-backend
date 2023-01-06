@@ -13,6 +13,7 @@ import com.prueba.demo.core.inputDto.QuemaProductoInputDto;
 import com.prueba.demo.core.model.DetalleQuemaProducto;
 import com.prueba.demo.core.model.QuemaProducto;
 import com.prueba.demo.core.outputDto.ListaQuemaProductoOutputDto;
+import com.prueba.demo.core.outputDto.ListarDetQuemaProductoOutputDto;
 import com.prueba.demo.mapper.DetQuemaProductoMapper;
 import com.prueba.demo.mapper.QuemaProductoMapper;
 import com.prueba.demo.service.QuemaProductoService;
@@ -100,19 +101,49 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     e.setDescHorno(element.getDescHorno());
                     e.setDescFechaRegistro(element.getDescFechaRegistro());
                     e.setCantidadPaquete(element.getCantidadPaquete());
-                    e.setFechaInicio(element.getFechaFin());
-                    e.setFechaFin(element.getFechaFin());
                     e.setDescripcionEstado(element.getDescripcionEstado());
                     e.setCodigo(element.getCodigo());
                     e.setActivo(element.getActivo());
                     e.setHorno(element.getHorno());
-                    e.setLadoInicio(element.getLadoInicio());
-                    e.setLadoFin(element.getLadoFin());
                     e.setFechaRegistro(element.getFechaRegistro());
                     e.setDescFechaInicio(element.getDescFechaInicio());
                     e.setDescFechaFin(element.getDescFechaFin());
+
+                    DetalleQuemaProducto detalle = new DetalleQuemaProducto();
+                    detalle.setIdQuemaProducto(element.getIdQuemaProducto());
+                    List<DetalleQuemaProducto> listaDetalle = detQuemaProductoMapper.listarDetQuemaProducto(detalle);
+
+                    if (listaDetalle != null && !listaDetalle.isEmpty()) {
+                        ListarDetQuemaProductoOutputDto d = new ListarDetQuemaProductoOutputDto();
+                        for (DetalleQuemaProducto element2 : listaDetalle) {
+                            d = new ListarDetQuemaProductoOutputDto();
+                            if (element2.getTipo()==1) {
+                                d.setIdDetalleQuemaProducto(element2.getIdDetalleQuemaProducto());
+                                d.setIdQuemaProducto(element2.getIdQuemaProducto());
+                                d.setLado(element2.getLado());
+                                d.setDescLado(element2.getDescLado());
+                                d.setActivo(element2.getActivo());
+                                d.setFechaDetalle(element2.getFechaDetalle());
+                                d.setTipo(element2.getTipo());
+                                e.setInicio(d);
+                            }
+
+                            if (element2.getTipo()==2) {
+                                d.setIdDetalleQuemaProducto(element2.getIdDetalleQuemaProducto());
+                                d.setIdQuemaProducto(element2.getIdQuemaProducto());
+                                d.setLado(element2.getLado());
+                                d.setDescLado(element2.getDescLado());
+                                d.setActivo(element2.getActivo());
+                                d.setFechaDetalle(element2.getFechaDetalle());
+                                d.setTipo(element2.getTipo());
+                                e.setFin(d);
+                            }
+                        }
+                    }
+
                     lista.add(e);
                 }
+
                 Respuesta resp = new Respuesta<>();
                 resp.setSuccess(true);
                 resp.setMessage("Se listó correctamente");

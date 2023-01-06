@@ -1,4 +1,4 @@
-package com.prueba.demo.core.model;
+package com.prueba.demo.core.outputDto;
 
 import java.util.Date;
 
@@ -7,13 +7,13 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class DetalleQuemaProducto extends ModeloBase{
+public class ListarDetQuemaProductoOutputDto {
     
     private Integer idDetalleQuemaProducto;
     private Integer idQuemaProducto;
     private String lado;
     private Date fechaDetalle;
     private Integer tipo;
-
+    private Integer activo;
     private String descLado;
 }
