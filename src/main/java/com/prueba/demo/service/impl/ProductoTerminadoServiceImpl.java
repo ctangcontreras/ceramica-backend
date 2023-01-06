@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.prueba.demo.core.inputDto.DetQuemaProductoInputDto;
+import com.prueba.demo.core.inputDto.RegistrarDetQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.ProductoTerminadoInputDto;
-import com.prueba.demo.core.inputDto.QuemaProductoInputDto;
 import com.prueba.demo.core.model.DetalleQuemaProducto;
 import com.prueba.demo.core.model.ProductoTerminado;
 import com.prueba.demo.core.model.QuemaProducto;

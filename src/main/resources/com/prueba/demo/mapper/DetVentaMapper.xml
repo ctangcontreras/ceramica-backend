@@ -6,7 +6,7 @@
 	<select id="registrarDetVenta" parameterType="com.prueba.demo.core.model.DetalleVenta" statementType="CALLABLE"
 			>
 		{CALL sp_det_venta_ins(
-			#{idDetalleVenta, jdbcType = INTEGER, mode = IN},
+			#{idDetalleVenta, jdbcType = INTEGER, mode = INOUT},
 			#{idVenta, jdbcType = INTEGER, mode = IN},
 			#{tipoLadrillo, jdbcType = VARCHAR, mode = IN},
 			#{cantidad, jdbcType = INTEGER, mode = IN},

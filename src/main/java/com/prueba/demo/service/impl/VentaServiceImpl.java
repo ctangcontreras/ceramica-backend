@@ -68,7 +68,7 @@ public class VentaServiceImpl implements VentaService{
                     if (element.getRegistrarProducto()!=null && !element.getRegistrarProducto().isEmpty()) {
                         for (RegistrarDetProductoVentaInputDto element2 : element.getRegistrarProducto()) {
                              detalleProducto.setIdDetalleProductoVenta(element2.getIdDetalleProductoVenta());
-                             detalleProducto.setIdDetalleVenta(element.getIdDetalleVenta());
+                             detalleProducto.setIdDetalleVenta(detalle.getIdDetalleVenta());
                              detalleProducto.setIdProductoTerminado(element2.getIdProductoTerminado());
                              detalle.setActivo(Constantes.ESTADO_ACTIVO);
                              detProductoVentaMapper.registrarDetProductoVenta(detalleProducto);
