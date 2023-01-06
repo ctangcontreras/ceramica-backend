@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.prueba.demo.core.inputDto.DetQuemaProductoInputDto;
+import com.prueba.demo.core.inputDto.RegistrarDetQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.EliminarQuemaProductoInputDto;
-import com.prueba.demo.core.inputDto.QuemaProductoInputDto;
+import com.prueba.demo.core.inputDto.RegistrarQuemaProductoInputDto;
 import com.prueba.demo.core.model.DetalleQuemaProducto;
 import com.prueba.demo.core.model.QuemaProducto;
 import com.prueba.demo.core.outputDto.ListaQuemaProductoOutputDto;
@@ -31,7 +31,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
 
     @Override
     @Transactional
-	public Respuesta<?> registarQuemaProducto(QuemaProductoInputDto param) throws Exception {
+	public Respuesta<?> registarQuemaProducto(RegistrarQuemaProductoInputDto param) throws Exception {
 
             QuemaProducto quemaProducto = new QuemaProducto();
             quemaProducto.setIdQuemaProducto(param.getIdQuemaProducto());
@@ -45,14 +45,14 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
             DetalleQuemaProducto detalle = new DetalleQuemaProducto();
 
             if (param.getRegistrarDetalle() != null && !param.getRegistrarDetalle().isEmpty()) {
-                for (DetQuemaProductoInputDto element : param.getRegistrarDetalle()) {
+                for (RegistrarDetQuemaProductoInputDto element : param.getRegistrarDetalle()) {
                     detalle.setIdDetalleQuemaProducto(element.getIdDetalleQuemaProducto());
                     detalle.setIdQuemaProducto(quemaProducto.getIdQuemaProducto());
                     detalle.setLado(element.getLado());
                     detalle.setFechaDetalle(element.getFechaDetalle());
                     detalle.setTipo(element.getTipo());
                     detalle.setActivo(Constantes.ESTADO_ACTIVO);
-                    detalle.setUsuarioCreacion(element.getUsuarioCreacion());
+                    detalle.setUsuarioCreacion(param.getUsuarioCreacion());
                     detQuemaProductoMapper.registrarDetQuemaProducto(detalle);
                 }
             }
@@ -83,7 +83,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
 
     @Override
     @Transactional
-	public Respuesta<?> listarQuemaProducto(QuemaProductoInputDto param) throws Exception {
+	public Respuesta<?> listarQuemaProducto(RegistrarQuemaProductoInputDto param) throws Exception {
 			QuemaProducto quemaProducto = new QuemaProducto();
 			quemaProducto.setIdQuemaProducto(param.getIdQuemaProducto());
 			quemaProducto.setFechaRegistro(param.getFechaRegistro());
