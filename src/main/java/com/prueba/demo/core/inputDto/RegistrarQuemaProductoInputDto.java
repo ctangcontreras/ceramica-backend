@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuemaProductoInputDto {
+public class RegistrarQuemaProductoInputDto {
     private Integer idQuemaProducto;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
     private Date fechaRegistro;
@@ -22,5 +22,5 @@ public class QuemaProductoInputDto {
     private Integer cantidadPaquete;
     private Integer usuarioCreacion;
 
-    private List<DetQuemaProductoInputDto> registrarDetalle;
+    private List<RegistrarDetQuemaProductoInputDto> registrarDetalle;
 }
