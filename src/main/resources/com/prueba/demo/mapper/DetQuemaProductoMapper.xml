@@ -1,6 +1,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.prueba.demo.mapper.DetQuemaProductoMapper">
 
+	<resultMap id="resListarDetQuemaProducto" type="DetalleQuemaProducto">
+			<result property="idDetalleQuemaProducto" 	column="N_DET_QUEMA_PRODUCTO_PK" />
+			<result property="idQuemaProducto" 			column="N_QUEMA_PRODUCTO" />
+			<result property="lado"  	    			column="C_LADO" />
+			<result property="descLado"      			column="DESC_LADO" />
+			<result property="fechaDetalle"        		column="D_FECHA_DETALLE" />
+			<result property="activo" 		 			column="N_ACTIVO" />
+			<result property="tipo"			  			column="N_TIPO" />
+	</resultMap>
 	
     <select id="registrarDetQuemaProducto" parameterType="com.prueba.demo.core.model.DetalleQuemaProducto" statementType="CALLABLE"
 			>
@@ -17,4 +26,13 @@
 		}
 	</select>
 
+	<select id="listarDetQuemaProducto" parameterType="com.prueba.demo.core.model.DetalleQuemaProducto" statementType="CALLABLE"
+			resultMap="resListarDetQuemaProducto">
+		{CALL sp_det_quema_producto_lis(
+			#{idDetalleQuemaProducto, jdbcType = INTEGER, mode = IN},
+			#{idQuemaProducto, jdbcType = INTEGER, mode = IN}
+		)
+		}
+	</select>
+	
 </mapper>
