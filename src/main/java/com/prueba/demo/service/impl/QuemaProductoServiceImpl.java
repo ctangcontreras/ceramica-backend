@@ -52,7 +52,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     detalle.setFechaDetalle(element.getFechaDetalle());
                     detalle.setTipo(element.getTipo());
                     detalle.setActivo(Constantes.ESTADO_ACTIVO);
-                    detalle.setUsuarioCreacion(element.getUsuarioCreacion());
+                    detalle.setUsuarioCreacion(param.getUsuarioCreacion());
                     detQuemaProductoMapper.registrarDetQuemaProducto(detalle);
                 }
             }
