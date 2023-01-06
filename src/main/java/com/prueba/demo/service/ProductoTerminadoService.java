@@ -7,5 +7,5 @@ import com.prueba.demo.support.dto.Respuesta;
 public interface ProductoTerminadoService {
     
     Respuesta<?> registarProductoTerminado(ProductoTerminadoInputDto param) throws Exception;
-    Respuesta<?> listarQuemaProducto(QuemaProductoInputDto param) throws Exception;
+   
 }
