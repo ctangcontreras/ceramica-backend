@@ -3,11 +3,15 @@
 
 	<resultMap id="resListarProductoTerminado" type="ProductoTerminado">
 			<result property="idProductoTerminado" 	    column="N_PRODUCTO_TERMINADO_PK" />
-			<result property="horno" 					column="C_HORNO" />
-			<result property="fechaRegistro"  	    	column="FECHA_REGISTRO" />
+			<result property="horno" 					column="DESC_HORNO" />
+			<result property="descFechaRegistro"  	   	column="FECHA_REGISTRO" />
 			<result property="paquete"      			column="N_PAQUETE" />
-			<result property="descContenido"        	column="CONTENIDO" />
+			<result property="total"  	   			    column="N_TOTAL" />
 			<result property="descripcionActivo"       	column="DESC_ESTADO_ACTIVO" />
+			<result property="activo"       			column="N_ACTIVO" />
+			<result property="codigo"        			column="C_CODIGO" />
+			<result property="crudo"        			column="N_CRUDO" />
+			
 	</resultMap>
 
 	<select id="registrarProductoTerminado" parameterType="com.prueba.demo.core.model.ProductoTerminado" statementType="CALLABLE"
@@ -36,4 +40,14 @@
 		}
 	</select>
 
+	<select id="eliminarProductoTerminado" parameterType="com.prueba.demo.core.model.ProductoTerminado" statementType="CALLABLE"
+			>
+		{CALL sp_producto_terminado_eli(
+			#{idProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{activo, jdbcType = INTEGER, mode = IN},
+			#{usuarioElimina, jdbcType = INTEGER, mode = IN},
+			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
 </mapper>

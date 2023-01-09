@@ -1,15 +1,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.prueba.demo.mapper.DetProductoTerminadoMapper">
 
-	<!-- <resultMap id="resListarDetQuemaProducto" type="DetalleQuemaProducto">
-			<result property="idDetalleQuemaProducto" 	column="N_DET_QUEMA_PRODUCTO_PK" />
-			<result property="idQuemaProducto" 			column="N_QUEMA_PRODUCTO" />
-			<result property="lado"  	    			column="C_LADO" />
-			<result property="descLado"      			column="DESC_LADO" />
-			<result property="fechaDetalle"        		column="D_FECHA_DETALLE" />
-			<result property="activo" 		 			column="N_ACTIVO" />
-			<result property="tipo"			  			column="N_TIPO" />
-	</resultMap> -->
+	<resultMap id="resListarDetProductoTerminado" type="DetalleProductoTerminado">
+			<result property="idDetalleProductoTerminado" 	column="N_DET_PRODUCTO_TERMINADO_PK" />
+			<result property="idProductoTerminado" 			column="N_PRODUCTO_TERMINADO" />
+			<result property="nro"  	    				column="N_NRO" />
+			<result property="codigoLadrillo"      			column="CODIGO_LADRILLO" />
+			<result property="descripccionTipoLadrillo"     column="C_TIPO_LADRILLO" />
+			<result property="codigoEstado" 		 		column="CODIGO_ESTADO_LADRILLO" />
+			<result property="descripcionEstado"			column="C_ESTADO_LADRILLO" />
+			<result property="cantidadPaquete"        		column="N_CANTIDAD_PAQUETE" />
+			<result property="activo"        				column="N_ACTIVO" />
+			<result property="descripcionActivo"        	column="DESC_N_ACTIVO" />
+			<result property="crudo" 				 		column="N_CANTIDAD_CRUDO" />
+			<result property="total"			  			column="N_TOTAL" />
+	</resultMap>
 	
     <select id="registrarDetProductoTerminado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
 			>
@@ -17,25 +22,25 @@
 			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
 			#{idProductoTerminado, jdbcType = INTEGER, mode = IN},
 			#{nro, jdbcType = INTEGER, mode = IN},
-			#{tipoLadrillo, jdbcType = VARCHAR, mode = IN},
+			#{descripccionTipoLadrillo, jdbcType = VARCHAR, mode = IN},
 			#{estado, jdbcType = VARCHAR, mode = IN},
 			#{cantidadPaquete, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
-			#{cantidadCrudo, jdbcType = INTEGER, mode = IN},
+			#{crudo, jdbcType = INTEGER, mode = IN},
 			#{total, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
 		)
 		}
 	</select>
 
-	<!-- <select id="listarDetQuemaProducto" parameterType="com.prueba.demo.core.model.DetalleQuemaProducto" statementType="CALLABLE"
-			resultMap="resListarDetQuemaProducto">
-		{CALL sp_det_quema_producto_lis(
-			#{idDetalleQuemaProducto, jdbcType = INTEGER, mode = IN},
-			#{idQuemaProducto, jdbcType = INTEGER, mode = IN}
+	<select id="listarDetProductoTerminado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
+			resultMap="resListarDetProductoTerminado">
+		{CALL sp_det_producto_terminado_lis(
+			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{idProductoTerminado, jdbcType = INTEGER, mode = IN}
 		)
 		}
-	</select> -->
+	</select>
 	
 </mapper>

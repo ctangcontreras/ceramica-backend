@@ -11,4 +11,5 @@ public interface ProductoTerminadoMapper {
 
     void  registrarProductoTerminado(ProductoTerminado param);
     List<ProductoTerminado> listarProductoTerminado(ProductoTerminado param);
+    void  eliminarProductoTerminado(ProductoTerminado param);
 }

@@ -1,5 +1,7 @@
 package com.prueba.demo.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.prueba.demo.core.model.DetalleProductoTerminado;
@@ -8,5 +10,5 @@ import com.prueba.demo.core.model.DetalleProductoTerminado;
 public interface DetProductoTerminadoMapper {
     
     void registrarDetProductoTerminado(DetalleProductoTerminado param);
-    /* List<DetalleQuemaProducto> listarDetQuemaProducto(DetalleQuemaProducto param); */
+    List<DetalleProductoTerminado> listarDetProductoTerminado(DetalleProductoTerminado param);
 }

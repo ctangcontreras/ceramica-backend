@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.prueba.demo.core.inputDto.EliminarProductoTerminadoInputDto;
 import com.prueba.demo.core.inputDto.ProductoTerminadoInputDto;
 import com.prueba.demo.service.ProductoTerminadoService;
 
@@ -31,24 +32,24 @@ public class ProductoTerminadoController {
 			}
 	}
 
-	/* @PostMapping("/eliminarQuemaProducto")
-		public ResponseEntity<?> eliminarQuemaProducto(@RequestBody EliminarQuemaProductoInputDto input){
+	@PostMapping("/eliminarProductoTerminado")
+		public ResponseEntity<?> eliminarQuemaProducto(@RequestBody EliminarProductoTerminadoInputDto input){
 			try {
-				return ResponseEntity.ok(quemaProductoService.eliminarQuemaProducto(input));
+				return ResponseEntity.ok(productoTerminadoService.eliminarProductoTerminado(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);
 			}
 	}
 
-	@PostMapping("/listaQuemaProducto")
-		public ResponseEntity<?> getListaUsuario(@RequestBody QuemaProductoInputDto input){
+	@PostMapping("/listaProductoTerminado")
+		public ResponseEntity<?> listaProductoTerminado(@RequestBody ProductoTerminadoInputDto input){
 			try {
-				return ResponseEntity.ok(quemaProductoService.listarQuemaProducto(input));
+				return ResponseEntity.ok(productoTerminadoService.listarProductoTerminado(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);
 			}
-	} */
+	}
     
 }
