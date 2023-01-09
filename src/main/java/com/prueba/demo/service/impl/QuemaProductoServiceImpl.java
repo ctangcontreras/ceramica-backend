@@ -58,6 +58,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     detalle.setIdQuemaProducto(quemaProducto.getIdQuemaProducto());
                     detalle.setLado(element.getLado());
                     detalle.setFechaDetalle(element.getFechaDetalle());
+                    detalle.setTFechaDetalle(new java.sql.Timestamp(detalle.getFechaDetalle().getTime()));
                     detalle.setTipo(element.getTipo());
                     detalle.setActivo(Constantes.ESTADO_ACTIVO);
                     detalle.setUsuarioCreacion(param.getUsuarioCreacion());

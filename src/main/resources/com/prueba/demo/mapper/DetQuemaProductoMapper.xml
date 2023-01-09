@@ -17,7 +17,7 @@
 			#{idDetalleQuemaProducto, jdbcType = INTEGER, mode = IN},
 			#{idQuemaProducto, jdbcType = INTEGER, mode = IN},
 			#{lado, jdbcType = VARCHAR, mode = IN},
-			#{fechaDetalle, jdbcType = DATE, mode = IN},
+			#{tFechaDetalle, jdbcType = DATE, mode = IN},
 			#{tipo, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
