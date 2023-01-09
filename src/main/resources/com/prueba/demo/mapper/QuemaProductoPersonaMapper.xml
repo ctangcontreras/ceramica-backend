@@ -1,0 +1,42 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prueba.demo.mapper.QuemaProductoPersonaMapper">
+
+	<resultMap id="resListarQuemaProductoPersona" type="QuemaProductoPersona">
+			<result property="idQuemaProductoPersona" 	column="N_QUEMA_PRODUCTO_PERSONA_PK" />
+			<result property="idQuemaProducto" 			column="N_QUEMA_PRODUCTO" />
+			<result property="dni"  	    			column="C_DNI" />
+			<result property="apellidoPaterno"      	column="C_APELLIDO_PATERNO" />
+			<result property="apellidoMaterno"        	column="C_APELLIDO_MATERNO" />
+			<result property="nombres"        			column="C_NOMBRES" />
+			<result property="activo"        			column="N_ACTIVO" />
+			<result property="tipoPersona" 		 		column="C_TIPO_PERSONA" />
+	</resultMap>
+
+	<select id="registrarQuemaProductoPersona" parameterType="com.prueba.demo.core.model.QuemaProductoPersona" statementType="CALLABLE"
+			>
+		{CALL sp_quema_producto_persona_ins(
+			#{idQuemaProductoPersona, jdbcType = INTEGER, mode = IN},
+			#{idQuemaProducto, jdbcType = INTEGER, mode = IN},
+			#{dni, jdbcType = VARCHAR, mode = IN},
+            #{apellidoPaterno, jdbcType = VARCHAR, mode = IN},
+            #{apellidoMaterno, jdbcType = VARCHAR, mode = IN},
+            #{nombres, jdbcType = VARCHAR, mode = IN},
+			#{tipoPersona, jdbcType = VARCHAR, mode = IN},
+			#{activo, jdbcType = INTEGER, mode = IN},
+			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
+			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
+	<select id="listarQuemaProductoPersona" parameterType="com.prueba.demo.core.model.QuemaProductoPersona" statementType="CALLABLE"
+			resultMap="resListarQuemaProductoPersona">
+		{CALL sp_quema_producto_persona_lis(
+			#{idQuemaProductoPersona, jdbcType = INTEGER, mode = IN},
+			#{idQuemaProducto, jdbcType = INTEGER, mode = IN}
+		)
+		}
+	</select>
+
+
+</mapper>

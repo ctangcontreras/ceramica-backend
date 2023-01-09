@@ -13,6 +13,7 @@
 			<result property="fechaRegistro"		column="D_FECHA_REGISTRO" />
 			<result property="descFechaInicio"      column="C_FECHA_INICIO" />
 			<result property="descFechaFin"  	    column="C_FECHA_FIN" />
+			<result property="observacion"  	    column="C_OBSERVACION" />
 	</resultMap>
 
 	<select id="registrarQuemaProducto" parameterType="com.prueba.demo.core.model.QuemaProducto" statementType="CALLABLE"
@@ -22,6 +23,7 @@
 			#{fechaRegistro, jdbcType = DATE, mode = IN},
 			#{horno, jdbcType = VARCHAR, mode = IN},
 			#{cantidadPaquete, jdbcType = INTEGER, mode = IN},
+			#{observacion, jdbcType = VARCHAR, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}

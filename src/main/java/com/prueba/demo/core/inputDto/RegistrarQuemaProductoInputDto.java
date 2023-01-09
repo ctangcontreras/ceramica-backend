@@ -20,7 +20,9 @@ public class RegistrarQuemaProductoInputDto {
     private Date fechaRegistro;
     private String horno;
     private Integer cantidadPaquete;
+    private String observacion;
     private Integer usuarioCreacion;
 
     private List<RegistrarDetQuemaProductoInputDto> registrarDetalle;
+    private List<RegistrarQuemaProductoPersonaInputDto> registrarPersona;
 }

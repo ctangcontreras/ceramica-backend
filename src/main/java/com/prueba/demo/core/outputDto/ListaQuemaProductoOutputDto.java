@@ -1,6 +1,7 @@
 package com.prueba.demo.core.outputDto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ public class ListaQuemaProductoOutputDto {
 
     private Integer idQuemaProducto;
     private Integer cantidadPaquete;
+    private String observacion;
     private String codigo;
     private Integer activo;
     private String horno;
@@ -23,5 +25,6 @@ public class ListaQuemaProductoOutputDto {
 
     private ListarDetQuemaProductoOutputDto inicio;
     private ListarDetQuemaProductoOutputDto fin;
+    private List<ListarQuemaProductoPersonaOutputDto> listaPersona;
 
 }

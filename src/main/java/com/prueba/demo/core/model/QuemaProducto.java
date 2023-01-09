@@ -13,6 +13,7 @@ public class QuemaProducto extends ModeloBase{
     private String horno;
     private Integer cantidadPaquete;
     private String codigo;
+    private String observacion;
 
     private String descFechaRegistro;
     private String descHorno;
