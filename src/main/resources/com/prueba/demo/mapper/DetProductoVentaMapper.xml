@@ -8,7 +8,7 @@
 		{CALL sp_det_producto_venta_ins(
 			#{idDetalleProductoVenta, jdbcType = INTEGER, mode = IN},
 			#{idDetalleVenta, jdbcType = INTEGER, mode = IN},
-			#{idProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{idDetProductoTerminado, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}

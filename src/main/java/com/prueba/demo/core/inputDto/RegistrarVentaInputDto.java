@@ -1,5 +1,6 @@
 package com.prueba.demo.core.inputDto;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class RegistrarVentaInputDto {
     
     private Integer idVenta;
+    private Date fechaRegistro;
     private String tipoDocumento;
     private String metodoPago;
     private Integer pendienteRecojo;
@@ -24,6 +26,7 @@ public class RegistrarVentaInputDto {
     private String apellidoMaterno;
     private String tipoVehiculo;
     private String placaVehiculo;
+    private String estadoVenta;
     private String observacion;
     private Integer usuarioCreacion;
 

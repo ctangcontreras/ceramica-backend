@@ -9,7 +9,7 @@ public class DetalleProductoVenta extends ModeloBase{
     
     private Integer idDetalleProductoVenta;
     private Integer idDetalleVenta;
-    private Integer idProductoTerminado;
+    private Integer idDetProductoTerminado;
     
     
 }

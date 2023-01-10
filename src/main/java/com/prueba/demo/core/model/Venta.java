@@ -1,5 +1,7 @@
 package com.prueba.demo.core.model;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +10,7 @@ import lombok.Setter;
 public class Venta extends ModeloBase{
     
     private Integer idVenta;
+    private Date fechaRegistro;
     private String tipoDocumento;
     private String metodoPago;
     private Integer pendienteRecojo;
@@ -18,6 +21,7 @@ public class Venta extends ModeloBase{
     private String apellidoMaterno;
     private String tipoVehiculo;
     private String placaVehiculo;
+    private String estadoVenta;
     private String observacion;
 
 }

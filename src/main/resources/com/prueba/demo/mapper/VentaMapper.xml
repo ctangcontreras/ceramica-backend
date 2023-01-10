@@ -7,6 +7,7 @@
 			>
 		{CALL sp_venta_ins(
 			#{idVenta, jdbcType = INTEGER, mode = INOUT},
+			#{fechaRegistro, jdbcType = DATE, mode = IN},
 			#{tipoDocumento, jdbcType = VARCHAR, mode = IN},
 			#{metodoPago, jdbcType = VARCHAR, mode = IN},
 			#{pendienteRecojo, jdbcType = INTEGER, mode = IN},
@@ -17,6 +18,7 @@
             #{apellidoMaterno, jdbcType = VARCHAR, mode = IN},
             #{tipoVehiculo, jdbcType = VARCHAR, mode = IN},
             #{placaVehiculo, jdbcType = VARCHAR, mode = IN},
+			#{estadoVenta, jdbcType = VARCHAR, mode = IN},
             #{observacion, jdbcType = VARCHAR, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},

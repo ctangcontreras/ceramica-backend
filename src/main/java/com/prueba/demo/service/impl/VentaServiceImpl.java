@@ -35,6 +35,7 @@ public class VentaServiceImpl implements VentaService{
 
             Venta venta = new Venta();
             venta.setIdVenta(param.getIdVenta());
+            venta.setFechaRegistro(param.getFechaRegistro());
             venta.setTipoDocumento(param.getTipoDocumento());
             venta.setMetodoPago(param.getMetodoPago());
             venta.setPendienteRecojo(param.getPendienteRecojo());
@@ -45,6 +46,7 @@ public class VentaServiceImpl implements VentaService{
             venta.setApellidoMaterno(param.getApellidoMaterno());
             venta.setTipoVehiculo(param.getTipoVehiculo());
             venta.setPlacaVehiculo(param.getPlacaVehiculo());
+            venta.setEstadoVenta(param.getEstadoVenta());
             venta.setObservacion(param.getObservacion());
             venta.setActivo(Constantes.ESTADO_ACTIVO);
             venta.setUsuarioCreacion(param.getUsuarioCreacion());
@@ -57,7 +59,8 @@ public class VentaServiceImpl implements VentaService{
                     detalle.setIdDetalleVenta(element.getIdDetalleVenta());
                     detalle.setIdVenta(venta.getIdVenta());
                     detalle.setTipoLadrillo(element.getTipoLadrillo());
-                    detalle.setCantidad(element.getCantidad());
+                    detalle.setCantidadTotal(element.getCantidadTotal());
+                    detalle.setPrecio(element.getPrecio());
                     detalle.setEstado(element.getEstado());
                     detalle.setActivo(Constantes.ESTADO_ACTIVO);
                     detalle.setUsuarioCreacion(param.getUsuarioCreacion());
@@ -69,7 +72,7 @@ public class VentaServiceImpl implements VentaService{
                         for (RegistrarDetProductoVentaInputDto element2 : element.getRegistrarProducto()) {
                              detalleProducto.setIdDetalleProductoVenta(element2.getIdDetalleProductoVenta());
                              detalleProducto.setIdDetalleVenta(detalle.getIdDetalleVenta());
-                             detalleProducto.setIdProductoTerminado(element2.getIdProductoTerminado());
+                             detalleProducto.setIdDetProductoTerminado(element2.getIdDetProductoTerminado());
                              detalle.setActivo(Constantes.ESTADO_ACTIVO);
                              detProductoVentaMapper.registrarDetProductoVenta(detalleProducto);
                         }
