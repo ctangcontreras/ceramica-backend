@@ -42,7 +42,7 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
             productoTerminado.setPaquete(param.getPaquete());
             productoTerminado.setTotal(param.getTotal());
             productoTerminado.setActivo(Constantes.ESTADO_ACTIVO);
-            productoTerminado.setCrudo(param.getCrudo());
+            //productoTerminado.setCrudo(param.getCrudo());
             productoTerminado.setUsuarioCreacion(param.getUsuarioCreacion());
             productoTerminadoMapper.registrarProductoTerminado(productoTerminado);
 
@@ -55,6 +55,7 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                     detalle.setNro(element.getNro());
                     detalle.setDescripccionTipoLadrillo(element.getTipoLadrillo());
                     detalle.setCantidadPaquete(element.getCantidadPaquete());
+                    detalle.setCantidadCrudo(element.getCantidadCrudo());
                     detalle.setCrudo(element.getCrudo());
                     detalle.setTotal(element.getTotal());
                     detalle.setActivo(Constantes.ESTADO_ACTIVO);
@@ -97,7 +98,7 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                     e.setPaquete(element.getPaquete());
                     //e.setDescStock(element.getDescStock());
                     e.setDescripcionActivo(element.getDescripcionActivo());
-                    e.setCrudo(element.getCrudo());
+                    //e.setCrudo(element.getCrudo());
                     e.setActivo(element.getActivo());
                     e.setCodigo(element.getCodigo());
                     
@@ -120,6 +121,7 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                             d.setDescripcionEstado(element2.getDescripcionEstado());
                             d.setDescripcionActivo(element2.getDescripcionActivo());
                             d.setActivo(element2.getActivo());
+                            d.setCantidadCrudo(element2.getCantidadCrudo());
                             d.setCrudo(element2.getCrudo());
                             d.setTotal(element2.getTotal());
                             detalle2.add(d);    

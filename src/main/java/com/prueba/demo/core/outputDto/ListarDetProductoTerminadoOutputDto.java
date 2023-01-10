@@ -19,6 +19,7 @@ public class ListarDetProductoTerminadoOutputDto {
     private Integer cantidadPaquete;
     private String descripcionActivo;
     private Integer activo;
+    private Integer cantidadCrudo;
     private Integer crudo;
     private Integer total;
     

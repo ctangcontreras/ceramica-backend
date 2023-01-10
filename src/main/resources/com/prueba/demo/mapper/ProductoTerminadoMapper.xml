@@ -11,7 +11,7 @@
 			<result property="descripcionActivo"       	column="DESC_ESTADO_ACTIVO" />
 			<result property="activo"       			column="N_ACTIVO" />
 			<result property="codigo"        			column="C_CODIGO" />
-			<result property="crudo"        			column="N_CRUDO" />
+			<!-- <result property="crudo"        			column="N_CRUDO" />  -->
 			
 	</resultMap>
 
@@ -25,7 +25,6 @@
 			#{total, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
-			#{crudo, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
 		)
 		}

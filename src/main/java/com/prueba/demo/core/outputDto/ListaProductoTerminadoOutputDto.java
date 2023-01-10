@@ -25,7 +25,7 @@ public class ListaProductoTerminadoOutputDto {
    private String descFechaRegistro;
     //private String descHorno;
     private Integer total;
-    private Integer crudo;
+    //private Integer crudo;
     private String codigo;
 
     private List<ListarDetProductoTerminadoOutputDto> lista;

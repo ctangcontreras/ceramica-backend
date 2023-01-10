@@ -17,6 +17,7 @@ public class DetalleProductoTerminado extends ModeloBase{
     private String codigoEstado;
     private String descripcionEstado;
     private Integer cantidadPaquete;
+    private Integer cantidadCrudo;
     private Integer crudo;
     private Integer total;
     

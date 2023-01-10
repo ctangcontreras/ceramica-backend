@@ -22,6 +22,7 @@ public class DetProductoTerminadoInputDto {
     private String estado;
     private Integer cantidadPaquete;
     private Integer usuarioCreacion;
+    private Integer cantidadCrudo;
     private Integer crudo;
     private Integer total;
     

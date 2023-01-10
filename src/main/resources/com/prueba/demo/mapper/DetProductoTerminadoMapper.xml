@@ -27,8 +27,9 @@
 			#{cantidadPaquete, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
-			#{crudo, jdbcType = INTEGER, mode = IN},
+			#{cantidadCrudo, jdbcType = INTEGER, mode = IN},
 			#{total, jdbcType = INTEGER, mode = IN},
+			#{crudo, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
 		)
 		}
