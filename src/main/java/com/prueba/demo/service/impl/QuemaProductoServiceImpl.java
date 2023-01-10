@@ -10,12 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.prueba.demo.core.inputDto.RegistrarDetQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.EliminarQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.RegistrarQuemaProductoInputDto;
+import com.prueba.demo.core.inputDto.RegistrarQuemaProductoPersonaInputDto;
 import com.prueba.demo.core.model.DetalleQuemaProducto;
 import com.prueba.demo.core.model.QuemaProducto;
+import com.prueba.demo.core.model.QuemaProductoPersona;
 import com.prueba.demo.core.outputDto.ListaQuemaProductoOutputDto;
 import com.prueba.demo.core.outputDto.ListarDetQuemaProductoOutputDto;
+import com.prueba.demo.core.outputDto.ListarQuemaProductoPersonaOutputDto;
 import com.prueba.demo.mapper.DetQuemaProductoMapper;
 import com.prueba.demo.mapper.QuemaProductoMapper;
+import com.prueba.demo.mapper.QuemaProductoPersonaMapper;
 import com.prueba.demo.service.QuemaProductoService;
 import com.prueba.demo.support.dto.Constantes;
 import com.prueba.demo.support.dto.Respuesta;
@@ -29,6 +33,9 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
     @Autowired
     DetQuemaProductoMapper detQuemaProductoMapper;
 
+    @Autowired
+    QuemaProductoPersonaMapper quemaProductoPersonaMapper;
+
     @Override
     @Transactional
 	public Respuesta<?> registarQuemaProducto(RegistrarQuemaProductoInputDto param) throws Exception {
@@ -38,6 +45,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
             quemaProducto.setFechaRegistro(param.getFechaRegistro());
             quemaProducto.setHorno(param.getHorno());
             quemaProducto.setCantidadPaquete(param.getCantidadPaquete());
+            quemaProducto.setObservacion(param.getObservacion());
             quemaProducto.setActivo(Constantes.ESTADO_ACTIVO);
             quemaProducto.setUsuarioCreacion(param.getUsuarioCreacion());
             quemaProductoMapper.registrarQuemaProducto(quemaProducto);
@@ -50,10 +58,27 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     detalle.setIdQuemaProducto(quemaProducto.getIdQuemaProducto());
                     detalle.setLado(element.getLado());
                     detalle.setFechaDetalle(element.getFechaDetalle());
+                    detalle.setTFechaDetalle(new java.sql.Timestamp(detalle.getFechaDetalle().getTime()));
                     detalle.setTipo(element.getTipo());
                     detalle.setActivo(Constantes.ESTADO_ACTIVO);
                     detalle.setUsuarioCreacion(param.getUsuarioCreacion());
                     detQuemaProductoMapper.registrarDetQuemaProducto(detalle);
+                }
+            }
+
+            QuemaProductoPersona  persona = new QuemaProductoPersona();
+            if (param.getRegistrarPersona() !=null && !param.getRegistrarPersona().isEmpty()) {
+                for (RegistrarQuemaProductoPersonaInputDto element2 : param.getRegistrarPersona()) {
+                     persona.setIdQuemaProductoPersona(element2.getIdQuemaProductoPersona());
+                     persona.setIdQuemaProducto(quemaProducto.getIdQuemaProducto());
+                     persona.setDni(element2.getDni());
+                     persona.setApellidoPaterno(element2.getApellidoPaterno());
+                     persona.setApellidoMaterno(element2.getApellidoMaterno());
+                     persona.setNombres(element2.getNombres());
+                     persona.setTipoPersona(element2.getTipoPersona());
+                     persona.setActivo(Constantes.ESTADO_ACTIVO);
+                     persona.setUsuarioCreacion(param.getUsuarioCreacion());
+                     quemaProductoPersonaMapper.registrarQuemaProductoPersona(persona);
                 }
             }
             
@@ -101,6 +126,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     e.setDescHorno(element.getDescHorno());
                     e.setDescFechaRegistro(element.getDescFechaRegistro());
                     e.setCantidadPaquete(element.getCantidadPaquete());
+                    e.setObservacion(element.getObservacion());
                     e.setDescripcionEstado(element.getDescripcionEstado());
                     e.setCodigo(element.getCodigo());
                     e.setActivo(element.getActivo());
@@ -140,7 +166,31 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                             }
                         }
                     }
+                    
+                    QuemaProductoPersona quemaProductoPersona = new QuemaProductoPersona();
+                    quemaProducto.setIdQuemaProducto(param.getIdQuemaProducto());
+                    List<QuemaProductoPersona> listaQuemaProductoPersona = quemaProductoPersonaMapper.listarQuemaProductoPersona(quemaProductoPersona);
 
+                    List<ListarQuemaProductoPersonaOutputDto> listaPersona = new ArrayList<>();
+
+                    if (listaQuemaProductoPersona != null && !listaQuemaProductoPersona.isEmpty()) {
+                        ListarQuemaProductoPersonaOutputDto per = new ListarQuemaProductoPersonaOutputDto();
+                        for (QuemaProductoPersona element3 : listaQuemaProductoPersona) {
+                            per = new ListarQuemaProductoPersonaOutputDto();
+                            per.setIdQuemaProductoPersona(element3.getIdQuemaProductoPersona());
+                            per.setIdQuemaProducto(element3.getIdQuemaProducto());
+                            per.setDni(element3.getDni());
+                            per.setApellidoPaterno(element3.getApellidoPaterno());
+                            per.setApellidoMaterno(element3.getApellidoMaterno());
+                            per.setNombres(element3.getNombres());
+                            per.setActivo(element3.getActivo());
+                            per.setTipoPersona(element3.getTipoPersona());
+                            listaPersona.add(per);
+                        }
+
+                        e.setListaPersona(listaPersona);
+                    }
+                    
                     lista.add(e);
                 }
 

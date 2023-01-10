@@ -1,5 +1,6 @@
 package com.prueba.demo.core.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import lombok.Getter;
@@ -14,6 +15,6 @@ public class DetalleQuemaProducto extends ModeloBase{
     private String lado;
     private Date fechaDetalle;
     private Integer tipo;
-
+    private Timestamp tFechaDetalle;
     private String descLado;
 }
