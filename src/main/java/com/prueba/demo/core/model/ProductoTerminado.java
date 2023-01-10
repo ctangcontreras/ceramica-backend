@@ -19,7 +19,6 @@ public class ProductoTerminado extends ModeloBase{
     private String codigo;
     private Integer crudo;
     private String acciones;
-
     private String descFechaRegistro;
     private String descHorno;
     private String descStock;

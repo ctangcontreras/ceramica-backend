@@ -4,6 +4,7 @@
 	<resultMap id="resListarProductoTerminado" type="ProductoTerminado">
 			<result property="idProductoTerminado" 	    column="N_PRODUCTO_TERMINADO_PK" />
 			<result property="horno" 					column="DESC_HORNO" />
+			<result property="fechaRegistro" 	   		column="D_FECHA_REGISTRO" />
 			<result property="descFechaRegistro"  	   	column="FECHA_REGISTRO" />
 			<result property="paquete"      			column="N_PAQUETE" />
 			<result property="total"  	   			    column="N_TOTAL" />
