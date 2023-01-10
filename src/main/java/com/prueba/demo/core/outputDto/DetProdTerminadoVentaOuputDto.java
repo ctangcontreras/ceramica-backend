@@ -1,27 +1,21 @@
-package com.prueba.demo.core.model;
-
-
+package com.prueba.demo.core.outputDto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class DetalleProductoTerminado extends ModeloBase{
-    
+public class DetProdTerminadoVentaOuputDto {
+
     private Integer idDetalleProductoTerminado;
     private Integer idProductoTerminado;
-    private Integer nro;
-    private String codigoLadrillo;
+    private String codigoTipoLadrillo;
     private String descripcionTipoLadrillo;
     private String codigoEstado;
-    private String descripcionEstado;
     private Integer cantidadPaquete;
     private Integer cantidadCrudo;
     private Integer crudo;
     private Integer total;
-
+    private String descripcionEstado;
     private String codigo;
-    
-    
 }

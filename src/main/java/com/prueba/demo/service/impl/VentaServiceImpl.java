@@ -1,15 +1,22 @@
 package com.prueba.demo.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.prueba.demo.core.inputDto.DetProdTerminadoVentaInputDto;
 import com.prueba.demo.core.inputDto.RegistrarDetProductoVentaInputDto;
 import com.prueba.demo.core.inputDto.RegistrarDetVentaInputDto;
 import com.prueba.demo.core.inputDto.RegistrarVentaInputDto;
+import com.prueba.demo.core.model.DetalleProductoTerminado;
 import com.prueba.demo.core.model.DetalleProductoVenta;
 import com.prueba.demo.core.model.DetalleVenta;
 import com.prueba.demo.core.model.Venta;
+import com.prueba.demo.core.outputDto.DetProdTerminadoVentaOuputDto;
+import com.prueba.demo.mapper.DetProductoTerminadoMapper;
 import com.prueba.demo.mapper.DetProductoVentaMapper;
 import com.prueba.demo.mapper.DetVentaMapper;
 import com.prueba.demo.mapper.VentaMapper;
@@ -28,6 +35,9 @@ public class VentaServiceImpl implements VentaService{
 
     @Autowired
     DetProductoVentaMapper detProductoVentaMapper;
+
+    @Autowired
+    DetProductoTerminadoMapper detProductoTerminadoMapper;
 
     @Override
     @Transactional
@@ -87,4 +97,51 @@ public class VentaServiceImpl implements VentaService{
             return resp;
 		
   }
+
+    @Override
+	public Respuesta<?> listarDetProdTerminadoVenta(DetProdTerminadoVentaInputDto param) throws Exception {
+
+        DetalleProductoTerminado detalleProducto = new DetalleProductoTerminado();
+        detalleProducto.setIdDetalleProductoTerminado(param.getIdDetalleProductoTerminado());
+        detalleProducto.setIdProductoTerminado(param.getIdProductoTerminado());
+        detalleProducto.setCodigoEstado(param.getCodigoEstado());
+        detalleProducto.setCodigoLadrillo(param.getCodigoLadrillo());
+        List<DetalleProductoTerminado> lista = detProductoTerminadoMapper.listarDetProductoTerminadoVenta(detalleProducto);
+
+        List<DetProdTerminadoVentaOuputDto> listaDet = new ArrayList<>();
+
+        if (lista != null && !lista.isEmpty()) {
+            DetProdTerminadoVentaOuputDto detalle = new DetProdTerminadoVentaOuputDto();
+            for (DetalleProductoTerminado element : lista) {
+                detalle = new DetProdTerminadoVentaOuputDto();
+                detalle.setIdDetalleProductoTerminado(element.getIdDetalleProductoTerminado());
+                detalle.setIdProductoTerminado(element.getIdProductoTerminado());
+                detalle.setCantidadPaquete(element.getCantidadPaquete());
+                detalle.setCantidadCrudo(element.getCantidadCrudo());
+                detalle.setCrudo(element.getCrudo());
+                detalle.setTotal(element.getTotal());
+                detalle.setCodigoEstado(element.getCodigoEstado());
+                detalle.setCodigoTipoLadrillo(element.getCodigoLadrillo());
+                detalle.setDescripcionEstado(element.getDescripcionEstado());
+                detalle.setDescripcionTipoLadrillo(element.getDescripcionTipoLadrillo());
+                detalle.setCodigo(element.getCodigo());
+                listaDet.add(detalle);
+            }
+
+
+            Respuesta resp = new Respuesta<>();
+            resp.setSuccess(true);
+            resp.setMessage("Se listó correctamente");
+            resp.setDato(listaDet);
+            return resp;
+        }else{
+            
+            Respuesta resp = new Respuesta<>();
+            resp.setSuccess(false);
+            resp.setMessage("No se encontró registros");
+            return resp;
+            
+        }
+
+    }
 }
