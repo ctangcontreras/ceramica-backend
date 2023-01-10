@@ -1,7 +1,5 @@
 package com.prueba.demo.core.outputDto;
 
-import java.util.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +11,7 @@ public class ListarDetProductoTerminadoOutputDto {
     private Integer idProductoTerminado;
     private Integer nro;
     private String codigoLadrillo;
-    private String descripccionTipoLadrillo;
+    private String descripcionTipoLadrillo;
     private String codigoEstado;
     private String descripcionEstado;
     private Integer cantidadPaquete;

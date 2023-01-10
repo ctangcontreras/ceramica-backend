@@ -6,7 +6,7 @@
 			<result property="idProductoTerminado" 			column="N_PRODUCTO_TERMINADO" />
 			<result property="nro"  	    				column="N_NRO" />
 			<result property="codigoLadrillo"      			column="CODIGO_LADRILLO" />
-			<result property="descripccionTipoLadrillo"     column="C_TIPO_LADRILLO" />
+			<result property="descripcionTipoLadrillo"      column="C_TIPO_LADRILLO" />
 			<result property="codigoEstado" 		 		column="CODIGO_ESTADO_LADRILLO" />
 			<result property="descripcionEstado"			column="C_ESTADO_LADRILLO" />
 			<result property="cantidadPaquete"        		column="N_CANTIDAD_PAQUETE" />

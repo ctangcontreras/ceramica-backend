@@ -13,7 +13,7 @@ public class DetalleProductoTerminado extends ModeloBase{
     private Integer idProductoTerminado;
     private Integer nro;
     private String codigoLadrillo;
-    private String descripccionTipoLadrillo;
+    private String descripcionTipoLadrillo;
     private String codigoEstado;
     private String descripcionEstado;
     private Integer cantidadPaquete;
