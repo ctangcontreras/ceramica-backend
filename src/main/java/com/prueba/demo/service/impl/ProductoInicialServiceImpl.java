@@ -78,7 +78,7 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 				lista = new ListaProductoInicialOutputDto();
 				lista.setIdProductoInicial(element.getIdProductoInicial());
 				lista.setFechaRegistro(date);
-				lista.setFechaRegistroDesc(element.getFechaRegistroDesc());;
+				lista.setFechaRegistroDesc(element.getFechaRegistroDesc());
 				lista.setPrensaDesc(element.getPrensaDesc());
 				lista.setCantidadProducido(element.getCantidadProducido());
 				lista.setCantidadEstimada(element.getCantidadEstimada());

@@ -86,19 +86,20 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
             if (listaProductoTerminado != null && !listaProductoTerminado.isEmpty()) {
                 ListaProductoTerminadoOutputDto e = new ListaProductoTerminadoOutputDto();
                 for (ProductoTerminado element : listaProductoTerminado) {
-                    Date date = new SimpleDateFormat("dd/mm/yyyy").parse(element.getDescFechaRegistro());
+                   // Date date = new SimpleDateFormat("dd/mm/yyyy").parse(element.getDescFechaRegistro());
                     
                     e = new ListaProductoTerminadoOutputDto();
                     e.setIdProductoTerminado(element.getIdProductoTerminado());
                     e.setHorno(element.getHorno());
-                    e.setFechaRegistro(date);
-                    //e.setDescFechaRegistro(element.getDescFechaRegistro());
+                    e.setFechaRegistro(element.getFechaRegistro());
+                    e.setDescFechaRegistro(element.getDescFechaRegistro());
                     e.setTotal(element.getTotal());
                     e.setPaquete(element.getPaquete());
                     //e.setDescStock(element.getDescStock());
                     e.setDescripcionActivo(element.getDescripcionActivo());
                     e.setCrudo(element.getCrudo());
                     e.setActivo(element.getActivo());
+                    e.setCodigo(element.getCodigo());
                     
                     DetalleProductoTerminado detalle = new DetalleProductoTerminado();
                     detalle.setIdProductoTerminado(element.getIdProductoTerminado());
