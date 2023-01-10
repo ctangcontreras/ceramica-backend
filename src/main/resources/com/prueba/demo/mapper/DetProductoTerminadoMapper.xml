@@ -12,7 +12,8 @@
 			<result property="cantidadPaquete"        		column="N_CANTIDAD_PAQUETE" />
 			<result property="activo"        				column="N_ACTIVO" />
 			<result property="descripcionActivo"        	column="DESC_N_ACTIVO" />
-			<result property="crudo" 				 		column="N_CANTIDAD_CRUDO" />
+			<result property="cantidadCrudo" 				column="N_CANTIDAD_CRUDO" />
+			<result property="crudo" 				 		column="N_CRUDO" />
 			<result property="total"			  			column="N_TOTAL" />
 	</resultMap>
 	
