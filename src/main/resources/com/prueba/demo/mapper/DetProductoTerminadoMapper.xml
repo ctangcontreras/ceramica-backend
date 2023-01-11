@@ -37,7 +37,7 @@
 			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
 			#{idProductoTerminado, jdbcType = INTEGER, mode = IN},
 			#{nro, jdbcType = INTEGER, mode = IN},
-			#{descripccionTipoLadrillo, jdbcType = VARCHAR, mode = IN},
+			#{descripcionTipoLadrillo, jdbcType = VARCHAR, mode = IN},
 			#{estado, jdbcType = VARCHAR, mode = IN},
 			#{cantidadPaquete, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},

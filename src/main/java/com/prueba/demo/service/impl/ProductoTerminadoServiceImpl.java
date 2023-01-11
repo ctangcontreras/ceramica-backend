@@ -91,6 +91,7 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                     
                     e = new ListaProductoTerminadoOutputDto();
                     e.setIdProductoTerminado(element.getIdProductoTerminado());
+                    e.setDescHorno(element.getDescHorno());
                     e.setHorno(element.getHorno());
                     e.setFechaRegistro(element.getFechaRegistro());
                     e.setDescFechaRegistro(element.getDescFechaRegistro());
@@ -124,6 +125,7 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                             d.setCantidadCrudo(element2.getCantidadCrudo());
                             d.setCrudo(element2.getCrudo());
                             d.setTotal(element2.getTotal());
+                            d.setCantidadPaquete(element2.getCantidadPaquete());
                             detalle2.add(d);    
                         }
 
