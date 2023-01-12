@@ -10,7 +10,7 @@
 			#{idVenta, jdbcType = INTEGER, mode = IN},
 			#{tipoLadrillo, jdbcType = VARCHAR, mode = IN},
 			#{cantidadTotal, jdbcType = INTEGER, mode = IN},
-			#{precio, jdbcType = INTEGER, mode = IN},
+			#{precio, jdbcType = DECIMAL, mode = IN},
             #{estado, jdbcType = VARCHAR, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},

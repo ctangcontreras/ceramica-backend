@@ -1,5 +1,6 @@
 package com.prueba.demo.core.inputDto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +18,7 @@ public class RegistrarDetVentaInputDto {
     private Integer idVenta;
     private String tipoLadrillo;
     private Integer cantidadTotal;
-    private Integer precio;
+    private BigDecimal precio;
     private String estado;
 
     private List<RegistrarDetProductoVentaInputDto> registrarProducto;
