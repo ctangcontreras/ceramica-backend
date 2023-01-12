@@ -29,6 +29,7 @@
 			<result property="codigoEstado" 		 		column="CODIGO_ESTADO" />
 			<result property="descripcionEstado"			column="DESC_ESTADO" />
 			<result property="codigo"						column="C_CODIGO" />
+			<result property="utilizado"				    column="N_UTILIZADO"/>
 	</resultMap>
 	
     <select id="registrarDetProductoTerminado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
