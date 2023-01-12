@@ -18,4 +18,5 @@ public class DetProdTerminadoVentaOuputDto {
     private Integer total;
     private String descripcionEstado;
     private String codigo;
+    private Integer utilizado;
 }

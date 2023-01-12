@@ -125,6 +125,7 @@ public class VentaServiceImpl implements VentaService{
                 detalle.setDescripcionEstado(element.getDescripcionEstado());
                 detalle.setDescripcionTipoLadrillo(element.getDescripcionTipoLadrillo());
                 detalle.setCodigo(element.getCodigo());
+                detalle.setUtilizado(element.getUtilizado());
                 listaDet.add(detalle);
             }
 
