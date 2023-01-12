@@ -25,5 +25,6 @@ public class DetProductoTerminadoInputDto {
     private Integer cantidadCrudo;
     private Integer crudo;
     private Integer total;
+    private Integer activo;
     
 }

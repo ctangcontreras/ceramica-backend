@@ -31,6 +31,8 @@ public class ListaProductoTerminadoOutputDto {
     private String codigo;
 
     private List<ListarDetProductoTerminadoOutputDto> lista;
+    
+   
    
     
     

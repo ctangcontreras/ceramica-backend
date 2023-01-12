@@ -42,7 +42,7 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
             productoTerminado.setPaquete(param.getPaquete());
             productoTerminado.setTotal(param.getTotal());
             productoTerminado.setActivo(Constantes.ESTADO_ACTIVO);
-            //productoTerminado.setCrudo(param.getCrudo());
+            //productoTerminado.setCrudo(Constantes.ESTADO_CRUDO);
             productoTerminado.setUsuarioCreacion(param.getUsuarioCreacion());
             productoTerminadoMapper.registrarProductoTerminado(productoTerminado);
 
@@ -83,6 +83,8 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
 			List<ProductoTerminado> listaProductoTerminado = productoTerminadoMapper.listarProductoTerminado(productoTerminado);
 
             List<ListaProductoTerminadoOutputDto> lista = new ArrayList<>();
+            
+       
 
             if (listaProductoTerminado != null && !listaProductoTerminado.isEmpty()) {
                 ListaProductoTerminadoOutputDto e = new ListaProductoTerminadoOutputDto();
@@ -129,9 +131,12 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                             detalle2.add(d);    
                         }
 
-                        e.setLista(detalle2);                    
+                        e.setLista(detalle2);
+                                        
                     }
                     lista.add(e);
+                 
+                    
                 }
                 Respuesta resp = new Respuesta<>();
                 resp.setSuccess(true);
