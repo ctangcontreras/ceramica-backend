@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.prueba.demo.core.inputDto.DetProductoTerminadoInputDto;
+import com.prueba.demo.core.inputDto.EliminarDetProductoTerminadoInputDto;
 import com.prueba.demo.core.inputDto.EliminarProductoTerminadoInputDto;
 import com.prueba.demo.core.inputDto.ProductoTerminadoInputDto;
 import com.prueba.demo.core.model.DetalleProductoTerminado;
@@ -47,6 +48,14 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
             productoTerminadoMapper.registrarProductoTerminado(productoTerminado);
 
             DetalleProductoTerminado detalle = new DetalleProductoTerminado();
+            if (param.getListaDetallesEliminados() != null && !param.getListaDetallesEliminados().isEmpty()) {
+                for (DetProductoTerminadoInputDto eliminados : param.getListaDetallesEliminados()) {
+                    detalle.setIdDetalleProductoTerminado(eliminados.getIdDetalleProductoTerminado());
+                    detalle.setUsuarioElimina(eliminados.getUsuarioElimina());
+                    detProductoTerminadoMapper.eliminarDetProductoTerminado(detalle);
+                }
+            }
+
 
             if (param.getRegistrarDetalle() != null && !param.getRegistrarDetalle().isEmpty()) {
                 for (DetProductoTerminadoInputDto element : param.getRegistrarDetalle()) {
@@ -83,14 +92,12 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
 			List<ProductoTerminado> listaProductoTerminado = productoTerminadoMapper.listarProductoTerminado(productoTerminado);
 
             List<ListaProductoTerminadoOutputDto> lista = new ArrayList<>();
-            
-       
+            /* List<ListaProductoTerminadoOutputDto> listaEliminados = new ArrayList<>(); */
 
             if (listaProductoTerminado != null && !listaProductoTerminado.isEmpty()) {
                 ListaProductoTerminadoOutputDto e = new ListaProductoTerminadoOutputDto();
+                ListaProductoTerminadoOutputDto det = new ListaProductoTerminadoOutputDto();
                 for (ProductoTerminado element : listaProductoTerminado) {
-                   // Date date = new SimpleDateFormat("dd/mm/yyyy").parse(element.getDescFechaRegistro());
-                    
                     e = new ListaProductoTerminadoOutputDto();
                     e.setIdProductoTerminado(element.getIdProductoTerminado());
                     e.setDescHorno(element.getDescHorno());
@@ -134,7 +141,21 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                         e.setLista(detalle2);
                                         
                     }
+
+                   /*  if (listaDetalle != null && !listaDetalle.isEmpty()) {
+                        ListarDetProductoTerminadoOutputDto q = new ListarDetProductoTerminadoOutputDto();
+                        List<ListarDetProductoTerminadoOutputDto> detalleElim = new ArrayList<>();
+                        for (DetalleProductoTerminado element2 : listaDetalle) {
+                            q = new ListarDetProductoTerminadoOutputDto();
+                            q.setIdDetalleProductoTerminado(element2.getIdDetalleProductoTerminado());
+                            detalleElim.add(q);
+                        }
+                        det.setListaDetallesEliminados(detalleElim);
+                    } */
+
                     lista.add(e);
+                   /*  listaEliminados.add(det); */
+
                  
                     
                 }
@@ -163,6 +184,21 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
  
         Respuesta resp = new Respuesta<>();
         resp.setSuccess(productoTerminado.getResultado().equals(1)?true:false);
+        resp.setMessage("Se eliminó el registro correctamente");
+        return resp;
+		
+  }
+
+  @Override
+	public Respuesta<?> eliminarDetProductoTerminado(EliminarDetProductoTerminadoInputDto param) throws Exception {
+
+        DetalleProductoTerminado detProductoTerminado = new DetalleProductoTerminado();
+        detProductoTerminado.setIdDetalleProductoTerminado(param.getIdDetalleProductoTerminado());
+        detProductoTerminadoMapper.eliminarDetProductoTerminado(detProductoTerminado);
+
+ 
+        Respuesta resp = new Respuesta<>();
+        resp.setSuccess(detProductoTerminado.getResultado().equals(1)?true:false);
         resp.setMessage("Se eliminó el registro correctamente");
         return resp;
 		

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.prueba.demo.core.inputDto.EliminarDetProductoTerminadoInputDto;
 import com.prueba.demo.core.inputDto.EliminarProductoTerminadoInputDto;
 import com.prueba.demo.core.inputDto.ProductoTerminadoInputDto;
 import com.prueba.demo.service.ProductoTerminadoService;
@@ -33,7 +34,7 @@ public class ProductoTerminadoController {
 	}
 
 	@PostMapping("/eliminarProductoTerminado")
-		public ResponseEntity<?> eliminarQuemaProducto(@RequestBody EliminarProductoTerminadoInputDto input){
+		public ResponseEntity<?> eliminarProductoTerminado(@RequestBody EliminarProductoTerminadoInputDto input){
 			try {
 				return ResponseEntity.ok(productoTerminadoService.eliminarProductoTerminado(input));
 			} catch (Exception e) {
@@ -46,6 +47,16 @@ public class ProductoTerminadoController {
 		public ResponseEntity<?> listaProductoTerminado(@RequestBody ProductoTerminadoInputDto input){
 			try {
 				return ResponseEntity.ok(productoTerminadoService.listarProductoTerminado(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+	}
+
+	@PostMapping("/eliminarDetProductoTerminado")
+		public ResponseEntity<?> eliminarDetProductoTerminado(@RequestBody EliminarDetProductoTerminadoInputDto input){
+			try {
+				return ResponseEntity.ok(productoTerminadoService.eliminarDetProductoTerminado(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);

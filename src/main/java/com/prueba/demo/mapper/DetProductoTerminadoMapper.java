@@ -12,4 +12,5 @@ public interface DetProductoTerminadoMapper {
     void registrarDetProductoTerminado(DetalleProductoTerminado param);
     List<DetalleProductoTerminado> listarDetProductoTerminado(DetalleProductoTerminado param);
     List<DetalleProductoTerminado> listarDetProductoTerminadoVenta(DetalleProductoTerminado param);
+    void eliminarDetProductoTerminado(DetalleProductoTerminado param);
 }
