@@ -70,5 +70,14 @@
 		)
 		}
 	</select>
+
+	<select id="eliminarDetProductoTerminado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE">
+		{CALL sp_det_producto_terminado_eli(
+			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{usuarioElimina, jdbcType = INTEGER, mode = IN},
+			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
 	
 </mapper>

@@ -28,4 +28,5 @@ public class ProductoTerminadoInputDto {
 
 
     private List<DetProductoTerminadoInputDto> registrarDetalle;
+    private List<DetProductoTerminadoInputDto> listaDetallesEliminados;
 }
