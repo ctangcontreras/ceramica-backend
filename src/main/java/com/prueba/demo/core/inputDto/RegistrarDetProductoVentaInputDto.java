@@ -14,4 +14,5 @@ public class RegistrarDetProductoVentaInputDto {
     private Integer idDetalleProductoVenta;
     private Integer idDetalleVenta;
     private Integer idDetProductoTerminado;
+    private Integer utilizado;
 }
