@@ -20,12 +20,13 @@
 			<result property="estadoVenta"        		column="C_ESTADO_VENTA" />
 			<result property="observacion"        		column="C_OBSERVACION" />
 			<result property="activo"        			column="N_ACTIVO" />
+			<result property="descEstadoVenta"          column="DESC_ESTADO_VENTA" />
 			<result property="descripcionActivo"        column="DESC_ESTADO_ACTIVO" />
 			<result property="descFechaRegistro"        column="DESC_FECHA_REGISTRO" />
-			<result property="descTipoDocumento1"        column="DESC_TIPO_DOCUMENTO1" />
-			<result property="descTipoDocumento2"        column="DESC_TIPO_DOCUMENTO2" />
+			<result property="descTipoDocumento1"       column="DESC_TIPO_DOCUMENTO1" />
+			<result property="descTipoDocumento2"       column="DESC_TIPO_DOCUMENTO2" />
 	</resultMap>
-	
+	descEstadoVenta
 
 	<select id="registrarVenta" parameterType="com.prueba.demo.core.model.Venta" statementType="CALLABLE"
 			>
@@ -58,7 +59,7 @@
 			#{idVenta, jdbcType = INTEGER, mode = IN},
 			#{fechaInicio, jdbcType = DATE, mode = IN},
 			#{fechaFin, jdbcType = DATE, mode = IN},
-			#{activo, jdbcType = INTEGER, mode = IN}
+			#{estadoVenta, jdbcType = VARCHAR, mode = IN}
 		)
 		}
 	</select>

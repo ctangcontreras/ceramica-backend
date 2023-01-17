@@ -27,6 +27,7 @@ public class Venta extends ModeloBase{
     private String codigo;
     
     private String descFechaRegistro;
+    private String descEstadoVenta;
     private String descTipoDocumento1;
     private String descTipoDocumento2;
     private Date fechaInicio;

@@ -129,7 +129,7 @@ public class VentaServiceImpl implements VentaService{
         venta.setIdVenta(param.getIdVenta());
         venta.setFechaInicio(param.getFechaInicio());
         venta.setFechaFin(param.getFechaFin());
-        venta.setActivo(param.getActivo());
+        venta.setEstadoVenta(param.getEstadoVenta());
         List<Venta> listaVenta = ventaMapper.listarVenta(venta);
 
         List<ListaVentaOutputDto> outputDto = new ArrayList<>();
@@ -155,6 +155,7 @@ public class VentaServiceImpl implements VentaService{
                 det.setEstadoVenta(element.getEstadoVenta());
                 det.setObservacion(element.getObservacion());
                 det.setActivo(element.getActivo());
+                det.setDescEstadoVenta(element.getDescEstadoVenta());
                 det.setDescripcionActivo(element.getDescripcionActivo());
                 det.setDescFechaRegistro(element.getDescFechaRegistro());
                 det.setDescTipoDocumento1(element.getDescTipoDocumento1());

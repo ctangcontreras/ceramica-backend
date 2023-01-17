@@ -27,6 +27,8 @@ public class ListaVentaOutputDto {
     private String codigo;
     private Integer activo;
     private String descripcionActivo;
+    
+    private String descEstadoVenta;
     private String descFechaRegistro;
     private String descTipoDocumento1;
     private String descTipoDocumento2;

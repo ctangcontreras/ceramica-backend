@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class ListarVentaInputDto {
 
     private Integer idVenta;
-    private Integer activo;
+    private String estadoVenta;
     private Date fechaInicio;
     private Date fechaFin;
 }
