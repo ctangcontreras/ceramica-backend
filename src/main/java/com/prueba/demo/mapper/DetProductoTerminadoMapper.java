@@ -1,4 +1,4 @@
-package com.prueba.demo.mapper;
+gipackage com.prueba.demo.mapper;
 
 import java.util.List;
 
@@ -14,4 +14,5 @@ public interface DetProductoTerminadoMapper {
     List<DetalleProductoTerminado> listarDetProductoTerminadoVenta(DetalleProductoTerminado param);
     void eliminarDetProductoTerminado(DetalleProductoTerminado param);
    
+    void actualizarUtilizado(DetalleProductoTerminado param);
 }

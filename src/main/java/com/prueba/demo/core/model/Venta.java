@@ -12,6 +12,7 @@ public class Venta extends ModeloBase{
     private Integer idVenta;
     private Date fechaRegistro;
     private String tipoDocumento;
+    private String numeroDocumento;
     private String metodoPago;
     private Integer pendienteRecojo;
     private Integer costoTotal;
@@ -23,5 +24,12 @@ public class Venta extends ModeloBase{
     private String placaVehiculo;
     private String estadoVenta;
     private String observacion;
+    private String codigo;
+    
+    private String descFechaRegistro;
+    private String descTipoDocumento1;
+    private String descTipoDocumento2;
+    private Date fechaInicio;
+    private Date fechaFin;
 
 }

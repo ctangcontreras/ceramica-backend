@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.prueba.demo.core.inputDto.DetProdTerminadoVentaInputDto;
+import com.prueba.demo.core.inputDto.ListarVentaInputDto;
 import com.prueba.demo.core.inputDto.RegistrarVentaInputDto;
 import com.prueba.demo.service.VentaService;
 
@@ -36,6 +37,16 @@ public class VentaController {
 		public ResponseEntity<?> listarDetProductoTerminadoVenta(@RequestBody DetProdTerminadoVentaInputDto input){
 			try {
 				return ResponseEntity.ok(ventaService.listarDetProdTerminadoVenta(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+	}
+
+	@PostMapping("/listarVenta")
+		public ResponseEntity<?> listarVenta(@RequestBody ListarVentaInputDto input){
+			try {
+				return ResponseEntity.ok(ventaService.listarVenta(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);

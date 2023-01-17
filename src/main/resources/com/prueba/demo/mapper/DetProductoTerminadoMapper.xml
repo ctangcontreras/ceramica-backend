@@ -82,5 +82,13 @@
 	</select>
 
 	
+	<select id="actualizarUtilizado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
+			>
+		{CALL sp_det_producto_terminado_actUtilizado(
+			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{utilizado, jdbcType = INTEGER, mode = IN}
+		)
+		}
+	</select>
 	
 </mapper>

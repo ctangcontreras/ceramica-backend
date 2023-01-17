@@ -1,19 +1,14 @@
-package com.prueba.demo.core.inputDto;
+package com.prueba.demo.core.outputDto;
 
 import java.util.Date;
-import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class RegistrarVentaInputDto {
-    
+@Setter
+@Getter
+public class ListaVentaOutputDto {
+
     private Integer idVenta;
     private Date fechaRegistro;
     private String tipoDocumento;
@@ -29,8 +24,10 @@ public class RegistrarVentaInputDto {
     private String placaVehiculo;
     private String estadoVenta;
     private String observacion;
-    private Integer usuarioCreacion;
-
-    private RegistrarVentaRecojoInputDto registrarVentaRecojo;
-    private List<RegistrarDetVentaInputDto> registrarDetalle;
+    private String codigo;
+    private Integer activo;
+    private String descripcionActivo;
+    private String descFechaRegistro;
+    private String descTipoDocumento1;
+    private String descTipoDocumento2;
 }

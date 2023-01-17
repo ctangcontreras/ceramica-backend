@@ -1,8 +1,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.prueba.demo.mapper.DetVentaMapper">
 
-	
-
+	<resultMap id="resListarDetalleVenta" type="DetalleVenta">
+			<result property="idDetalleVenta" 	column="N_DET_VENTA_PK" />
+			<result property="idVenta" 		    column="N_VENTA" />
+			<result property="tipoLadrillo" 	column="C_TIPO_LADRILLO" />
+			<result property="estado" 	   		column="C_ESTADO" />
+			<result property="cantidadTotal"  	column="N_CANTIDAD_TOTAL" />
+			<result property="precio"      		column="N_PRECIO" />
+			<result property="activo"      		column="N_ACTIVO" />
+	</resultMap>
 	<select id="registrarDetVenta" parameterType="com.prueba.demo.core.model.DetalleVenta" statementType="CALLABLE"
 			>
 		{CALL sp_det_venta_ins(
@@ -15,6 +22,15 @@
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
+	<select id="listarDetalleVenta" parameterType="com.prueba.demo.core.model.DetalleVenta" statementType="CALLABLE"
+			resultMap="resListarDetalleVenta">
+		{CALL sp_det_venta_lis(
+			#{idDetalleVenta, jdbcType = INTEGER, mode = IN},
+			#{idVenta, jdbcType = INTEGER, mode = IN}
 		)
 		}
 	</select>
