@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegistrarVentaRecojoInputDto {
-    
-    private Integer idVentaRecojo;
+public class ListarVentaInputDto {
+
     private Integer idVenta;
-    private Date fecha;
-    private String observacion;
+    private Integer activo;
+    private Date fechaInicio;
+    private Date fechaFin;
 }

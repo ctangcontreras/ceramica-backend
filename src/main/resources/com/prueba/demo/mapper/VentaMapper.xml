@@ -1,6 +1,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.prueba.demo.mapper.VentaMapper">
 
+
+	<resultMap id="resListarVenta" type="Venta">
+			<result property="idVenta" 	                column="N_VENTA_PK" />
+			<result property="codigo" 				    column="C_CODIGO" />
+			<result property="fechaRegistro" 		    column="D_FECHA_REGISTRO" />
+			<result property="tipoDocumento" 	   		column="C_TIPO_DOCUMENTO" />
+			<result property="metodoPago"  	   	        column="C_METODO_PAGO" />
+			<result property="pendienteRecojo"      	column="N_PENDIENTE_RECOJO" />
+			<result property="costoTotal"  	   			column="N_COSTO_TOTAL" />
+			<result property="razonSocial"       	    column="C_RAZON_SOCIAL" />
+			<result property="nombres"       			column="C_NOMBRES" />
+			<result property="apellidoPaterno"        	column="C_APELLIDO_PATERNO" />
+			<result property="apellidoMaterno"        	column="C_APELLIDO_MATERNO" />
+			<result property="tipoVehiculo"        		column="C_TIPO_VEHICULO" />
+			<result property="placaVehiculo"        	column="C_PLACA_VEHICULO" />
+			<result property="estadoVenta"        		column="C_ESTADO_VENTA" />
+			<result property="observacion"        		column="C_OBSERVACION" />
+			<result property="activo"        			column="N_ACTIVO" />
+			<result property="descripcionActivo"        column="DESC_ESTADO_ACTIVO" />
+
+	</resultMap>
 	
 
 	<select id="registrarVenta" parameterType="com.prueba.demo.core.model.Venta" statementType="CALLABLE"
@@ -23,6 +44,17 @@
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
+	<select id="listarVenta" parameterType="com.prueba.demo.core.model.Venta" statementType="CALLABLE"
+			resultMap="resListarVenta">
+		{CALL sp_venta_lis(
+			#{idVenta, jdbcType = INTEGER, mode = IN},
+			#{fechaInicio, jdbcType = DATE, mode = IN},
+			#{fechaFin, jdbcType = DATE, mode = IN},
+			#{activo, jdbcType = INTEGER, mode = IN}
 		)
 		}
 	</select>

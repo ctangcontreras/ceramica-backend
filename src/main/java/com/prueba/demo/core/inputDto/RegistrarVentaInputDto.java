@@ -30,5 +30,6 @@ public class RegistrarVentaInputDto {
     private String observacion;
     private Integer usuarioCreacion;
 
+    private RegistrarVentaRecojoInputDto registrarVentaRecojo;
     private List<RegistrarDetVentaInputDto> registrarDetalle;
 }

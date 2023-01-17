@@ -23,5 +23,9 @@ public class Venta extends ModeloBase{
     private String placaVehiculo;
     private String estadoVenta;
     private String observacion;
+    private String codigo;
+    
+    private Date fechaInicio;
+    private Date fechaFin;
 
 }
