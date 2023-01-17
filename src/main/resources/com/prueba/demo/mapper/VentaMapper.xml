@@ -7,6 +7,7 @@
 			<result property="codigo" 				    column="C_CODIGO" />
 			<result property="fechaRegistro" 		    column="D_FECHA_REGISTRO" />
 			<result property="tipoDocumento" 	   		column="C_TIPO_DOCUMENTO" />
+			<result property="numeroDocumento" 	   		column="C_NUMERO_DOCUMENTO" />
 			<result property="metodoPago"  	   	        column="C_METODO_PAGO" />
 			<result property="pendienteRecojo"      	column="N_PENDIENTE_RECOJO" />
 			<result property="costoTotal"  	   			column="N_COSTO_TOTAL" />
@@ -20,7 +21,9 @@
 			<result property="observacion"        		column="C_OBSERVACION" />
 			<result property="activo"        			column="N_ACTIVO" />
 			<result property="descripcionActivo"        column="DESC_ESTADO_ACTIVO" />
-
+			<result property="descFechaRegistro"        column="DESC_FECHA_REGISTRO" />
+			<result property="descTipoDocumento1"        column="DESC_TIPO_DOCUMENTO1" />
+			<result property="descTipoDocumento2"        column="DESC_TIPO_DOCUMENTO2" />
 	</resultMap>
 	
 
@@ -30,6 +33,7 @@
 			#{idVenta, jdbcType = INTEGER, mode = INOUT},
 			#{fechaRegistro, jdbcType = DATE, mode = IN},
 			#{tipoDocumento, jdbcType = VARCHAR, mode = IN},
+			#{numeroDocumento, jdbcType = VARCHAR, mode = IN},
 			#{metodoPago, jdbcType = VARCHAR, mode = IN},
 			#{pendienteRecojo, jdbcType = INTEGER, mode = IN},
             #{costoTotal, jdbcType = INTEGER, mode = IN},
