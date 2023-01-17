@@ -51,4 +51,12 @@
 		)
 		}
 	</select>
+
+	<select id="listarProductoTerminadoventa" parameterType="com.prueba.demo.core.model.ProductoTerminado" statementType="CALLABLE"
+	resultMap="resListarProductoTerminado">
+		{CALL sp_det_producto_terminado_lis2(
+			#{idProductoTerminado, jdbcType = INTEGER, mode = IN}
+		)
+		}
+	</select>
 </mapper>

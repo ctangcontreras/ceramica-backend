@@ -21,6 +21,7 @@ public class DetalleProductoTerminado extends ModeloBase{
     private Integer crudo;
     private Integer total;
     private Integer utilizado;
+    private Integer idVenta;
 
     private String codigo;
     

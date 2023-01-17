@@ -135,6 +135,7 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                             d.setCrudo(element2.getCrudo());
                             d.setTotal(element2.getTotal());
                             d.setCantidadPaquete(element2.getCantidadPaquete());
+                            d.setIdVenta(element2.getIdVenta());
                             detalle2.add(d);    
                         }
 
@@ -142,19 +143,9 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                                         
                     }
 
-                   /*  if (listaDetalle != null && !listaDetalle.isEmpty()) {
-                        ListarDetProductoTerminadoOutputDto q = new ListarDetProductoTerminadoOutputDto();
-                        List<ListarDetProductoTerminadoOutputDto> detalleElim = new ArrayList<>();
-                        for (DetalleProductoTerminado element2 : listaDetalle) {
-                            q = new ListarDetProductoTerminadoOutputDto();
-                            q.setIdDetalleProductoTerminado(element2.getIdDetalleProductoTerminado());
-                            detalleElim.add(q);
-                        }
-                        det.setListaDetallesEliminados(detalleElim);
-                    } */
-
+                
                     lista.add(e);
-                   /*  listaEliminados.add(det); */
+               
 
                  
                     
@@ -175,17 +166,36 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
   @Override
 	public Respuesta<?> eliminarProductoTerminado(EliminarProductoTerminadoInputDto param) throws Exception {
 
-        ProductoTerminado productoTerminado = new ProductoTerminado();
-        productoTerminado.setIdProductoTerminado(param.getIdProductoTerminado());
-        productoTerminado.setActivo(Constantes.ESTADO_INACTIVO);
-        productoTerminado.setUsuarioElimina(param.getUsuarioElimina());
-        productoTerminadoMapper.eliminarProductoTerminado(productoTerminado);
+        ProductoTerminado idProductoTerminado = new ProductoTerminado();
+        idProductoTerminado.setIdProductoTerminado(param.getIdProductoTerminado());
+        List<ProductoTerminado> listaProductoTerminado = productoTerminadoMapper.listarProductoTerminadoventa(idProductoTerminado);
+
+        if (listaProductoTerminado != null && !listaProductoTerminado.isEmpty()) {
+            Respuesta resp = new Respuesta<>();
+            resp.setSuccess(false);
+            resp.setMessage("No se puede eliminar el registro");
+            return resp;
+            
+        }else{
+            ProductoTerminado productoTerminado = new ProductoTerminado();
+            productoTerminado.setIdProductoTerminado(param.getIdProductoTerminado());
+            productoTerminado.setActivo(Constantes.ESTADO_INACTIVO);
+            productoTerminado.setUsuarioElimina(param.getUsuarioElimina());
+            productoTerminadoMapper.eliminarProductoTerminado(productoTerminado);
+
+            Respuesta resp = new Respuesta<>();
+            resp.setSuccess(productoTerminado.getResultado().equals(1)?true:false);
+            resp.setMessage("Se eliminó el registro correctamente");
+            return resp;
+           
+           
+        }
+        
+
+  
 
  
-        Respuesta resp = new Respuesta<>();
-        resp.setSuccess(productoTerminado.getResultado().equals(1)?true:false);
-        resp.setMessage("Se eliminó el registro correctamente");
-        return resp;
+       
 		
   }
 

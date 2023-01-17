@@ -20,5 +20,6 @@ public class ListarDetProductoTerminadoOutputDto {
     private Integer cantidadCrudo;
     private Integer crudo;
     private Integer total;
+    private Integer idVenta;
     
 }
