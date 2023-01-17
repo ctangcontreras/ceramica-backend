@@ -1,4 +1,4 @@
-gipackage com.prueba.demo.mapper;
+package com.prueba.demo.mapper;
 
 import java.util.List;
 
