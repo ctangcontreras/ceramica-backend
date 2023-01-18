@@ -19,6 +19,7 @@ import com.prueba.demo.core.model.Venta;
 import com.prueba.demo.core.model.VentaRecojo;
 import com.prueba.demo.core.outputDto.DetProdTerminadoVentaOuputDto;
 import com.prueba.demo.core.outputDto.ListaVentaOutputDto;
+import com.prueba.demo.core.outputDto.ListarDetVentaOutputDto;
 import com.prueba.demo.mapper.DetProductoTerminadoMapper;
 import com.prueba.demo.mapper.DetProductoVentaMapper;
 import com.prueba.demo.mapper.DetVentaMapper;
@@ -134,39 +135,63 @@ public class VentaServiceImpl implements VentaService{
 
         List<ListaVentaOutputDto> outputDto = new ArrayList<>();
 
-        if (listaVenta!=null & !listaVenta.isEmpty()) {
-            ListaVentaOutputDto det = new ListaVentaOutputDto();
+        if (listaVenta!=null && !listaVenta.isEmpty()) {
+            ListaVentaOutputDto vent = new ListaVentaOutputDto();
             for (Venta element : listaVenta) {
-                det = new ListaVentaOutputDto();
-                det.setIdVenta(element.getIdVenta());
-                det.setCodigo(element.getCodigo());
-                det.setFechaRegistro(element.getFechaRegistro());
-                det.setTipoDocumento(element.getTipoDocumento());
-                det.setTipoDocumento(element.getTipoDocumento());
-                det.setTipoDocumento(element.getTipoDocumento());
-                det.setPendienteRecojo(element.getPendienteRecojo());
-                det.setCostoTotal(element.getCostoTotal());
-                det.setRazonSocial(element.getRazonSocial());
-                det.setNombres(element.getNombres());
-                det.setApellidoPaterno(element.getApellidoPaterno());
-                det.setApellidoMaterno(element.getApellidoPaterno());
-                det.setTipoVehiculo(element.getTipoVehiculo());
-                det.setPlacaVehiculo(element.getPlacaVehiculo());
-                det.setEstadoVenta(element.getEstadoVenta());
-                det.setObservacion(element.getObservacion());
-                det.setActivo(element.getActivo());
-                det.setDescEstadoVenta(element.getDescEstadoVenta());
-                det.setDescripcionActivo(element.getDescripcionActivo());
-                det.setDescFechaRegistro(element.getDescFechaRegistro());
-                det.setDescTipoDocumento1(element.getDescTipoDocumento1());
-                det.setDescTipoDocumento2(element.getDescTipoDocumento2());
-                outputDto.add(det);
+                vent = new ListaVentaOutputDto();
+                vent.setIdVenta(element.getIdVenta());
+                vent.setCodigo(element.getCodigo());
+                vent.setFechaRegistro(element.getFechaRegistro());
+                vent.setTipoDocumento(element.getTipoDocumento());
+                vent.setNumeroDocumento(element.getNumeroDocumento());
+                vent.setMetodoPago(element.getMetodoPago());
+                vent.setPendienteRecojo(element.getPendienteRecojo());
+                vent.setCostoTotal(element.getCostoTotal());
+                vent.setRazonSocial(element.getRazonSocial());
+                vent.setNombres(element.getNombres());
+                vent.setApellidoPaterno(element.getApellidoPaterno());
+                vent.setApellidoMaterno(element.getApellidoPaterno());
+                vent.setTipoVehiculo(element.getTipoVehiculo());
+                vent.setPlacaVehiculo(element.getPlacaVehiculo());
+                vent.setEstadoVenta(element.getEstadoVenta());
+                vent.setObservacion(element.getObservacion());
+                vent.setActivo(element.getActivo());
+                vent.setDescEstadoVenta(element.getDescEstadoVenta());
+                vent.setDescripcionActivo(element.getDescripcionActivo());
+                vent.setDescFechaRegistro(element.getDescFechaRegistro());
+                vent.setDescTipoDocumento1(element.getDescTipoDocumento1());
+                vent.setDescTipoDocumento2(element.getDescTipoDocumento2());
+                
             }
 
-            /* DetalleVenta detalleVenta = new DetalleVenta();
+            DetalleVenta detalleVenta = new DetalleVenta();
             detalleVenta.setIdVenta(param.getIdVenta());
-            L detVentaMapper.listarDetalleVenta(detalleVenta); */
+            List<DetalleVenta> listaDetalle = detVentaMapper.listarDetalleVenta(detalleVenta);
 
+            List<ListarDetVentaOutputDto> outputDto2 = new ArrayList<>();
+
+            if (listaDetalle!=null && !listaDetalle.isEmpty()) {
+                ListarDetVentaOutputDto det = new ListarDetVentaOutputDto();
+                for (DetalleVenta element2 : listaDetalle) {
+                    det = new ListarDetVentaOutputDto();
+                    det.setIdDetalleVenta(element2.getIdDetalleVenta());
+                    det.setIdVenta(element2.getIdVenta());
+                    det.setCantidadTotal(element2.getCantidadTotal());
+                    det.setPrecio(element2.getPrecio());
+                    det.setTipoLadrillo(element2.getTipoLadrillo());
+                    det.setEstado(element2.getEstado());
+                    det.setActivo(element2.getActivo());
+                    det.setDescTipoLadrillo(element2.getDescTipoLadrillo());
+                    det.setDescEstadoLadrillo(element2.getDescEstadoLadrillo());
+                    outputDto2.add(det);
+                }
+
+                vent.setListaDetalle(outputDto2);
+                
+            }
+
+            outputDto.add(vent);
+            
             Respuesta resp = new Respuesta<>();
             resp.setSuccess(true);
             resp.setMessage("Se listó correctamente");

@@ -2,13 +2,15 @@
 <mapper namespace="com.prueba.demo.mapper.DetVentaMapper">
 
 	<resultMap id="resListarDetalleVenta" type="DetalleVenta">
-			<result property="idDetalleVenta" 	column="N_DET_VENTA_PK" />
-			<result property="idVenta" 		    column="N_VENTA" />
-			<result property="tipoLadrillo" 	column="C_TIPO_LADRILLO" />
-			<result property="estado" 	   		column="C_ESTADO" />
-			<result property="cantidadTotal"  	column="N_CANTIDAD_TOTAL" />
-			<result property="precio"      		column="N_PRECIO" />
-			<result property="activo"      		column="N_ACTIVO" />
+			<result property="idDetalleVenta" 		column="N_DET_VENTA_PK" />
+			<result property="idVenta" 		    	column="N_VENTA" />
+			<result property="tipoLadrillo" 		column="C_TIPO_LADRILLO" />
+			<result property="descTipoLadrillo" 	column="DESC_TIPO_LADRILLO" />
+			<result property="estado" 	   			column="C_ESTADO" />
+			<result property="descEstadoLadrillo" 	column="DESC_ESTADO_LADRILLO" />
+			<result property="cantidadTotal"  		column="N_CANTIDAD_TOTAL" />
+			<result property="precio"      			column="N_PRECIO" />
+			<result property="activo"      			column="N_ACTIVO" />
 	</resultMap>
 	<select id="registrarDetVenta" parameterType="com.prueba.demo.core.model.DetalleVenta" statementType="CALLABLE"
 			>

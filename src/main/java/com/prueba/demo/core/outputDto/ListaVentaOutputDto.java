@@ -1,6 +1,7 @@
 package com.prueba.demo.core.outputDto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -32,4 +33,6 @@ public class ListaVentaOutputDto {
     private String descFechaRegistro;
     private String descTipoDocumento1;
     private String descTipoDocumento2;
+
+    private List<ListarDetVentaOutputDto> listaDetalle;
 }
