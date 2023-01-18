@@ -23,6 +23,8 @@ public class ProductoTerminadoInputDto {
     private Integer total;
     private Integer activo;
     private Integer usuarioCreacion;
+    private Date fechaInicio;
+    private Date fechaFin;
     //private Integer crudo;
     
 

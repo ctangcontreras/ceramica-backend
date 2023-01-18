@@ -16,7 +16,7 @@ public class ListaProductoTerminadoOutputDto {
     private String descHorno;
     private String horno;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
+
     private Date fechaRegistro;
     private Integer paquete;
     //private String descContenido;

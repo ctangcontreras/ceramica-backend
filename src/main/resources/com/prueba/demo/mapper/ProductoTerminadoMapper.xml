@@ -35,7 +35,8 @@
 			resultMap="resListarProductoTerminado">
 		{CALL sp_producto_terminado_lis(
 			#{idProductoTerminado, jdbcType = INTEGER, mode = IN},
-			#{fechaRegistro, jdbcType = DATE, mode = IN},
+			#{fechaInicio, jdbcType = DATE, mode = IN},
+			#{fechaFin, jdbcType = DATE, mode = IN},
 			#{horno, jdbcType = VARCHAR, mode = IN}
 		)
 		}
