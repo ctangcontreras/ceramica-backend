@@ -86,17 +86,18 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
 	public Respuesta<?> listarProductoTerminado(ProductoTerminadoInputDto param) throws Exception {
 			ProductoTerminado productoTerminado = new ProductoTerminado();
 			productoTerminado.setIdProductoTerminado(param.getIdProductoTerminado());
-			productoTerminado.setFechaRegistro(param.getFechaRegistro());
+            productoTerminado.setFechaInicio(param.getFechaInicio());
+            productoTerminado.setFechaFin(param.getFechaFin());
 			productoTerminado.setHorno(param.getHorno());
 
 			List<ProductoTerminado> listaProductoTerminado = productoTerminadoMapper.listarProductoTerminado(productoTerminado);
 
             List<ListaProductoTerminadoOutputDto> lista = new ArrayList<>();
-            /* List<ListaProductoTerminadoOutputDto> listaEliminados = new ArrayList<>(); */
+         
 
             if (listaProductoTerminado != null && !listaProductoTerminado.isEmpty()) {
                 ListaProductoTerminadoOutputDto e = new ListaProductoTerminadoOutputDto();
-                ListaProductoTerminadoOutputDto det = new ListaProductoTerminadoOutputDto();
+           
                 for (ProductoTerminado element : listaProductoTerminado) {
                     e = new ListaProductoTerminadoOutputDto();
                     e.setIdProductoTerminado(element.getIdProductoTerminado());

@@ -73,11 +73,11 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 				ListaProductoInicialOutputDto lista = new ListaProductoInicialOutputDto();
 			for (ProductoInicial element : listaProductoInicial) {
 
-				Date date = new SimpleDateFormat("dd/mm/yyyy").parse(element.getFechaRegistroDate());
+				//Date date = new SimpleDateFormat("dd/mm/yyyy").parse(element.getFechaRegistroDate());
 
 				lista = new ListaProductoInicialOutputDto();
 				lista.setIdProductoInicial(element.getIdProductoInicial());
-				lista.setFechaRegistro(date);
+				lista.setFechaRegistro(element.getFechaRegistro());
 				lista.setFechaRegistroDesc(element.getFechaRegistroDesc());
 				lista.setPrensaDesc(element.getPrensaDesc());
 				lista.setCantidadProducido(element.getCantidadProducido());
