@@ -18,5 +18,7 @@ public class ListarDetVentaOutputDto {
     private Integer activo;
     private String descTipoLadrillo;
     private String descEstadoLadrillo;
+
+    /* private List<ListarDetProductoVentaOuputDto> listaProductoVenta; */
     
 }

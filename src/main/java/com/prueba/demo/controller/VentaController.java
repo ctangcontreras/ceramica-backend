@@ -33,6 +33,16 @@ public class VentaController {
 			}
 	}
 
+	@PostMapping("/listarVenta")
+		public ResponseEntity<?> listarVenta(@RequestBody ListarVentaInputDto input){
+			try {
+				return ResponseEntity.ok(ventaService.listarVenta(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+	}
+
 	@PostMapping("/listarDetProdTerminadoVenta")
 		public ResponseEntity<?> listarDetProductoTerminadoVenta(@RequestBody DetProdTerminadoVentaInputDto input){
 			try {
@@ -43,13 +53,15 @@ public class VentaController {
 			}
 	}
 
-	@PostMapping("/listarVenta")
-		public ResponseEntity<?> listarVenta(@RequestBody ListarVentaInputDto input){
+	@PostMapping("/listarDetProductoVenta")
+		public ResponseEntity<?> listarDetProductoVenta(@RequestBody DetProdTerminadoVentaInputDto input){
 			try {
-				return ResponseEntity.ok(ventaService.listarVenta(input));
+				return ResponseEntity.ok(ventaService.listarDetProductoVenta(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);
 			}
 	}
+	
+	
 }

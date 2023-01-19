@@ -19,6 +19,7 @@ import com.prueba.demo.core.model.Venta;
 import com.prueba.demo.core.model.VentaRecojo;
 import com.prueba.demo.core.outputDto.DetProdTerminadoVentaOuputDto;
 import com.prueba.demo.core.outputDto.ListaVentaOutputDto;
+import com.prueba.demo.core.outputDto.ListarDetProductoVentaOuputDto;
 import com.prueba.demo.core.outputDto.ListarDetVentaOutputDto;
 import com.prueba.demo.mapper.DetProductoTerminadoMapper;
 import com.prueba.demo.mapper.DetProductoVentaMapper;
@@ -92,6 +93,7 @@ public class VentaServiceImpl implements VentaService{
                              /* detalleProducto.setIdDetalleProductoVenta(element2.getIdDetalleProductoVenta()); */
                              detalleProducto.setIdDetalleVenta(detalle.getIdDetalleVenta());
                              detalleProducto.setIdDetProductoTerminado(element2.getIdDetProductoTerminado());
+                             detalleProducto.setUtilizado(element2.getUtilizado());
                              detalleProducto.setActivo(Constantes.ESTADO_ACTIVO);
                              detalleProducto.setUsuarioCreacion(param.getUsuarioCreacion());
                              detProductoVentaMapper.registrarDetProductoVenta(detalleProducto);
@@ -161,37 +163,61 @@ public class VentaServiceImpl implements VentaService{
                 vent.setDescFechaRegistro(element.getDescFechaRegistro());
                 vent.setDescTipoDocumento1(element.getDescTipoDocumento1());
                 vent.setDescTipoDocumento2(element.getDescTipoDocumento2());
-                
-            }
 
-            DetalleVenta detalleVenta = new DetalleVenta();
-            detalleVenta.setIdVenta(param.getIdVenta());
-            List<DetalleVenta> listaDetalle = detVentaMapper.listarDetalleVenta(detalleVenta);
+                DetalleVenta detalleVenta = new DetalleVenta();
+                detalleVenta.setIdVenta(param.getIdVenta());
+                List<DetalleVenta> listaDetalle = detVentaMapper.listarDetalleVenta(detalleVenta);
 
-            List<ListarDetVentaOutputDto> outputDto2 = new ArrayList<>();
+                List<ListarDetVentaOutputDto> outputDto2 = new ArrayList<>();
 
-            if (listaDetalle!=null && !listaDetalle.isEmpty()) {
-                ListarDetVentaOutputDto det = new ListarDetVentaOutputDto();
-                for (DetalleVenta element2 : listaDetalle) {
-                    det = new ListarDetVentaOutputDto();
-                    det.setIdDetalleVenta(element2.getIdDetalleVenta());
-                    det.setIdVenta(element2.getIdVenta());
-                    det.setCantidadTotal(element2.getCantidadTotal());
-                    det.setPrecio(element2.getPrecio());
-                    det.setTipoLadrillo(element2.getTipoLadrillo());
-                    det.setEstado(element2.getEstado());
-                    det.setActivo(element2.getActivo());
-                    det.setDescTipoLadrillo(element2.getDescTipoLadrillo());
-                    det.setDescEstadoLadrillo(element2.getDescEstadoLadrillo());
-                    outputDto2.add(det);
+                if (listaDetalle!=null && !listaDetalle.isEmpty()) {
+                    ListarDetVentaOutputDto det = new ListarDetVentaOutputDto();
+                    for (DetalleVenta element2 : listaDetalle) {
+                        det = new ListarDetVentaOutputDto();
+                        det.setIdDetalleVenta(element2.getIdDetalleVenta());
+                        det.setIdVenta(element2.getIdVenta());
+                        det.setCantidadTotal(element2.getCantidadTotal());
+                        det.setPrecio(element2.getPrecio());
+                        det.setTipoLadrillo(element2.getTipoLadrillo());
+                        det.setEstado(element2.getEstado());
+                        det.setActivo(element2.getActivo());
+                        det.setDescTipoLadrillo(element2.getDescTipoLadrillo());
+                        det.setDescEstadoLadrillo(element2.getDescEstadoLadrillo());
+
+                        /* DetalleProductoTerminado detalleProdVenta = new DetalleProductoTerminado();
+                        detalleProdVenta.setIdDetalleVenta(element2.getIdDetalleVenta());
+                        List<DetalleProductoTerminado> listaDetalleProdVenta = detProductoVentaMapper.listarDetalleProductoVenta(detalleProdVenta);
+
+                        List<ListarDetProductoVentaOuputDto> ouputDto3 = new ArrayList<>();
+
+                        if (listaDetalleProdVenta!=null && !listaDetalleProdVenta.isEmpty()) {
+                            ListarDetProductoVentaOuputDto prod = new ListarDetProductoVentaOuputDto();
+                            for (DetalleProductoTerminado element3 : listaDetalleProdVenta) {
+                                prod.setIdDetalleProductoTerminado(element3.getIdDetalleProductoTerminado());
+                                prod.setIdProductoTerminado(element3.getIdProductoTerminado());
+                                prod.setCantidadPaquete(element3.getCantidadPaquete());
+                                prod.setCantidadCrudo(element3.getCantidadCrudo());
+                                prod.setCrudo(element3.getCrudo());
+                                prod.setTotal(element3.getTotal());
+                                prod.setDescripcionEstado(element3.getDescripcionEstado());
+                                prod.setDescripcionTipoLadrillo(element3.getDescripcionTipoLadrillo());
+                                prod.setCodigo(element3.getCodigo());
+                                prod.setUtilizado(element3.getUtilizado());
+                                ouputDto3.add(prod);
+                            }
+
+                            det.setListaProductoVenta(ouputDto3);
+                        }*/
+                        outputDto2.add(det); 
+                    }
+
+                    vent.setListaDetalle(outputDto2);
+                    
                 }
 
-                vent.setListaDetalle(outputDto2);
-                
+                outputDto.add(vent);
             }
-
-            outputDto.add(vent);
-            
+    
             Respuesta resp = new Respuesta<>();
             resp.setSuccess(true);
             resp.setMessage("Se listó correctamente");
@@ -206,6 +232,49 @@ public class VentaServiceImpl implements VentaService{
             
         
         }
+    }
+
+    @Override
+	public Respuesta<?> listarDetProductoVenta(DetProdTerminadoVentaInputDto param) throws Exception {
+
+        DetalleProductoTerminado detalleProducto = new DetalleProductoTerminado();
+        detalleProducto.setIdDetalleVenta(param.getIdDetalleVenta());
+        List<DetalleProductoTerminado> lista = detProductoVentaMapper.listarDetalleProductoVenta(detalleProducto);
+
+        List<DetProdTerminadoVentaOuputDto> listaDet = new ArrayList<>();
+
+        if (lista != null && !lista.isEmpty()) {
+            DetProdTerminadoVentaOuputDto detalle = new DetProdTerminadoVentaOuputDto();
+            for (DetalleProductoTerminado element : lista) {
+                detalle = new DetProdTerminadoVentaOuputDto();
+                detalle.setIdDetalleProductoTerminado(element.getIdDetalleProductoTerminado());
+                detalle.setIdProductoTerminado(element.getIdProductoTerminado());
+                detalle.setCantidadPaquete(element.getCantidadPaquete());
+                detalle.setCantidadCrudo(element.getCantidadCrudo());
+                detalle.setCrudo(element.getCrudo());
+                detalle.setTotal(element.getTotal());
+                detalle.setDescripcionEstado(element.getDescripcionEstado());
+                detalle.setDescripcionTipoLadrillo(element.getDescripcionTipoLadrillo());
+                detalle.setCodigo(element.getCodigo());
+                detalle.setUtilizado(element.getUtilizado());
+                listaDet.add(detalle);
+            }
+
+
+            Respuesta resp = new Respuesta<>();
+            resp.setSuccess(true);
+            resp.setMessage("Se listó correctamente");
+            resp.setDato(listaDet);
+            return resp;
+        }else{
+            
+            Respuesta resp = new Respuesta<>();
+            resp.setSuccess(false);
+            resp.setMessage("No se encontró registros");
+            return resp;
+            
+        }
+
     }
 
     @Override
@@ -255,4 +324,5 @@ public class VentaServiceImpl implements VentaService{
         }
 
     }
+
 }

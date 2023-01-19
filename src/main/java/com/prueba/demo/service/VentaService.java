@@ -8,6 +8,7 @@ import com.prueba.demo.support.dto.Respuesta;
 public interface VentaService {
 
     Respuesta<?> registrarVenta(RegistrarVentaInputDto param) throws Exception;
-    Respuesta<?> listarDetProdTerminadoVenta(DetProdTerminadoVentaInputDto param) throws Exception;
     Respuesta<?> listarVenta(ListarVentaInputDto param) throws Exception;
+    Respuesta<?> listarDetProductoVenta(DetProdTerminadoVentaInputDto param) throws Exception;
+    Respuesta<?> listarDetProdTerminadoVenta(DetProdTerminadoVentaInputDto param) throws Exception;
 }
