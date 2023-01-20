@@ -1,5 +1,6 @@
 package com.prueba.demo.core.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import lombok.Getter;
@@ -15,7 +16,7 @@ public class Venta extends ModeloBase{
     private String numeroDocumento;
     private String metodoPago;
     private Integer pendienteRecojo;
-    private Integer costoTotal;
+    private BigDecimal costoTotal;
     private String razonSocial;
     private String nombres;
     private String apellidoPaterno;

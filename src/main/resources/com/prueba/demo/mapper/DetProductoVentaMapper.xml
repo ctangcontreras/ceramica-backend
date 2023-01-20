@@ -1,17 +1,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.prueba.demo.mapper.DetProductoVentaMapper">
 
-	
+	<resultMap id="resListarDetalleProductoVenta1" type="DetalleProductoVenta">
+			<result property="idDetalleProductoVenta" 	column="N_DET_PRODUCTO_VENTA_PK" />
+			<result property="idDetalleVenta" 			column="N_DET_VENTA" />
+			<result property="idDetProductoTerminado" 	column="N_DET_PRODUCTO_TERMINADO" />
+			<result property="utilizado"        		column="N_UTILIZADO" />
+			<result property="activo"        			column="N_ACTIVO" />
+	</resultMap>
 
+	<resultMap id="resListarDetalleProductoVenta2" type="DetalleProductoTerminado">
+			<result property="idDetalleProductoTerminado" 	column="N_DET_PRODUCTO_TERMINADO_PK" />
+			<result property="idProductoTerminado" 			column="N_PRODUCTO_TERMINADO" />
+			<result property="cantidadPaquete" 				column="N_CANTIDAD_PAQUETE" />
+			<result property="crudo"        				column="N_CRUDO" />
+			<result property="cantidadCrudo"        		column="N_CANTIDAD_CRUDO" />
+			<result property="total"			  			column="N_TOTAL" />
+			<result property="descripcionTipoLadrillo"      column="DESC_TIPO" />
+			<result property="descripcionEstado"			column="DESC_ESTADO" />
+			<result property="codigo"						column="C_CODIGO" />
+			<result property="utilizado"				    column="N_UTILIZADO"/>
+	</resultMap>
+	
 	<select id="registrarDetProductoVenta" parameterType="com.prueba.demo.core.model.DetalleProductoVenta" statementType="CALLABLE"
 			>
 		{CALL sp_det_producto_venta_ins(
 			#{idDetalleProductoVenta, jdbcType = INTEGER, mode = IN},
 			#{idDetalleVenta, jdbcType = INTEGER, mode = IN},
 			#{idDetProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{utilizado, jdbcType = INTEGER, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
+	<select id="listarDetalleProductoVenta1" parameterType="com.prueba.demo.core.model.DetalleProductoVenta" statementType="CALLABLE"
+			resultMap="resListarDetalleProductoVenta1">
+		{CALL sp_det_producto_venta_lis1(
+			#{idDetalleProductoVenta, jdbcType = INTEGER, mode = IN},
+			#{idDetalleVenta, jdbcType = INTEGER, mode = IN},
+			#{idDetProductoTerminado, jdbcType = INTEGER, mode = IN}
+		)
+		}
+	</select>
+
+	<select id="listarDetalleProductoVenta2" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
+			resultMap="resListarDetalleProductoVenta2">
+		{CALL sp_det_producto_venta_lis2(
+			#{idDetalleVenta, jdbcType = INTEGER, mode = IN}
+		)
+		}
+	</select>
+
+	<select id="eliminarDetalleProductoVenta" parameterType="com.prueba.demo.core.model.DetalleProductoVenta" statementType="CALLABLE">
+		{CALL sp_det_producto_venta_eli(
+			#{idDetalleVenta, jdbcType = INTEGER, mode = IN},
+			#{usuarioElimina, jdbcType = INTEGER, mode = IN}
 		)
 		}
 	</select>

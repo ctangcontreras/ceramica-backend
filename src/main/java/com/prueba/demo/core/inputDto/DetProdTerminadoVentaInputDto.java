@@ -15,4 +15,6 @@ public class DetProdTerminadoVentaInputDto {
     private Integer idProductoTerminado;
     private String codigoLadrillo;
     private String codigoEstado;
+
+    private Integer idDetalleVenta;
 }

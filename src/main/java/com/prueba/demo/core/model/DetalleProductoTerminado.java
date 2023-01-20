@@ -24,6 +24,6 @@ public class DetalleProductoTerminado extends ModeloBase{
     private Integer idVenta;
 
     private String codigo;
-    
+    private Integer idDetalleVenta;
     
 }

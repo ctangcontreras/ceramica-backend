@@ -22,4 +22,5 @@ public class RegistrarDetVentaInputDto {
     private String estado;
 
     private List<RegistrarDetProductoVentaInputDto> registrarProducto;
+    //private List<RegistrarDetProductoVentaInputDto> listaProductoEliminados;
 }

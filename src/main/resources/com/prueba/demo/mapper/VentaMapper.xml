@@ -36,7 +36,7 @@
 			#{numeroDocumento, jdbcType = VARCHAR, mode = IN},
 			#{metodoPago, jdbcType = VARCHAR, mode = IN},
 			#{pendienteRecojo, jdbcType = INTEGER, mode = IN},
-            #{costoTotal, jdbcType = INTEGER, mode = IN},
+            #{costoTotal, jdbcType = DECIMAL, mode = IN},
             #{razonSocial, jdbcType = VARCHAR, mode = IN},
             #{nombres, jdbcType = VARCHAR, mode = IN},
             #{apellidoPaterno, jdbcType = VARCHAR, mode = IN},
@@ -59,6 +59,15 @@
 			#{fechaInicio, jdbcType = DATE, mode = IN},
 			#{fechaFin, jdbcType = DATE, mode = IN},
 			#{estadoVenta, jdbcType = VARCHAR, mode = IN}
+		)
+		}
+	</select>
+
+	<select id="eliminarVenta" parameterType="com.prueba.demo.core.model.Venta" statementType="CALLABLE"
+			>
+		{CALL sp_venta_eli(
+			#{idVenta, jdbcType = INTEGER, mode = IN},
+			#{usuarioElimina, jdbcType = INTEGER, mode = IN},
 		)
 		}
 	</select>

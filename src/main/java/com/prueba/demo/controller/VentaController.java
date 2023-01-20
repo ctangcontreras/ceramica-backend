@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.prueba.demo.core.inputDto.DetProdTerminadoVentaInputDto;
+import com.prueba.demo.core.inputDto.EliminarVentaInputDto;
 import com.prueba.demo.core.inputDto.ListarVentaInputDto;
 import com.prueba.demo.core.inputDto.RegistrarVentaInputDto;
 import com.prueba.demo.service.VentaService;
@@ -33,6 +34,16 @@ public class VentaController {
 			}
 	}
 
+	@PostMapping("/listarVenta")
+		public ResponseEntity<?> listarVenta(@RequestBody ListarVentaInputDto input){
+			try {
+				return ResponseEntity.ok(ventaService.listarVenta(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+	}
+
 	@PostMapping("/listarDetProdTerminadoVenta")
 		public ResponseEntity<?> listarDetProductoTerminadoVenta(@RequestBody DetProdTerminadoVentaInputDto input){
 			try {
@@ -43,13 +54,25 @@ public class VentaController {
 			}
 	}
 
-	@PostMapping("/listarVenta")
-		public ResponseEntity<?> listarVenta(@RequestBody ListarVentaInputDto input){
+	@PostMapping("/listarDetProductoVenta2")
+		public ResponseEntity<?> listarDetProductoVenta(@RequestBody DetProdTerminadoVentaInputDto input){
 			try {
-				return ResponseEntity.ok(ventaService.listarVenta(input));
+				return ResponseEntity.ok(ventaService.listarDetProductoVenta2(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);
 			}
 	}
+
+	@PostMapping("/eliminarProductoTerminado")
+		public ResponseEntity<?> eliminarProductoTerminado(@RequestBody EliminarVentaInputDto input){
+			try {
+				return ResponseEntity.ok(ventaService.eliminarProductoTerminado(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+	}
+	
+	
 }

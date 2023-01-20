@@ -32,6 +32,12 @@
 			<result property="codigo"						column="C_CODIGO" />
 			<result property="utilizado"				    column="N_UTILIZADO"/>
 	</resultMap>
+
+	<resultMap id="resListarDetProductoTerminadoVenta2" type="DetalleProductoTerminado">
+			<result property="idDetalleProductoTerminado" 	column="N_DET_PRODUCTO_TERMINADO_PK" />
+			<result property="idProductoTerminado" 			column="N_PRODUCTO_TERMINADO" />
+			<result property="utilizado"				    column="N_UTILIZADO"/>
+	</resultMap>
 	
     <select id="registrarDetProductoTerminado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
 			>
@@ -61,6 +67,15 @@
 		}
 	</select>
 
+	<select id="eliminarDetProductoTerminado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE">
+		{CALL sp_det_producto_terminado_eli(
+			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{usuarioElimina, jdbcType = INTEGER, mode = IN},
+			#{resultado, jdbcType = INTEGER, mode = OUT}
+		)
+		}
+	</select>
+
 	<select id="listarDetProductoTerminadoVenta" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
 			resultMap="resListarDetProductoTerminadoVenta">
 		{CALL sp_det_producto_terminado_lisVenta(
@@ -72,19 +87,26 @@
 		}
 	</select>
 
-	<select id="eliminarDetProductoTerminado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE">
-		{CALL sp_det_producto_terminado_eli(
-			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
-			#{usuarioElimina, jdbcType = INTEGER, mode = IN},
-			#{resultado, jdbcType = INTEGER, mode = OUT}
+	<select id="listarDetProductoTerminadoVenta2" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
+			resultMap="resListarDetProductoTerminadoVenta2">
+		{CALL sp_det_producto_terminado_lisVenta2(
+			#{idDetalleVenta, jdbcType = INTEGER, mode = IN}
 		)
 		}
 	</select>
 
-	
 	<select id="actualizarUtilizado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
 			>
 		{CALL sp_det_producto_terminado_actUtilizado(
+			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{utilizado, jdbcType = INTEGER, mode = IN}
+		)
+		}
+	</select>
+
+	<select id="restarUtilizado" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
+			>
+		{CALL sp_det_producto_terminado_restUtilizado(
 			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
 			#{utilizado, jdbcType = INTEGER, mode = IN}
 		)

@@ -1,5 +1,6 @@
 package com.prueba.demo.core.outputDto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class ListaVentaOutputDto {
     private String numeroDocumento;
     private String metodoPago;
     private Integer pendienteRecojo;
-    private Integer costoTotal;
+    private BigDecimal costoTotal;
     private String razonSocial;
     private String nombres;
     private String apellidoPaterno;

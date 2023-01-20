@@ -1,5 +1,6 @@
 package com.prueba.demo.core.inputDto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class RegistrarVentaInputDto {
     private String numeroDocumento;
     private String metodoPago;
     private Integer pendienteRecojo;
-    private Integer costoTotal;
+    private BigDecimal costoTotal;
     private String razonSocial;
     private String nombres;
     private String apellidoPaterno;
@@ -33,4 +34,5 @@ public class RegistrarVentaInputDto {
 
     private RegistrarVentaRecojoInputDto registrarVentaRecojo;
     private List<RegistrarDetVentaInputDto> registrarDetalle;
+    private List<RegistrarDetVentaInputDto> detallesEliminados;
 }
