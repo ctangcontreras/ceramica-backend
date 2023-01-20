@@ -24,4 +24,7 @@ public class ProductoInicial extends ModeloBase{
     private String tipoLadrilloDesc;
     private String prensaDesc;
     private String cCodigo;
+
+    private Date fechaInicio;
+    private Date fechaFin;
 }

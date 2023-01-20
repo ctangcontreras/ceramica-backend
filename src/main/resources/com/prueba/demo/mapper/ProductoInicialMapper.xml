@@ -35,7 +35,8 @@
 			resultMap="resListarProductoInicial">
 		{CALL sp_producto_inicial_lis(
 			#{idProductoInicial, jdbcType = INTEGER, mode = IN},
-			#{fechaRegistro, jdbcType = DATE, mode = IN},
+			#{fechaInicio, jdbcType = DATE, mode = IN},
+			#{fechaFin, jdbcType = DATE, mode = IN},
 			#{prensa, jdbcType = VARCHAR, mode = IN},
 			#{tipoLadrillo, jdbcType = VARCHAR, mode = IN}
 		)

@@ -20,6 +20,8 @@ public class Respuesta<D> {
 		this.success = success;
 	}
 
+	
+
 	public Respuesta(boolean success, D dato) {
 		this.success = success;
 		this.dato = dato;
@@ -80,5 +82,8 @@ public class Respuesta<D> {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+
+    
 
 }

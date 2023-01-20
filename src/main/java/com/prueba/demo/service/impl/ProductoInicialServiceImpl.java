@@ -63,7 +63,8 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 	public Respuesta<?> getListarProductoInicial(ProductoInicialInputDto param) throws Exception {
 			ProductoInicial listProductoInicial = new ProductoInicial();
 			listProductoInicial.setIdProductoInicial(param.getIdProductoInicial());
-			listProductoInicial.setFechaRegistro(param.getFechaRegistro());
+			listProductoInicial.setFechaInicio(param.getFechaInicio());
+			listProductoInicial.setFechaFin(param.getFechaFin());
 			listProductoInicial.setPrensa(param.getPrensa());
 			listProductoInicial.setTipoLadrillo(param.getTipoLadrillo());
 			List<ProductoInicial> listaProductoInicial = productoInicialMapper.getListarProductoInicial(listProductoInicial);
