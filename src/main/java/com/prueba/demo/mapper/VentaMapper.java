@@ -11,4 +11,5 @@ public interface VentaMapper {
     
     void registrarVenta(Venta param);
     List<Venta> listarVenta(Venta param);
+    void eliminarVenta(Venta param);
 }

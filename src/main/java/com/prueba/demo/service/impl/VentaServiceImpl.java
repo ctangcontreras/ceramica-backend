@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.prueba.demo.core.inputDto.DetProdTerminadoVentaInputDto;
+import com.prueba.demo.core.inputDto.EliminarVentaInputDto;
 import com.prueba.demo.core.inputDto.ListarVentaInputDto;
 import com.prueba.demo.core.inputDto.RegistrarDetProductoVentaInputDto;
 import com.prueba.demo.core.inputDto.RegistrarDetVentaInputDto;
@@ -377,5 +378,21 @@ public class VentaServiceImpl implements VentaService {
         }
 
     }
+
+    @Override
+	public Respuesta<?> eliminarProductoTerminado(EliminarVentaInputDto param) throws Exception {
+
+            Venta venta = new Venta();
+            venta.setIdVenta(param.getIdVenta());
+            venta.setUsuarioElimina(param.getUsuarioElimina());
+            ventaMapper.eliminarVenta(venta);
+
+            Respuesta resp = new Respuesta<>();
+            resp.setSuccess(venta.getResultado().equals(1)?true:false);
+            resp.setMessage("Se eliminó el registro correctamente");
+            return resp;
+           
+    }
+
 
 }

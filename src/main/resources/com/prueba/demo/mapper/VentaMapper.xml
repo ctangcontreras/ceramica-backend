@@ -63,5 +63,14 @@
 		}
 	</select>
 
+	<select id="eliminarVenta" parameterType="com.prueba.demo.core.model.Venta" statementType="CALLABLE"
+			>
+		{CALL sp_venta_eli(
+			#{idVenta, jdbcType = INTEGER, mode = IN},
+			#{usuarioElimina, jdbcType = INTEGER, mode = IN},
+		)
+		}
+	</select>
+
 
 </mapper>
