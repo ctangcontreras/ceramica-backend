@@ -34,4 +34,5 @@ public class RegistrarVentaInputDto {
 
     private RegistrarVentaRecojoInputDto registrarVentaRecojo;
     private List<RegistrarDetVentaInputDto> registrarDetalle;
+    private List<RegistrarDetVentaInputDto> detallesEliminados;
 }

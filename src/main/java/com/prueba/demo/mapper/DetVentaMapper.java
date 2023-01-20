@@ -11,4 +11,5 @@ public interface DetVentaMapper {
     
     void registrarDetVenta(DetalleVenta param);
     List<DetalleVenta> listarDetalleVenta(DetalleVenta param);
+    void eliminarDetalleVenta(DetalleVenta param);
 }

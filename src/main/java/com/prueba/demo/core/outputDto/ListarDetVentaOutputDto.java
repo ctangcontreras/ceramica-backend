@@ -1,6 +1,7 @@
 package com.prueba.demo.core.outputDto;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,6 @@ public class ListarDetVentaOutputDto {
     private String descTipoLadrillo;
     private String descEstadoLadrillo;
 
-    /* private List<ListarDetProductoVentaOuputDto> listaProductoVenta; */
+    private List<ListarDetProductoVentaOuputDto> listaProductoVenta;
     
 }

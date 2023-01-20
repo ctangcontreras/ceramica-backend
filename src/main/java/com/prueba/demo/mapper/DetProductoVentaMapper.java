@@ -11,5 +11,7 @@ import com.prueba.demo.core.model.DetalleProductoVenta;
 public interface DetProductoVentaMapper {
     
     void registrarDetProductoVenta(DetalleProductoVenta param);
-    List<DetalleProductoTerminado> listarDetalleProductoVenta(DetalleProductoTerminado param);
+    List<DetalleProductoVenta> listarDetalleProductoVenta1(DetalleProductoVenta param);
+    List<DetalleProductoTerminado> listarDetalleProductoVenta2(DetalleProductoTerminado param);
+    void eliminarDetalleProductoVenta(DetalleProductoVenta param);
 }

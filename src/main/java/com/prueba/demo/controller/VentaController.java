@@ -53,10 +53,10 @@ public class VentaController {
 			}
 	}
 
-	@PostMapping("/listarDetProductoVenta")
+	@PostMapping("/listarDetProductoVenta2")
 		public ResponseEntity<?> listarDetProductoVenta(@RequestBody DetProdTerminadoVentaInputDto input){
 			try {
-				return ResponseEntity.ok(ventaService.listarDetProductoVenta(input));
+				return ResponseEntity.ok(ventaService.listarDetProductoVenta2(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);

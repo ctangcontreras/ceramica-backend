@@ -31,8 +31,8 @@ import com.prueba.demo.support.dto.Constantes;
 import com.prueba.demo.support.dto.Respuesta;
 
 @Service
-public class VentaServiceImpl implements VentaService{
-    
+public class VentaServiceImpl implements VentaService {
+
     @Autowired
     VentaMapper ventaMapper;
 
@@ -50,84 +50,144 @@ public class VentaServiceImpl implements VentaService{
 
     @Override
     @Transactional
-	public Respuesta<?> registrarVenta(RegistrarVentaInputDto param) throws Exception {
+    public Respuesta<?> registrarVenta(RegistrarVentaInputDto param) throws Exception {
 
-            Venta venta = new Venta();
-            venta.setIdVenta(param.getIdVenta());
-            venta.setFechaRegistro(param.getFechaRegistro());
-            venta.setTipoDocumento(param.getTipoDocumento());
-            venta.setNumeroDocumento(param.getNumeroDocumento());
-            venta.setMetodoPago(param.getMetodoPago());
-            venta.setPendienteRecojo(param.getPendienteRecojo());
-            venta.setCostoTotal(param.getCostoTotal());
-            venta.setRazonSocial(param.getRazonSocial());
-            venta.setNombres(param.getNombres());
-            venta.setApellidoPaterno(param.getApellidoPaterno());
-            venta.setApellidoMaterno(param.getApellidoMaterno());
-            venta.setTipoVehiculo(param.getTipoVehiculo());
-            venta.setPlacaVehiculo(param.getPlacaVehiculo());
-            venta.setEstadoVenta(param.getEstadoVenta());
-            venta.setObservacion(param.getObservacion());
-            venta.setActivo(Constantes.ESTADO_ACTIVO);
-            venta.setUsuarioCreacion(param.getUsuarioCreacion());
-            ventaMapper.registrarVenta(venta);
+        Venta venta = new Venta();
+        venta.setIdVenta(param.getIdVenta());
+        venta.setFechaRegistro(param.getFechaRegistro());
+        venta.setTipoDocumento(param.getTipoDocumento());
+        venta.setNumeroDocumento(param.getNumeroDocumento());
+        venta.setMetodoPago(param.getMetodoPago());
+        venta.setPendienteRecojo(param.getPendienteRecojo());
+        venta.setCostoTotal(param.getCostoTotal());
+        venta.setRazonSocial(param.getRazonSocial());
+        venta.setNombres(param.getNombres());
+        venta.setApellidoPaterno(param.getApellidoPaterno());
+        venta.setApellidoMaterno(param.getApellidoMaterno());
+        venta.setTipoVehiculo(param.getTipoVehiculo());
+        venta.setPlacaVehiculo(param.getPlacaVehiculo());
+        venta.setEstadoVenta(param.getEstadoVenta());
+        venta.setObservacion(param.getObservacion());
+        venta.setActivo(Constantes.ESTADO_ACTIVO);
+        venta.setUsuarioCreacion(param.getUsuarioCreacion());
+        ventaMapper.registrarVenta(venta);
 
-            DetalleVenta detalle = new DetalleVenta();
+        DetalleVenta detallesEliminados = new DetalleVenta();
+        if (param.getDetallesEliminados() != null && !param.getDetallesEliminados().isEmpty()) {
+            for (RegistrarDetVentaInputDto detEli : param.getDetallesEliminados()) {
+                detallesEliminados.setIdDetalleVenta(detEli.getIdDetalleVenta());
+                detallesEliminados.setUsuarioElimina(param.getUsuarioCreacion());
+                detVentaMapper.eliminarDetalleVenta(detallesEliminados);
 
-            if (param.getRegistrarDetalle()!=null && !param.getRegistrarDetalle().isEmpty()) {
-                for (RegistrarDetVentaInputDto element : param.getRegistrarDetalle()) {
-                    detalle.setIdDetalleVenta(element.getIdDetalleVenta());
-                    detalle.setIdVenta(venta.getIdVenta());
-                    detalle.setTipoLadrillo(element.getTipoLadrillo());
-                    detalle.setCantidadTotal(element.getCantidadTotal());
-                    detalle.setPrecio(element.getPrecio());
-                    detalle.setEstado(element.getEstado());
-                    detalle.setActivo(Constantes.ESTADO_ACTIVO);
-                    detalle.setUsuarioCreacion(param.getUsuarioCreacion());
-                    detVentaMapper.registrarDetVenta(detalle);
-
-                    DetalleProductoVenta detalleProducto = new DetalleProductoVenta();
-
-                    if (element.getRegistrarProducto()!=null && !element.getRegistrarProducto().isEmpty()) {
-                        for (RegistrarDetProductoVentaInputDto element2 : element.getRegistrarProducto()) {
-                             /* detalleProducto.setIdDetalleProductoVenta(element2.getIdDetalleProductoVenta()); */
-                             detalleProducto.setIdDetalleVenta(detalle.getIdDetalleVenta());
-                             detalleProducto.setIdDetProductoTerminado(element2.getIdDetProductoTerminado());
-                             detalleProducto.setUtilizado(element2.getUtilizado());
-                             detalleProducto.setActivo(Constantes.ESTADO_ACTIVO);
-                             detalleProducto.setUsuarioCreacion(param.getUsuarioCreacion());
-                             detProductoVentaMapper.registrarDetProductoVenta(detalleProducto);
-
-                             DetalleProductoTerminado prodTerminado = new DetalleProductoTerminado();
-                             prodTerminado.setIdDetalleProductoTerminado(element2.getIdDetProductoTerminado());
-                             prodTerminado.setUtilizado(element2.getUtilizado());
-                             detProductoTerminadoMapper.actualizarUtilizado(prodTerminado);
-                        }
-                    }
+                DetalleProductoVenta prodVen = new DetalleProductoVenta();
+                prodVen.setIdDetalleVenta(detEli.getIdDetalleVenta());
+                List<DetalleProductoVenta> listaDetProductoVenta = detProductoVentaMapper.listarDetalleProductoVenta1(prodVen);
+        
+                DetalleProductoTerminado prodTerm = new DetalleProductoTerminado();
+                prodTerm.setIdDetalleVenta(detEli.getIdDetalleVenta());
+                List<DetalleProductoTerminado> listaDetProdTerm = detProductoTerminadoMapper.listarDetProductoTerminadoVenta2(prodTerm);
+                
+              
+                if ((listaDetProductoVenta!=null && !listaDetProductoVenta.isEmpty()) && (listaDetProdTerm!=null && !listaDetProdTerm.isEmpty())) {
+                    for (DetalleProductoVenta e : listaDetProductoVenta) {
+                        for (DetalleProductoTerminado e2 : listaDetProdTerm) {
+                             if (e.getIdDetProductoTerminado().equals(e2.getIdDetalleProductoTerminado())) {
+                                   DetalleProductoTerminado restar = new DetalleProductoTerminado();
+                                   restar.setIdDetalleProductoTerminado(e2.getIdDetalleProductoTerminado());
+                                   restar.setUtilizado(e.getUtilizado());
+                                   detProductoTerminadoMapper.restarUtilizado(restar);
+                             }
+                        }   
+                   }     
                 }
 
+                DetalleProductoVenta eliminarProductoVenta = new DetalleProductoVenta();
+                eliminarProductoVenta.setIdDetalleVenta(detEli.getIdDetalleVenta());
+                eliminarProductoVenta.setUsuarioElimina(param.getUsuarioCreacion());
+                detProductoVentaMapper.eliminarDetalleProductoVenta(eliminarProductoVenta);
+            }
+        }
+
+        DetalleVenta detalleVenta = new DetalleVenta();
+        if (param.getRegistrarDetalle() != null && !param.getRegistrarDetalle().isEmpty()) {
+            for (RegistrarDetVentaInputDto element : param.getRegistrarDetalle()) {
+                detalleVenta.setIdDetalleVenta(element.getIdDetalleVenta());
+                detalleVenta.setIdVenta(venta.getIdVenta());
+                detalleVenta.setTipoLadrillo(element.getTipoLadrillo());
+                detalleVenta.setCantidadTotal(element.getCantidadTotal());
+                detalleVenta.setPrecio(element.getPrecio());
+                detalleVenta.setEstado(element.getEstado());
+                detalleVenta.setActivo(Constantes.ESTADO_ACTIVO);
+                detalleVenta.setUsuarioCreacion(param.getUsuarioCreacion());
+                detVentaMapper.registrarDetVenta(detalleVenta);
+
+                DetalleProductoVenta prodVen = new DetalleProductoVenta();
+                prodVen.setIdDetalleVenta(detalleVenta.getIdDetalleVenta());
+                List<DetalleProductoVenta> listaDetProductoVenta = detProductoVentaMapper.listarDetalleProductoVenta1(prodVen);
+        
+                DetalleProductoTerminado prodTerm = new DetalleProductoTerminado();
+                prodTerm.setIdDetalleVenta(detalleVenta.getIdDetalleVenta());
+                List<DetalleProductoTerminado> listaDetProdTerm = detProductoTerminadoMapper.listarDetProductoTerminadoVenta2(prodTerm);
+                
+              
+                if ((listaDetProductoVenta!=null && !listaDetProductoVenta.isEmpty()) && (listaDetProdTerm!=null && !listaDetProdTerm.isEmpty())) {
+                    for (DetalleProductoVenta e : listaDetProductoVenta) {
+                        for (DetalleProductoTerminado e2 : listaDetProdTerm) {
+                             if (e.getIdDetProductoTerminado().equals(e2.getIdDetalleProductoTerminado())) {
+                                   DetalleProductoTerminado restar = new DetalleProductoTerminado();
+                                   restar.setIdDetalleProductoTerminado(e2.getIdDetalleProductoTerminado());
+                                   restar.setUtilizado(e.getUtilizado());
+                                   detProductoTerminadoMapper.restarUtilizado(restar);
+                             }
+                        }   
+                   }     
+                }
+
+                DetalleProductoVenta eliminarProductoVenta = new DetalleProductoVenta();
+                eliminarProductoVenta.setIdDetalleVenta(detalleVenta.getIdDetalleVenta());
+                eliminarProductoVenta.setUsuarioElimina(param.getUsuarioCreacion());
+                detProductoVentaMapper.eliminarDetalleProductoVenta(eliminarProductoVenta);
+
+                DetalleProductoVenta detalleProducto = new DetalleProductoVenta();
+                if (element.getRegistrarProducto() != null && !element.getRegistrarProducto().isEmpty()) {
+                    for (RegistrarDetProductoVentaInputDto element2 : element.getRegistrarProducto()) {
+
+                        detalleProducto.setIdDetalleVenta(detalleVenta.getIdDetalleVenta());
+                        detalleProducto.setIdDetProductoTerminado(element2.getIdDetProductoTerminado());
+                        detalleProducto.setUtilizado(element2.getUtilizado());
+                        detalleProducto.setActivo(Constantes.ESTADO_ACTIVO);
+                        detalleProducto.setUsuarioCreacion(param.getUsuarioCreacion());
+                        detProductoVentaMapper.registrarDetProductoVenta(detalleProducto);
+
+                        DetalleProductoTerminado prodTerminado = new DetalleProductoTerminado();
+                        prodTerminado.setIdDetalleProductoTerminado(element2.getIdDetProductoTerminado());
+                        prodTerminado.setUtilizado(element2.getUtilizado());
+                        detProductoTerminadoMapper.actualizarUtilizado(prodTerminado);
+                    }
+                }
             }
 
-            VentaRecojo recojo = new VentaRecojo();
-            if (param.getPendienteRecojo().equals(1)) {
-                /* recojo.setIdVentaRecojo(param.getRegistrarVentaRecojo().getIdVentaRecojo()); */
-                recojo.setIdVenta(venta.getIdVenta());
-                recojo.setFecha(param.getRegistrarVentaRecojo().getFecha());
-                recojo.setActivo(Constantes.ESTADO_ACTIVO);
-                recojo.setUsuarioCreacion(param.getUsuarioCreacion());
-                recojo.setObservacion(param.getRegistrarVentaRecojo().getObservacion());
-                ventaRecojoMapper.registrarVentaRecojo(recojo);
-            }
+        }
 
-			Respuesta resp = new Respuesta<>();
-			resp.setSuccess(venta.getResultado().equals(1)?true:false);
-            resp.setMessage("Se registraron correctamente los datos");
-            return resp;
-		
-  }
+        VentaRecojo recojo = new VentaRecojo();
+        if (param.getPendienteRecojo().equals(1)) {
+            recojo.setIdVenta(venta.getIdVenta());
+            recojo.setFecha(param.getRegistrarVentaRecojo().getFecha());
+            recojo.setActivo(Constantes.ESTADO_ACTIVO);
+            recojo.setUsuarioCreacion(param.getUsuarioCreacion());
+            recojo.setObservacion(param.getRegistrarVentaRecojo().getObservacion());
+            ventaRecojoMapper.registrarVentaRecojo(recojo);
+        }
+
+        Respuesta resp = new Respuesta<>();
+        resp.setSuccess(venta.getResultado().equals(1) ? true : false);
+        resp.setMessage("Se registraron correctamente los datos");
+        return resp;
+
+    }
 
     @Override
-    public Respuesta<?> listarVenta(ListarVentaInputDto param) throws Exception{
+    public Respuesta<?> listarVenta(ListarVentaInputDto param) throws Exception {
         Venta venta = new Venta();
         venta.setIdVenta(param.getIdVenta());
         venta.setFechaInicio(param.getFechaInicio());
@@ -137,7 +197,7 @@ public class VentaServiceImpl implements VentaService{
 
         List<ListaVentaOutputDto> outputDto = new ArrayList<>();
 
-        if (listaVenta!=null && !listaVenta.isEmpty()) {
+        if (listaVenta != null && !listaVenta.isEmpty()) {
             ListaVentaOutputDto vent = new ListaVentaOutputDto();
             for (Venta element : listaVenta) {
                 vent = new ListaVentaOutputDto();
@@ -170,7 +230,7 @@ public class VentaServiceImpl implements VentaService{
 
                 List<ListarDetVentaOutputDto> outputDto2 = new ArrayList<>();
 
-                if (listaDetalle!=null && !listaDetalle.isEmpty()) {
+                if (listaDetalle != null && !listaDetalle.isEmpty()) {
                     ListarDetVentaOutputDto det = new ListarDetVentaOutputDto();
                     for (DetalleVenta element2 : listaDetalle) {
                         det = new ListarDetVentaOutputDto();
@@ -184,62 +244,56 @@ public class VentaServiceImpl implements VentaService{
                         det.setDescTipoLadrillo(element2.getDescTipoLadrillo());
                         det.setDescEstadoLadrillo(element2.getDescEstadoLadrillo());
 
-                        /* DetalleProductoTerminado detalleProdVenta = new DetalleProductoTerminado();
+                        DetalleProductoVenta detalleProdVenta = new DetalleProductoVenta();
                         detalleProdVenta.setIdDetalleVenta(element2.getIdDetalleVenta());
-                        List<DetalleProductoTerminado> listaDetalleProdVenta = detProductoVentaMapper.listarDetalleProductoVenta(detalleProdVenta);
+                        List<DetalleProductoVenta> listaDetalleProdVenta = detProductoVentaMapper.listarDetalleProductoVenta1(detalleProdVenta);
 
                         List<ListarDetProductoVentaOuputDto> ouputDto3 = new ArrayList<>();
 
-                        if (listaDetalleProdVenta!=null && !listaDetalleProdVenta.isEmpty()) {
+                        if (listaDetalleProdVenta != null && !listaDetalleProdVenta.isEmpty()) {
                             ListarDetProductoVentaOuputDto prod = new ListarDetProductoVentaOuputDto();
-                            for (DetalleProductoTerminado element3 : listaDetalleProdVenta) {
-                                prod.setIdDetalleProductoTerminado(element3.getIdDetalleProductoTerminado());
-                                prod.setIdProductoTerminado(element3.getIdProductoTerminado());
-                                prod.setCantidadPaquete(element3.getCantidadPaquete());
-                                prod.setCantidadCrudo(element3.getCantidadCrudo());
-                                prod.setCrudo(element3.getCrudo());
-                                prod.setTotal(element3.getTotal());
-                                prod.setDescripcionEstado(element3.getDescripcionEstado());
-                                prod.setDescripcionTipoLadrillo(element3.getDescripcionTipoLadrillo());
-                                prod.setCodigo(element3.getCodigo());
+                            for (DetalleProductoVenta element3 : listaDetalleProdVenta) {
+                                prod.setIdDetalleProductoVenta(element3.getIdDetalleProductoVenta());
+                                prod.setIdDetalleVenta(element3.getIdDetalleVenta());
+                                prod.setIdDetProductoTerminado(element3.getIdDetProductoTerminado());
                                 prod.setUtilizado(element3.getUtilizado());
+                                prod.setActivo(element3.getActivo());
                                 ouputDto3.add(prod);
                             }
 
                             det.setListaProductoVenta(ouputDto3);
-                        }*/
-                        outputDto2.add(det); 
+                        }
+                        outputDto2.add(det);
                     }
 
                     vent.setListaDetalle(outputDto2);
-                    
+
                 }
 
                 outputDto.add(vent);
             }
-    
+
             Respuesta resp = new Respuesta<>();
             resp.setSuccess(true);
             resp.setMessage("Se listó correctamente");
             resp.setDato(outputDto);
             return resp;
-        }else{
-            
+        } else {
+
             Respuesta resp = new Respuesta<>();
             resp.setSuccess(false);
             resp.setMessage("No se encontró registros");
             return resp;
-            
-        
+
         }
     }
 
     @Override
-	public Respuesta<?> listarDetProductoVenta(DetProdTerminadoVentaInputDto param) throws Exception {
+    public Respuesta<?> listarDetProductoVenta2(DetProdTerminadoVentaInputDto param) throws Exception {
 
         DetalleProductoTerminado detalleProducto = new DetalleProductoTerminado();
         detalleProducto.setIdDetalleVenta(param.getIdDetalleVenta());
-        List<DetalleProductoTerminado> lista = detProductoVentaMapper.listarDetalleProductoVenta(detalleProducto);
+        List<DetalleProductoTerminado> lista = detProductoVentaMapper.listarDetalleProductoVenta2(detalleProducto);
 
         List<DetProdTerminadoVentaOuputDto> listaDet = new ArrayList<>();
 
@@ -260,32 +314,32 @@ public class VentaServiceImpl implements VentaService{
                 listaDet.add(detalle);
             }
 
-
             Respuesta resp = new Respuesta<>();
             resp.setSuccess(true);
             resp.setMessage("Se listó correctamente");
             resp.setDato(listaDet);
             return resp;
-        }else{
-            
+        } else {
+
             Respuesta resp = new Respuesta<>();
             resp.setSuccess(false);
             resp.setMessage("No se encontró registros");
             return resp;
-            
+
         }
 
     }
 
     @Override
-	public Respuesta<?> listarDetProdTerminadoVenta(DetProdTerminadoVentaInputDto param) throws Exception {
+    public Respuesta<?> listarDetProdTerminadoVenta(DetProdTerminadoVentaInputDto param) throws Exception {
 
         DetalleProductoTerminado detalleProducto = new DetalleProductoTerminado();
         detalleProducto.setIdDetalleProductoTerminado(param.getIdDetalleProductoTerminado());
         detalleProducto.setIdProductoTerminado(param.getIdProductoTerminado());
         detalleProducto.setCodigoEstado(param.getCodigoEstado());
         detalleProducto.setCodigoLadrillo(param.getCodigoLadrillo());
-        List<DetalleProductoTerminado> lista = detProductoTerminadoMapper.listarDetProductoTerminadoVenta(detalleProducto);
+        List<DetalleProductoTerminado> lista = detProductoTerminadoMapper
+                .listarDetProductoTerminadoVenta(detalleProducto);
 
         List<DetProdTerminadoVentaOuputDto> listaDet = new ArrayList<>();
 
@@ -308,19 +362,18 @@ public class VentaServiceImpl implements VentaService{
                 listaDet.add(detalle);
             }
 
-
             Respuesta resp = new Respuesta<>();
             resp.setSuccess(true);
             resp.setMessage("Se listó correctamente");
             resp.setDato(listaDet);
             return resp;
-        }else{
-            
+        } else {
+
             Respuesta resp = new Respuesta<>();
             resp.setSuccess(false);
             resp.setMessage("No se encontró registros");
             return resp;
-            
+
         }
 
     }
