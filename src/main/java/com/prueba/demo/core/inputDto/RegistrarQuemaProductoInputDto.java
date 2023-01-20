@@ -25,4 +25,9 @@ public class RegistrarQuemaProductoInputDto {
 
     private List<RegistrarDetQuemaProductoInputDto> registrarDetalle;
     private List<RegistrarQuemaProductoPersonaInputDto> registrarPersona;
+
+
+
+    private Date fechaInicio;
+    private Date fechaFin;
 }
