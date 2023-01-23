@@ -15,6 +15,8 @@ public class QuemaProducto extends ModeloBase{
     private String codigo;
     private String observacion;
 
+    private Date fechaInicio;
+    private Date fechaFin;
     private String descFechaRegistro;
     private String descHorno;
     private String descFechaInicio;

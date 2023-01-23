@@ -8,10 +8,10 @@ import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
-import javax.validation.constraints.Size;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -36,17 +36,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.prueba.demo.core.inputDto.ListarQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.ProductoInicialInputDto;
 import com.prueba.demo.core.inputDto.ProductoTerminadoInputDto;
 import com.prueba.demo.core.model.DetalleProductoTerminado;
+import com.prueba.demo.core.model.DetalleQuemaProducto;
 import com.prueba.demo.core.model.ProductoInicial;
 import com.prueba.demo.core.model.ProductoTerminado;
+import com.prueba.demo.core.model.QuemaProducto;
+import com.prueba.demo.core.model.QuemaProductoPersona;
 import com.prueba.demo.core.outputDto.ListaProductoInicialOutputDto;
 import com.prueba.demo.core.outputDto.ListaProductoTerminadoOutputDto;
+import com.prueba.demo.core.outputDto.ListaQuemaProductoOutputDto;
 import com.prueba.demo.core.outputDto.ListarDetProductoTerminadoOutputDto;
+import com.prueba.demo.core.outputDto.ListarDetQuemaProductoOutputDto;
+import com.prueba.demo.core.outputDto.ListarQuemaProductoPersonaOutputDto;
 import com.prueba.demo.mapper.DetProductoTerminadoMapper;
+import com.prueba.demo.mapper.DetQuemaProductoMapper;
 import com.prueba.demo.mapper.ProductoInicialMapper;
 import com.prueba.demo.mapper.ProductoTerminadoMapper;
+import com.prueba.demo.mapper.QuemaProductoMapper;
+import com.prueba.demo.mapper.QuemaProductoPersonaMapper;
 import com.prueba.demo.service.ReportesService;
 import com.prueba.demo.support.dto.Respuesta;
 
@@ -64,6 +74,15 @@ public class ReportesServiceImpl implements ReportesService {
 
 	@Autowired
 	private DetProductoTerminadoMapper detProductoTerminadoMapper;
+
+	@Autowired
+	private QuemaProductoMapper quemaProductoMapper;
+
+	@Autowired
+	private DetQuemaProductoMapper detQuemaProductoMapper;
+
+	@Autowired
+	private QuemaProductoPersonaMapper quemaProductoPersonaMapper;
  
 
   @Override
@@ -528,6 +547,8 @@ public class ReportesServiceImpl implements ReportesService {
  
 
   }
+
+  
 
   public void autoSizeColumns(Workbook workbook) {
 	int numberOfSheets = workbook.getNumberOfSheets();
@@ -1158,9 +1179,303 @@ public Respuesta<?> listarProductoTerminadoExcel(ProductoTerminadoInputDto param
 		} 
 	}
 
+<<<<<<< HEAD
 		
 	}
 		
+=======
+
+	@Override
+	public Respuesta<?> listarQuemaProductoExcel(ListarQuemaProductoInputDto param) throws Exception {
+		QuemaProducto quemaProducto = new QuemaProducto();
+		quemaProducto.setIdQuemaProducto(param.getIdQuemaProducto());
+		quemaProducto.setFechaInicio(param.getFechaInicio());
+        quemaProducto.setFechaFin(param.getFechaFin());
+		quemaProducto.setHorno(param.getHorno());
+
+		List<QuemaProducto> listaQuemaProducto = quemaProductoMapper.listarQuemaProducto(quemaProducto);
+
+		List<ListaQuemaProductoOutputDto> lista = new ArrayList<>();
+
+		if (listaQuemaProducto != null && !listaQuemaProducto.isEmpty()) {
+			ListaQuemaProductoOutputDto e = new ListaQuemaProductoOutputDto();
+			for (QuemaProducto element : listaQuemaProducto) {
+				e = new ListaQuemaProductoOutputDto();
+				e.setIdQuemaProducto(element.getIdQuemaProducto());
+				e.setDescHorno(element.getDescHorno());
+				e.setDescFechaRegistro(element.getDescFechaRegistro());
+				e.setCantidadPaquete(element.getCantidadPaquete());
+				e.setObservacion(element.getObservacion());
+				e.setDescripcionEstado(element.getDescripcionEstado());
+				e.setCodigo(element.getCodigo());
+				e.setActivo(element.getActivo());
+				e.setHorno(element.getHorno());
+				e.setFechaRegistro(element.getFechaRegistro());
+				e.setDescFechaInicio(element.getDescFechaInicio());
+				e.setDescFechaFin(element.getDescFechaFin());
+
+				DetalleQuemaProducto detalle = new DetalleQuemaProducto();
+				detalle.setIdQuemaProducto(element.getIdQuemaProducto());
+				List<DetalleQuemaProducto> listaDetalle = detQuemaProductoMapper.listarDetQuemaProducto(detalle);
+
+				if (listaDetalle != null && !listaDetalle.isEmpty()) {
+					ListarDetQuemaProductoOutputDto d = new ListarDetQuemaProductoOutputDto();
+					for (DetalleQuemaProducto element2 : listaDetalle) {
+						d = new ListarDetQuemaProductoOutputDto();
+						if (element2.getTipo()==1) {
+							d.setIdDetalleQuemaProducto(element2.getIdDetalleQuemaProducto());
+							d.setIdQuemaProducto(element2.getIdQuemaProducto());
+							d.setLado(element2.getLado());
+							d.setDescLado(element2.getDescLado());
+							d.setActivo(element2.getActivo());
+							d.setFechaDetalle(element2.getFechaDetalle());
+							d.setTipo(element2.getTipo());
+							e.setInicio(d);
+						}
+
+						if (element2.getTipo()==2) {
+							d.setIdDetalleQuemaProducto(element2.getIdDetalleQuemaProducto());
+							d.setIdQuemaProducto(element2.getIdQuemaProducto());
+							d.setLado(element2.getLado());
+							d.setDescLado(element2.getDescLado());
+							d.setActivo(element2.getActivo());
+							d.setFechaDetalle(element2.getFechaDetalle());
+							d.setTipo(element2.getTipo());
+							e.setFin(d);
+						}
+					}
+				}
+				
+				QuemaProductoPersona quemaProductoPersona = new QuemaProductoPersona();
+				quemaProductoPersona.setIdQuemaProducto(param.getIdQuemaProducto());
+				List<QuemaProductoPersona> listaQuemaProductoPersona = quemaProductoPersonaMapper.listarQuemaProductoPersona(quemaProductoPersona);
+
+				List<ListarQuemaProductoPersonaOutputDto> listaPersona = new ArrayList<>();
+
+				if (listaQuemaProductoPersona != null && !listaQuemaProductoPersona.isEmpty()) {
+					ListarQuemaProductoPersonaOutputDto per = new ListarQuemaProductoPersonaOutputDto();
+					for (QuemaProductoPersona element3 : listaQuemaProductoPersona) {
+						per = new ListarQuemaProductoPersonaOutputDto();
+						per.setIdQuemaProductoPersona(element3.getIdQuemaProductoPersona());
+						per.setIdQuemaProducto(element3.getIdQuemaProducto());
+						per.setDni(element3.getDni());
+						per.setApellidoPaterno(element3.getApellidoPaterno());
+						per.setApellidoMaterno(element3.getApellidoMaterno());
+						per.setNombres(element3.getNombres());
+						per.setActivo(element3.getActivo());
+						per.setTipoPersona(element3.getTipoPersona());
+						listaPersona.add(per);
+					}
+
+					e.setListaPersona(listaPersona);
+				}
+				
+				lista.add(e);
+			}
+
+			// Creamos nuestro libro de excel
+			HSSFWorkbook workbook = new HSSFWorkbook();
+			//Le damos color al fondo
+			HSSFFont blueFont = workbook.createFont();
+
+			blueFont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+    
+			HSSFCellStyle style = workbook.createCellStyle();
+			HSSFCellStyle style2 = workbook.createCellStyle();
+
+			style.setBorderBottom(XSSFCellStyle.BORDER_MEDIUM);
+			style.setBorderTop(XSSFCellStyle.BORDER_MEDIUM);
+			style.setBorderRight(XSSFCellStyle.BORDER_MEDIUM);
+			style.setBorderLeft(XSSFCellStyle.BORDER_MEDIUM);
+
+			style2.setBorderBottom(XSSFCellStyle.BORDER_MEDIUM);
+			style2.setBorderTop(XSSFCellStyle.BORDER_MEDIUM);
+			style2.setBorderRight(XSSFCellStyle.BORDER_MEDIUM);
+			style2.setBorderLeft(XSSFCellStyle.BORDER_MEDIUM);
+
+			style.setFont(blueFont);
+
+			 //centrar
+			 style.setAlignment(style.ALIGN_CENTER);
+			 style2.setAlignment(style2.ALIGN_CENTER);
+			
+		   //iniciamos variables
+			 int numeroColumna = 6;
+			 int tamano = 5000;
+
+			 //CellRangeAddress cellRangeAddress = new CellRangeAddress(1, 1, 1, 3);// Merges the cells
+			 CellRangeAddress cellRangeAddress = new CellRangeAddress(1, 1, 2, 5);
+         
+			 // Creamos una hoja de calculo llama "Reporte" en dicho libro de excel
+			 HSSFSheet sheet = workbook.createSheet("Reporte Producto Inicial");
+			
+			 sheet.setColumnWidth( numeroColumna, tamano);
+			 
+			
+			 sheet.addMergedRegion(cellRangeAddress);
+
+			 //Resource resource = new ClassPathResource("assets/logoEmpresa.jpeg"); 
+     		//InputStream inputStream = resource.getInputStream();
+
+			// byte[] bytes = IOUtils.toByteArray(inputStream);
+
+			 //int pictureIdx = workbook.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+				//inputStream.close();
+				
+				//Returns an object that handles instantiating concrete classes
+				CreationHelper helper = workbook.getCreationHelper();
+			
+				//Creates the top-level drawing patriarch.
+				Drawing drawing = sheet.createDrawingPatriarch();
+			
+				//Create an anchor that is attached to the worksheet
+				ClientAnchor anchor = helper.createClientAnchor();
+				//set top-left corner for the image
+				anchor.setCol1(0); //Column B
+				anchor.setRow1(0); //Row 3 abajo
+				anchor.setCol2(0); //Column C
+				anchor.setRow2(1); //Row 4
+				double scale = 0.1;
+				
+				//Creates a picture
+				//Picture pict = drawing.createPicture(anchor,pictureIdx);
+				//Reset the image to the original size
+				//pict.resize(scale);
+
+				
+				// sheet.addMergedRegion(new CellRangeAddress(1,1,1,3));
+				Row filaTitulo =sheet.createRow(1);
+				Cell  celda = filaTitulo.createCell(2);
+				celda.setCellValue("REPORTE QUEMA PRODUCTO");
+				//combinar y centrar
+				final int borderMediumDashed = CellStyle.BORDER_MEDIUM;
+				RegionUtil.setBorderTop(borderMediumDashed,cellRangeAddress, sheet,sheet.getWorkbook());
+				RegionUtil.setBorderBottom(borderMediumDashed,cellRangeAddress, sheet,sheet.getWorkbook());
+				RegionUtil.setBorderLeft(borderMediumDashed,cellRangeAddress, sheet,sheet.getWorkbook());
+				RegionUtil.setBorderRight(borderMediumDashed,cellRangeAddress, sheet,sheet.getWorkbook());
+				
+			  	celda.setCellStyle(style);
+
+				Row filaT = null;
+				Cell celdaT = null;
+				int fila = 0;
+
+				if (param.getFechaInicio()!=null && param.getFechaFin()!=null) {
+					DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+					String strFechaInicio = formatter.format(param.getFechaInicio());
+					String strFechaFin = formatter.format(param.getFechaFin());
+
+					filaT =sheet.createRow(2);
+					celdaT = filaT.createCell(0);
+					celdaT.setCellValue("Fecha Inicio");
+					celdaT = filaT.createCell(1);
+					celdaT.setCellValue(strFechaInicio);
+				
+					filaT =sheet.createRow(3);
+					celdaT = filaT.createCell(0);
+					celdaT.setCellValue("Fecha Fin");
+					celdaT = filaT.createCell(1);
+					celdaT.setCellValue(strFechaFin);
+				
+				}
+				
+			   // sheet.addMergedRegion(cellRangeAddress);
+			 
+			   
+				Row filaReporte =sheet.createRow(5);
+				String[] meses = {"","Fecha Registro", "HORNO", "Cantidad Paquete", "Fecha Inicio Quema", "Fecha Fin Quema", "Estado", "Observación"};
+
+				for (int i = 1; i < meses.length; i++) {
+					// Creamos una fila en la posicion indicada por el contador del ciclo
+			   
+					// Creamos la celda para el nombre del mes, en la primera posicion de la fila
+					Cell celdaMes = filaReporte.createCell(i);
+					// Indicamos que valor debe tener
+					celdaMes.setCellValue(meses[i]);
+					celdaMes.setCellStyle(style);
+					sheet.setColumnWidth(i, tamano);
+				   
+				}
+
+				int numeroFila =6;
+     for(ListaQuemaProductoOutputDto element : lista ) {
+    	 Row filaData=sheet.createRow(numeroFila);
+    
+    	Cell fechaRegistro = filaData.createCell(1);
+    	fechaRegistro.setCellValue(element.getDescFechaRegistro());
+    	
+    	 Cell horno = filaData.createCell(2);
+    	 horno.setCellValue(element.getDescHorno());
+    	 
+    	 Cell cantidadPaquete = filaData.createCell(3);
+    	 cantidadPaquete.setCellValue(element.getCantidadPaquete());
+    	 
+    	 Cell descfechaInicio = filaData.createCell(4);
+    	 descfechaInicio.setCellValue(element.getDescFechaInicio());
+    	 
+    	 Cell descfechaFin = filaData.createCell(5);
+    	 descfechaFin.setCellValue(element.getDescFechaFin());
+    	 
+    	 Cell estado = filaData.createCell(6);
+    	 estado.setCellValue(element.getDescripcionEstado());
+
+		 Cell observacion = filaData.createCell(7);
+    	 observacion.setCellValue(element.getObservacion());
+    	 
+    	 fechaRegistro.setCellStyle(style2);
+    	 horno.setCellStyle(style2);
+    	 cantidadPaquete.setCellStyle(style2);
+    	 descfechaInicio.setCellStyle(style2);
+    	 descfechaFin.setCellStyle(style2);
+    	 estado.setCellStyle(style2);
+		 observacion.setCellStyle(style2);
+    	 
+    	 
+    	 numeroFila ++;
+    	 
+     	} 
+
+		 autoSizeColumns(workbook);
+
+			 byte[] fileContent =null;
+     
+			 // Ahora almacenaremos el archivo en disco
+			 try {
+		
+				 File archivo = File.createTempFile("formatoProgramaInversiones",".xls");
+		
+				 FileOutputStream out = new FileOutputStream(archivo);
+				 workbook.write(out);
+				 out.close();
+				 fileContent = Files.readAllBytes(archivo.toPath());
+				 
+		
+			 } catch (IOException o) {
+				 System.err.println("ERROR AL CREAR EL ARCHIVO!");
+				 o.printStackTrace();
+			 }
+			 
+			 System.out.println("Reporte generado");
+			 
+
+			Respuesta resp = new Respuesta<>();
+			resp.setSuccess(true);
+            resp.setMessage("Se listo correctamente los datos");
+            resp.setDato(fileContent);
+            return resp;
+		} else {	
+			Respuesta resp = new Respuesta<>();
+            resp.setSuccess(false);
+            resp.setMessage("No se encontró registros");
+            return resp;
+		} 
+
+
+ 
+
+  }
+
+>>>>>>> ab3faf676e238b8ea8028f0207c9ac31c8149494
  
 
 }

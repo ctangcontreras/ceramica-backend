@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prueba.demo.core.inputDto.EliminarQuemaProductoInputDto;
+import com.prueba.demo.core.inputDto.ListarQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.RegistrarQuemaProductoInputDto;
 import com.prueba.demo.service.QuemaProductoService;
 import org.slf4j.Logger;
@@ -43,7 +44,7 @@ public class QuemaProductoController {
 	}
 
 	@PostMapping("/listaQuemaProducto")
-		public ResponseEntity<?> getListaUsuario(@RequestBody RegistrarQuemaProductoInputDto input){
+		public ResponseEntity<?> getListaUsuario(@RequestBody ListarQuemaProductoInputDto input){
 			try {
 				return ResponseEntity.ok(quemaProductoService.listarQuemaProducto(input));
 			} catch (Exception e) {

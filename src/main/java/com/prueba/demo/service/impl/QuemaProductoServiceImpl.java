@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.prueba.demo.core.inputDto.RegistrarDetQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.EliminarQuemaProductoInputDto;
+import com.prueba.demo.core.inputDto.ListarQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.RegistrarQuemaProductoInputDto;
 import com.prueba.demo.core.inputDto.RegistrarQuemaProductoPersonaInputDto;
 import com.prueba.demo.core.model.DetalleQuemaProducto;
@@ -108,10 +109,11 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
 
     @Override
     @Transactional
-	public Respuesta<?> listarQuemaProducto(RegistrarQuemaProductoInputDto param) throws Exception {
+	public Respuesta<?> listarQuemaProducto(ListarQuemaProductoInputDto param) throws Exception {
 			QuemaProducto quemaProducto = new QuemaProducto();
 			quemaProducto.setIdQuemaProducto(param.getIdQuemaProducto());
-			quemaProducto.setFechaRegistro(param.getFechaRegistro());
+			quemaProducto.setFechaInicio(param.getFechaInicio());
+            quemaProducto.setFechaFin(param.getFechaFin());
 			quemaProducto.setHorno(param.getHorno());
 
 			List<QuemaProducto> listaQuemaProducto = quemaProductoMapper.listarQuemaProducto(quemaProducto);
@@ -168,7 +170,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     }
                     
                     QuemaProductoPersona quemaProductoPersona = new QuemaProductoPersona();
-                    quemaProducto.setIdQuemaProducto(param.getIdQuemaProducto());
+                    quemaProductoPersona.setIdQuemaProducto(param.getIdQuemaProducto());
                     List<QuemaProductoPersona> listaQuemaProductoPersona = quemaProductoPersonaMapper.listarQuemaProductoPersona(quemaProductoPersona);
 
                     List<ListarQuemaProductoPersonaOutputDto> listaPersona = new ArrayList<>();

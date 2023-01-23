@@ -68,6 +68,7 @@
 		{CALL sp_venta_eli(
 			#{idVenta, jdbcType = INTEGER, mode = IN},
 			#{usuarioElimina, jdbcType = INTEGER, mode = IN},
+			#{resultado, jdbcType = INTEGER, mode = OUT}
 		)
 		}
 	</select>
