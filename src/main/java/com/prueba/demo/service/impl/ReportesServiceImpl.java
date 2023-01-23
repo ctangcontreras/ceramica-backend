@@ -125,7 +125,7 @@ public class ReportesServiceImpl implements ReportesService {
 			//Le damos color al fondo
 			HSSFFont blueFont = workbook.createFont();
 
-			blueFont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
     
 			HSSFCellStyle style = workbook.createCellStyle();
 			HSSFCellStyle style2 = workbook.createCellStyle();
@@ -351,7 +351,7 @@ public class ReportesServiceImpl implements ReportesService {
 			//Le damos color al fondo
 			HSSFFont blueFont = workbook.createFont();
 
-			blueFont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
     
 			HSSFCellStyle style = workbook.createCellStyle();
 			HSSFCellStyle style2 = workbook.createCellStyle();
@@ -646,7 +646,7 @@ public Respuesta<?> listarProductoTerminadoExcel(ProductoTerminadoInputDto param
 			//Le damos color al fondo
 			HSSFFont blueFont = workbook.createFont();
 
-			blueFont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
     
 			HSSFCellStyle style = workbook.createCellStyle();
 			HSSFCellStyle style2 = workbook.createCellStyle();
@@ -946,7 +946,7 @@ public Respuesta<?> listarProductoTerminadoExcel(ProductoTerminadoInputDto param
 			//Le damos color al fondo
 			HSSFFont blueFont = workbook.createFont();
 
-			blueFont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
     
 			HSSFCellStyle style = workbook.createCellStyle();
 			HSSFCellStyle style2 = workbook.createCellStyle();
@@ -1179,11 +1179,9 @@ public Respuesta<?> listarProductoTerminadoExcel(ProductoTerminadoInputDto param
 		} 
 	}
 
-<<<<<<< HEAD
 		
 	}
 		
-=======
 
 	@Override
 	public Respuesta<?> listarQuemaProductoExcel(ListarQuemaProductoInputDto param) throws Exception {
@@ -1278,7 +1276,7 @@ public Respuesta<?> listarProductoTerminadoExcel(ProductoTerminadoInputDto param
 			//Le damos color al fondo
 			HSSFFont blueFont = workbook.createFont();
 
-			blueFont.setBoldweight(Font.BOLDWEIGHT_NORMAL);
+			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
     
 			HSSFCellStyle style = workbook.createCellStyle();
 			HSSFCellStyle style2 = workbook.createCellStyle();
@@ -1475,7 +1473,6 @@ public Respuesta<?> listarProductoTerminadoExcel(ProductoTerminadoInputDto param
 
   }
 
->>>>>>> ab3faf676e238b8ea8028f0207c9ac31c8149494
  
 
 }

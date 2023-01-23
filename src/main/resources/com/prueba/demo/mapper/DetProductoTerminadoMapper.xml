@@ -15,7 +15,7 @@
 			<result property="cantidadCrudo" 				column="N_CANTIDAD_CRUDO" />
 			<result property="crudo" 				 		column="N_CRUDO" />
 			<result property="total"			  			column="N_TOTAL" />
-			<result property="idVenta"			  			column="N_DET_VENTA" />
+			<result property="idVenta"			  			column="ID_VENTA" />
 	</resultMap>
 
 	<resultMap id="resListarDetProductoTerminadoVenta" type="DetalleProductoTerminado">
