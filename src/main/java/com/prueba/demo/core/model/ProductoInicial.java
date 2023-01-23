@@ -27,4 +27,7 @@ public class ProductoInicial extends ModeloBase{
 
     private Date fechaInicio;
     private Date fechaFin;
+
+    private String fechaInicioDesc;
+    private String fechaFinDesc;
 }
