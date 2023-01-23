@@ -73,6 +73,40 @@ public class VentaServiceImpl implements VentaService {
         venta.setUsuarioCreacion(param.getUsuarioCreacion());
         ventaMapper.registrarVenta(venta);
 
+        if (param.getListaPendienteRecojo() != null && !param.getListaPendienteRecojo().isEmpty()) {
+            for (RegistrarDetVentaInputDto pendRecojo : param.getListaPendienteRecojo()) {
+
+                DetalleProductoVenta prodVen = new DetalleProductoVenta();
+                prodVen.setIdDetalleVenta(pendRecojo.getIdDetalleVenta());
+                List<DetalleProductoVenta> listaDetProductoVenta = detProductoVentaMapper
+                        .listarDetalleProductoVenta1(prodVen);
+
+                DetalleProductoTerminado prodTerm = new DetalleProductoTerminado();
+                prodTerm.setIdDetalleVenta(pendRecojo.getIdDetalleVenta());
+                List<DetalleProductoTerminado> listaDetProdTerm = detProductoTerminadoMapper
+                        .listarDetProductoTerminadoVenta2(prodTerm);
+
+                if ((listaDetProductoVenta != null && !listaDetProductoVenta.isEmpty())
+                        && (listaDetProdTerm != null && !listaDetProdTerm.isEmpty())) {
+                    for (DetalleProductoVenta e : listaDetProductoVenta) {
+                        for (DetalleProductoTerminado e2 : listaDetProdTerm) {
+                            if (e.getIdDetProductoTerminado().equals(e2.getIdDetalleProductoTerminado())) {
+                                DetalleProductoTerminado restar = new DetalleProductoTerminado();
+                                restar.setIdDetalleProductoTerminado(e2.getIdDetalleProductoTerminado());
+                                restar.setUtilizado(e.getUtilizado());
+                                detProductoTerminadoMapper.restarUtilizado(restar);
+                            }
+                        }
+                    }
+                }
+
+                DetalleProductoVenta eliminarProductoVenta = new DetalleProductoVenta();
+                eliminarProductoVenta.setIdDetalleVenta(pendRecojo.getIdDetalleVenta());
+                eliminarProductoVenta.setUsuarioElimina(param.getUsuarioCreacion());
+                detProductoVentaMapper.eliminarDetalleProductoVenta(eliminarProductoVenta);
+            }
+        }
+
         DetalleVenta detallesEliminados = new DetalleVenta();
         if (param.getDetallesEliminados() != null && !param.getDetallesEliminados().isEmpty()) {
             for (RegistrarDetVentaInputDto detEli : param.getDetallesEliminados()) {
@@ -82,24 +116,26 @@ public class VentaServiceImpl implements VentaService {
 
                 DetalleProductoVenta prodVen = new DetalleProductoVenta();
                 prodVen.setIdDetalleVenta(detEli.getIdDetalleVenta());
-                List<DetalleProductoVenta> listaDetProductoVenta = detProductoVentaMapper.listarDetalleProductoVenta1(prodVen);
-        
+                List<DetalleProductoVenta> listaDetProductoVenta = detProductoVentaMapper
+                        .listarDetalleProductoVenta1(prodVen);
+
                 DetalleProductoTerminado prodTerm = new DetalleProductoTerminado();
                 prodTerm.setIdDetalleVenta(detEli.getIdDetalleVenta());
-                List<DetalleProductoTerminado> listaDetProdTerm = detProductoTerminadoMapper.listarDetProductoTerminadoVenta2(prodTerm);
-                
-              
-                if ((listaDetProductoVenta!=null && !listaDetProductoVenta.isEmpty()) && (listaDetProdTerm!=null && !listaDetProdTerm.isEmpty())) {
+                List<DetalleProductoTerminado> listaDetProdTerm = detProductoTerminadoMapper
+                        .listarDetProductoTerminadoVenta2(prodTerm);
+
+                if ((listaDetProductoVenta != null && !listaDetProductoVenta.isEmpty())
+                        && (listaDetProdTerm != null && !listaDetProdTerm.isEmpty())) {
                     for (DetalleProductoVenta e : listaDetProductoVenta) {
                         for (DetalleProductoTerminado e2 : listaDetProdTerm) {
-                             if (e.getIdDetProductoTerminado().equals(e2.getIdDetalleProductoTerminado())) {
-                                   DetalleProductoTerminado restar = new DetalleProductoTerminado();
-                                   restar.setIdDetalleProductoTerminado(e2.getIdDetalleProductoTerminado());
-                                   restar.setUtilizado(e.getUtilizado());
-                                   detProductoTerminadoMapper.restarUtilizado(restar);
-                             }
-                        }   
-                   }     
+                            if (e.getIdDetProductoTerminado().equals(e2.getIdDetalleProductoTerminado())) {
+                                DetalleProductoTerminado restar = new DetalleProductoTerminado();
+                                restar.setIdDetalleProductoTerminado(e2.getIdDetalleProductoTerminado());
+                                restar.setUtilizado(e.getUtilizado());
+                                detProductoTerminadoMapper.restarUtilizado(restar);
+                            }
+                        }
+                    }
                 }
 
                 DetalleProductoVenta eliminarProductoVenta = new DetalleProductoVenta();
@@ -124,24 +160,26 @@ public class VentaServiceImpl implements VentaService {
 
                 DetalleProductoVenta prodVen = new DetalleProductoVenta();
                 prodVen.setIdDetalleVenta(detalleVenta.getIdDetalleVenta());
-                List<DetalleProductoVenta> listaDetProductoVenta = detProductoVentaMapper.listarDetalleProductoVenta1(prodVen);
-        
+                List<DetalleProductoVenta> listaDetProductoVenta = detProductoVentaMapper
+                        .listarDetalleProductoVenta1(prodVen);
+
                 DetalleProductoTerminado prodTerm = new DetalleProductoTerminado();
                 prodTerm.setIdDetalleVenta(detalleVenta.getIdDetalleVenta());
-                List<DetalleProductoTerminado> listaDetProdTerm = detProductoTerminadoMapper.listarDetProductoTerminadoVenta2(prodTerm);
-                
-              
-                if ((listaDetProductoVenta!=null && !listaDetProductoVenta.isEmpty()) && (listaDetProdTerm!=null && !listaDetProdTerm.isEmpty())) {
+                List<DetalleProductoTerminado> listaDetProdTerm = detProductoTerminadoMapper
+                        .listarDetProductoTerminadoVenta2(prodTerm);
+
+                if ((listaDetProductoVenta != null && !listaDetProductoVenta.isEmpty())
+                        && (listaDetProdTerm != null && !listaDetProdTerm.isEmpty())) {
                     for (DetalleProductoVenta e : listaDetProductoVenta) {
                         for (DetalleProductoTerminado e2 : listaDetProdTerm) {
-                             if (e.getIdDetProductoTerminado().equals(e2.getIdDetalleProductoTerminado())) {
-                                   DetalleProductoTerminado restar = new DetalleProductoTerminado();
-                                   restar.setIdDetalleProductoTerminado(e2.getIdDetalleProductoTerminado());
-                                   restar.setUtilizado(e.getUtilizado());
-                                   detProductoTerminadoMapper.restarUtilizado(restar);
-                             }
-                        }   
-                   }     
+                            if (e.getIdDetProductoTerminado().equals(e2.getIdDetalleProductoTerminado())) {
+                                DetalleProductoTerminado restar = new DetalleProductoTerminado();
+                                restar.setIdDetalleProductoTerminado(e2.getIdDetalleProductoTerminado());
+                                restar.setUtilizado(e.getUtilizado());
+                                detProductoTerminadoMapper.restarUtilizado(restar);
+                            }
+                        }
+                    }
                 }
 
                 DetalleProductoVenta eliminarProductoVenta = new DetalleProductoVenta();
@@ -213,7 +251,7 @@ public class VentaServiceImpl implements VentaService {
                 vent.setRazonSocial(element.getRazonSocial());
                 vent.setNombres(element.getNombres());
                 vent.setApellidoPaterno(element.getApellidoPaterno());
-                vent.setApellidoMaterno(element.getApellidoPaterno());
+                vent.setApellidoMaterno(element.getApellidoMaterno());
                 vent.setTipoVehiculo(element.getTipoVehiculo());
                 vent.setPlacaVehiculo(element.getPlacaVehiculo());
                 vent.setEstadoVenta(element.getEstadoVenta());
@@ -247,7 +285,8 @@ public class VentaServiceImpl implements VentaService {
 
                         DetalleProductoVenta detalleProdVenta = new DetalleProductoVenta();
                         detalleProdVenta.setIdDetalleVenta(element2.getIdDetalleVenta());
-                        List<DetalleProductoVenta> listaDetalleProdVenta = detProductoVentaMapper.listarDetalleProductoVenta1(detalleProdVenta);
+                        List<DetalleProductoVenta> listaDetalleProdVenta = detProductoVentaMapper
+                                .listarDetalleProductoVenta1(detalleProdVenta);
 
                         List<ListarDetProductoVentaOuputDto> ouputDto3 = new ArrayList<>();
 
@@ -359,7 +398,6 @@ public class VentaServiceImpl implements VentaService {
                 detalle.setDescripcionEstado(element.getDescripcionEstado());
                 detalle.setDescripcionTipoLadrillo(element.getDescripcionTipoLadrillo());
                 detalle.setCodigo(element.getCodigo());
-                /* detalle.setUtilizado(element.getUtilizado()); */
                 listaDet.add(detalle);
             }
 
@@ -380,19 +418,56 @@ public class VentaServiceImpl implements VentaService {
     }
 
     @Override
-	public Respuesta<?> eliminarProductoTerminado(EliminarVentaInputDto param) throws Exception {
+    public Respuesta<?> eliminarVenta(EliminarVentaInputDto param) throws Exception {
 
-            Venta venta = new Venta();
-            venta.setIdVenta(param.getIdVenta());
-            venta.setUsuarioElimina(param.getUsuarioElimina());
-            ventaMapper.eliminarVenta(venta);
+        DetalleVenta detalleVenta = new DetalleVenta();
+        detalleVenta.setIdVenta(param.getIdVenta());
+        List<DetalleVenta> listaDetalle = detVentaMapper.listarDetalleVenta(detalleVenta);
 
-            Respuesta resp = new Respuesta<>();
-            resp.setSuccess(venta.getResultado().equals(1)?true:false);
-            resp.setMessage("Se eliminó el registro correctamente");
-            return resp;
-           
+        for (DetalleVenta element : listaDetalle) {
+            DetalleProductoVenta prodVen = new DetalleProductoVenta();
+            prodVen.setIdDetalleVenta(element.getIdDetalleVenta());
+            List<DetalleProductoVenta> listaDetProductoVenta = detProductoVentaMapper.listarDetalleProductoVenta1(prodVen);
+
+            DetalleProductoTerminado prodTerm = new DetalleProductoTerminado();
+            prodTerm.setIdDetalleVenta(element.getIdDetalleVenta());
+            List<DetalleProductoTerminado> listaDetProdTerm = detProductoTerminadoMapper.listarDetProductoTerminadoVenta2(prodTerm);
+
+            if ((listaDetProductoVenta != null && !listaDetProductoVenta.isEmpty()) && (listaDetProdTerm != null && !listaDetProdTerm.isEmpty())) {
+                for (DetalleProductoVenta e : listaDetProductoVenta) {
+                    for (DetalleProductoTerminado e2 : listaDetProdTerm) {
+                        if (e.getIdDetProductoTerminado().equals(e2.getIdDetalleProductoTerminado())) {
+                            DetalleProductoTerminado restar = new DetalleProductoTerminado();
+                            restar.setIdDetalleProductoTerminado(e2.getIdDetalleProductoTerminado());
+                            restar.setUtilizado(e.getUtilizado());
+                            detProductoTerminadoMapper.restarUtilizado(restar);
+                        }
+                    }
+                }
+            }
+
+            DetalleProductoVenta eliminarProductoVenta = new DetalleProductoVenta();
+            eliminarProductoVenta.setIdDetalleVenta(element.getIdDetalleVenta());
+            eliminarProductoVenta.setUsuarioElimina(param.getUsuarioElimina());
+            detProductoVentaMapper.eliminarDetalleProductoVenta(eliminarProductoVenta);
+        }
+        
+
+        Venta venta = new Venta();
+        venta.setIdVenta(param.getIdVenta());
+        venta.setUsuarioElimina(param.getUsuarioElimina());
+        ventaMapper.eliminarVenta(venta);
+
+        VentaRecojo ventaRecojo = new VentaRecojo();
+        ventaRecojo.setIdVenta(param.getIdVenta());
+        ventaRecojo.setUsuarioElimina(param.getUsuarioElimina());
+        ventaRecojoMapper.eliminarVentaRecojo(ventaRecojo);
+
+        Respuesta resp = new Respuesta<>();
+        resp.setSuccess(venta.getResultado().equals(1) ? true : false);
+        resp.setMessage("Se eliminó el registro correctamente");
+        return resp;
+
     }
-
 
 }

@@ -779,26 +779,26 @@ public Respuesta<?> listarProductoTerminadoExcel(ProductoTerminadoInputDto param
 				
 			  	celda.setCellStyle(style);
 
+				Row filaT = null;
+				Cell celdaT = null;
+				int fila = 0;
+
 				if (param.getFechaInicio()!=null && param.getFechaFin()!=null) {
 					DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 					String strFechaInicio = formatter.format(param.getFechaInicio());
 					String strFechaFin = formatter.format(param.getFechaFin());
 
-			  		Row filaTitulo2 =sheet.createRow(2);
-					Cell  celda2 = filaTitulo2.createCell(0);
-					celda2.setCellValue("Fecha Inicio");
-
-					Row filaData2=sheet.createRow(2);
-					Cell fechaInicio = filaData2.createCell(1);
-					fechaInicio.setCellValue(strFechaInicio);
+					filaT =sheet.createRow(2);
+					celdaT = filaT.createCell(0);
+					celdaT.setCellValue("Fecha Inicio");
+					celdaT = filaT.createCell(1);
+					celdaT.setCellValue(strFechaInicio);
 				
-					Row filaTitulo3 =sheet.createRow(3);
-					Cell  celda3 = filaTitulo3.createCell(0);
-					celda3.setCellValue("Fecha Fin");
-
-					Row filaData3=sheet.createRow(3);
-					Cell fechaFin = filaData3.createCell(1);
-					fechaFin.setCellValue(strFechaFin);
+					filaT =sheet.createRow(3);
+					celdaT = filaT.createCell(0);
+					celdaT.setCellValue("Fecha Fin");
+					celdaT = filaT.createCell(1);
+					celdaT.setCellValue(strFechaFin);
 				
 				}
 				

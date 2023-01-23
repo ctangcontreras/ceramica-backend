@@ -64,10 +64,10 @@ public class VentaController {
 			}
 	}
 
-	@PostMapping("/eliminarProductoTerminado")
-		public ResponseEntity<?> eliminarProductoTerminado(@RequestBody EliminarVentaInputDto input){
+	@PostMapping("/eliminarVenta")
+		public ResponseEntity<?> eliminarVenta(@RequestBody EliminarVentaInputDto input){
 			try {
-				return ResponseEntity.ok(ventaService.eliminarProductoTerminado(input));
+				return ResponseEntity.ok(ventaService.eliminarVenta(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);

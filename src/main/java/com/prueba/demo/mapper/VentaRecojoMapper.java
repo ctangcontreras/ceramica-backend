@@ -8,4 +8,5 @@ import com.prueba.demo.core.model.VentaRecojo;
 public interface VentaRecojoMapper {
     
     void registrarVentaRecojo(VentaRecojo param);
+    void eliminarVentaRecojo(VentaRecojo param);
 }

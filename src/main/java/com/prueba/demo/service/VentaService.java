@@ -12,5 +12,5 @@ public interface VentaService {
     Respuesta<?> listarVenta(ListarVentaInputDto param) throws Exception;
     Respuesta<?> listarDetProductoVenta2(DetProdTerminadoVentaInputDto param) throws Exception;
     Respuesta<?> listarDetProdTerminadoVenta(DetProdTerminadoVentaInputDto param) throws Exception;
-    Respuesta<?> eliminarProductoTerminado(EliminarVentaInputDto param) throws Exception;
+    Respuesta<?> eliminarVenta(EliminarVentaInputDto param) throws Exception;
 }
