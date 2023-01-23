@@ -264,7 +264,7 @@ public class VentaServiceImpl implements VentaService {
                 vent.setDescTipoDocumento2(element.getDescTipoDocumento2());
 
                 DetalleVenta detalleVenta = new DetalleVenta();
-                detalleVenta.setIdVenta(param.getIdVenta());
+                detalleVenta.setIdVenta(element.getIdVenta());
                 List<DetalleVenta> listaDetalle = detVentaMapper.listarDetalleVenta(detalleVenta);
 
                 List<ListarDetVentaOutputDto> outputDto2 = new ArrayList<>();

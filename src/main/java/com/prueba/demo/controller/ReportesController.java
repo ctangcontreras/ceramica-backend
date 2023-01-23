@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prueba.demo.core.inputDto.ListarQuemaProductoInputDto;
+import com.prueba.demo.core.inputDto.ListarVentaInputDto;
 import com.prueba.demo.core.inputDto.ProductoInicialInputDto;
 import com.prueba.demo.core.inputDto.ProductoTerminadoInputDto;
 import com.prueba.demo.service.ReportesService;
@@ -51,6 +52,16 @@ public class ReportesController {
 		public ResponseEntity<?> listarQuemaProductoExcel(@RequestBody ListarQuemaProductoInputDto input){
 			try {
 				return ResponseEntity.ok(reportesService.listarQuemaProductoExcel(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+		}
+
+		@PostMapping("/generarReporteExcelVenta")
+		public ResponseEntity<?> listarVentaExcel(@RequestBody ListarVentaInputDto input){
+			try {
+				return ResponseEntity.ok(reportesService.listarVentaExcel(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);

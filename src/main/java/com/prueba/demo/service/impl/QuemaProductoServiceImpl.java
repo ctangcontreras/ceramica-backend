@@ -170,7 +170,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     }
                     
                     QuemaProductoPersona quemaProductoPersona = new QuemaProductoPersona();
-                    quemaProductoPersona.setIdQuemaProducto(param.getIdQuemaProducto());
+                    quemaProductoPersona.setIdQuemaProducto(element.getIdQuemaProducto());
                     List<QuemaProductoPersona> listaQuemaProductoPersona = quemaProductoPersonaMapper.listarQuemaProductoPersona(quemaProductoPersona);
 
                     List<ListarQuemaProductoPersonaOutputDto> listaPersona = new ArrayList<>();
