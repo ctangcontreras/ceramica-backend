@@ -68,5 +68,15 @@ public class ReportesController {
 			}
 		}
 
+		@PostMapping("/generarReportePdfProductoIncial")
+		public ResponseEntity<?> listarProductoInicialPdf(@RequestBody ProductoInicialInputDto input){
+			try {
+				return ResponseEntity.ok(reportesService.reporteProductoInicialPdf(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+		}
+
 	
 }

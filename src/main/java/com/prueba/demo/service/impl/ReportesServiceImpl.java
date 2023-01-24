@@ -45,6 +45,7 @@ import com.prueba.demo.core.model.ProductoInicial;
 import com.prueba.demo.core.model.ProductoTerminado;
 import com.prueba.demo.core.model.QuemaProducto;
 import com.prueba.demo.core.model.QuemaProductoPersona;
+import com.prueba.demo.core.model.ReporteProductoInicial;
 import com.prueba.demo.core.model.Venta;
 import com.prueba.demo.core.outputDto.ListaProductoInicialOutputDto;
 import com.prueba.demo.core.outputDto.ListaProductoTerminadoOutputDto;
@@ -63,6 +64,7 @@ import com.prueba.demo.mapper.ProductoInicialMapper;
 import com.prueba.demo.mapper.ProductoTerminadoMapper;
 import com.prueba.demo.mapper.QuemaProductoMapper;
 import com.prueba.demo.mapper.QuemaProductoPersonaMapper;
+import com.prueba.demo.mapper.ReportesMapper;
 import com.prueba.demo.mapper.VentaMapper;
 import com.prueba.demo.service.ReportesService;
 import com.prueba.demo.support.dto.Respuesta;
@@ -97,6 +99,9 @@ public class ReportesServiceImpl implements ReportesService {
 
 	@Autowired
 	private DetProductoVentaMapper detProductoVentaMapper;
+
+	@Autowired
+	private ReportesMapper reportesMapper;
 
 	@Override
 	public Respuesta<?> listarProductoInicialExcel(ProductoInicialInputDto param) throws Exception {
@@ -1811,5 +1816,69 @@ public class ReportesServiceImpl implements ReportesService {
 		}
 
 	}
+
+	@Override
+	public Respuesta<?> reporteProductoInicialPdf(ProductoInicialInputDto param) throws Exception {
+
+			ReporteProductoInicial listProductoInicial = new ReporteProductoInicial();
+			listProductoInicial.setIdProductoInicial(param.getIdProductoInicial());
+			listProductoInicial.setFechaInicio(param.getFechaInicio());
+			listProductoInicial.setFechaFin(param.getFechaFin());
+			listProductoInicial.setPrensa(param.getPrensa());
+			listProductoInicial.setTipoLadrillo(param.getTipoLadrillo());
+			List<ReporteProductoInicial> listaProductoInicial = reportesMapper.getReporteProductoInicial(listProductoInicial);
+		
+			List<ListaProductoInicialOutputDto> listaReporteInicial = new ArrayList<>();
+			if (!listaProductoInicial.isEmpty()) {
+				ListaProductoInicialOutputDto lista = new ListaProductoInicialOutputDto();
+			for (ReporteProductoInicial element : listaProductoInicial) {
+				//Date date = new SimpleDateFormat("dd/mm/yyyy").parse(element.getFechaRegistroDate());
+				lista = new ListaProductoInicialOutputDto();
+				lista.setIdProductoInicial(element.getIdProductoInicial());
+				lista.setFechaRegistroDesc(element.getFechaRegistroDesc());
+				lista.setPrensaDesc(element.getPrensaDesc());
+				lista.setCantidadProducido(element.getCantidadProducido());
+				lista.setCantidadEstimada(element.getCantidadEstimada());
+				lista.setCodigoProductoInicial(element.getCodigoProductoInicial());
+				lista.setTipoLadrilloDesc(element.getTipoLadrilloDesc());
+				listaReporteInicial.add(lista);
+			}
+
+			byte[] fileContent = null;
+
+			// Ahora almacenaremos el archivo en disco
+			try {
+
+				File archivo = File.createTempFile("formatoProgramaInversiones", ".pdf");
+
+				FileOutputStream out = new FileOutputStream(archivo);
+				//workbook.write(out);
+				out.close();
+				fileContent = Files.readAllBytes(archivo.toPath());
+
+			} catch (IOException o) {
+				System.err.println("ERROR AL CREAR EL ARCHIVO!");
+				o.printStackTrace();
+			}
+
+			System.out.println("Reporte generado");
+
+			Respuesta resp = new Respuesta<>();
+			resp.setSuccess(true);
+            resp.setMessage("Se creo el reporte correctamente");
+            resp.setDato(fileContent);
+            return resp;
+		} else {	
+			Respuesta resp = new Respuesta<>();
+            resp.setSuccess(false);
+            resp.setMessage("No se encontró registros");
+            return resp;
+		} 
+
+		
+		
+
+	}
+
 
 }
