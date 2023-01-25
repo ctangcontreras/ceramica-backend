@@ -25,6 +25,7 @@ public class ReporteProductoInicial extends ModeloBase{
     private Integer cantidadProducido;
     private Integer cantidadEstimada;
     private Integer diferencia;
+    private String logo;
 
     private Date fechaInicio;
     private Date fechaFin;

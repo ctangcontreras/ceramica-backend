@@ -73,6 +73,8 @@ import com.prueba.demo.support.dto.Respuesta;
 public class ReportesServiceImpl implements ReportesService {
 	private static final Logger log = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
+	
+
 	@Autowired
 	private ProductoInicialMapper productoInicialMapper;
 
@@ -143,10 +145,14 @@ public class ReportesServiceImpl implements ReportesService {
 				// Le damos color al fondo
 				HSSFFont blueFont = workbook.createFont();
 
-				blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+		
+			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+    
+			HSSFCellStyle style = workbook.createCellStyle();
+			HSSFCellStyle style2 = workbook.createCellStyle();
 
-				HSSFCellStyle style = workbook.createCellStyle();
-				HSSFCellStyle style2 = workbook.createCellStyle();
+			
+
 
 				style.setBorderBottom(XSSFCellStyle.BORDER_MEDIUM);
 				style.setBorderTop(XSSFCellStyle.BORDER_MEDIUM);
@@ -367,10 +373,14 @@ public class ReportesServiceImpl implements ReportesService {
 				// Le damos color al fondo
 				HSSFFont blueFont = workbook.createFont();
 
-				blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
 
-				HSSFCellStyle style = workbook.createCellStyle();
-				HSSFCellStyle style2 = workbook.createCellStyle();
+
+
+			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+    
+			HSSFCellStyle style = workbook.createCellStyle();
+			HSSFCellStyle style2 = workbook.createCellStyle();
+
 
 				style.setBorderBottom(XSSFCellStyle.BORDER_MEDIUM);
 				style.setBorderTop(XSSFCellStyle.BORDER_MEDIUM);
@@ -648,6 +658,8 @@ public class ReportesServiceImpl implements ReportesService {
 				// Le damos color al fondo
 				HSSFFont blueFont = workbook.createFont();
 
+		
+
 				HSSFCellStyle style = workbook.createCellStyle();
 				HSSFCellStyle style2 = workbook.createCellStyle();
 
@@ -656,7 +668,9 @@ public class ReportesServiceImpl implements ReportesService {
 				style.setBorderRight(XSSFCellStyle.BORDER_MEDIUM);
 				style.setBorderLeft(XSSFCellStyle.BORDER_MEDIUM);
 
-				blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+    
+
 
 				style2.setBorderBottom(XSSFCellStyle.BORDER_MEDIUM);
 				style2.setBorderTop(XSSFCellStyle.BORDER_MEDIUM);
@@ -844,7 +858,9 @@ public class ReportesServiceImpl implements ReportesService {
 			List<ProductoTerminado> listaProductoTerminado = productoTerminadoMapper
 					.listarProductoTerminado(productoTerminado);
 
+
 			List<ListaProductoTerminadoOutputDto> lista = new ArrayList<>();
+
 
 			if (listaProductoTerminado != null && !listaProductoTerminado.isEmpty()) {
 				ListaProductoTerminadoOutputDto e = new ListaProductoTerminadoOutputDto();
@@ -1117,6 +1133,10 @@ public class ReportesServiceImpl implements ReportesService {
 
 	}
 
+		
+	
+		
+
 	@Override
 	public Respuesta<?> listarQuemaProductoExcel(ListarQuemaProductoInputDto param) throws Exception {
 		QuemaProducto quemaProducto = new QuemaProducto();
@@ -1212,6 +1232,7 @@ public class ReportesServiceImpl implements ReportesService {
 			HSSFFont blueFont = workbook.createFont();
 
 			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+    
 
 			HSSFCellStyle style = workbook.createCellStyle();
 			HSSFCellStyle style2 = workbook.createCellStyle();
@@ -1245,6 +1266,14 @@ public class ReportesServiceImpl implements ReportesService {
 
 			sheet.setColumnWidth(numeroColumna, tamano);
 
+			// Resource resource = new ClassPathResource("assets/logoEmpresa.jpeg");
+			// InputStream inputStream = resource.getInputStream();
+
+			// byte[] bytes = IOUtils.toByteArray(inputStream);
+
+			// int pictureIdx = workbook.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+			// inputStream.close();
+
 			// Returns an object that handles instantiating concrete classes
 			CreationHelper helper = workbook.getCreationHelper();
 
@@ -1260,6 +1289,7 @@ public class ReportesServiceImpl implements ReportesService {
 			anchor.setRow2(1); // Row 4
 			double scale = 0.1;
 
+			// sheet.addMergedRegion(new CellRangeAddress(1,1,1,3));
 			Row filaTitulo = sheet.createRow(1);
 			Cell celda = filaTitulo.createCell(4);
 			celda.setCellValue("REPORTE QUEMA PRODUCTO");
@@ -1286,102 +1316,78 @@ public class ReportesServiceImpl implements ReportesService {
 
 			}
 
-			filaT = sheet.createRow(5);
-			String[] nombres = { "", "Fecha Registro", "HORNO", "Cantidad Paquete", "Fecha Inicio Quema",
+			// sheet.addMergedRegion(cellRangeAddress);
+
+			Row filaReporte = sheet.createRow(5);
+			String[] meses = { "", "Fecha Registro", "HORNO", "Cantidad Paquete", "Fecha Inicio Quema",
 					"Fecha Fin Quema", "Observación", "Personas" };
 
-			for (int i = 1; i < nombres.length; i++) {
+			for (int i = 1; i < meses.length; i++) {
 				// Creamos una fila en la posicion indicada por el contador del ciclo
 
 				// Creamos la celda para el nombre del mes, en la primera posicion de la fila
-				celdaT = filaT.createCell(i);
+				Cell celdaMes = filaReporte.createCell(i);
 				// Indicamos que valor debe tener
-				celdaT.setCellValue(nombres[i]);
-				celdaT.setCellStyle(style);
+				celdaMes.setCellValue(meses[i]);
+				celdaMes.setCellStyle(style);
 				sheet.setColumnWidth(i, tamano);
 
 			}
 
 			int numeroFila = 6;
 			for (ListaQuemaProductoOutputDto element : lista) {
-				filaT = sheet.createRow(numeroFila);
+				Row filaData = sheet.createRow(numeroFila);
 
-				celdaT = filaT.createCell(1);
-				celdaT.setCellValue(element.getDescFechaRegistro());
+				Cell fechaRegistro = filaData.createCell(1);
+				fechaRegistro.setCellValue(element.getDescFechaRegistro());
 
-				celdaT = filaT.createCell(2);
-				celdaT.setCellValue(element.getDescHorno());
+				Cell horno = filaData.createCell(2);
+				horno.setCellValue(element.getDescHorno());
 
-				celdaT = filaT.createCell(3);
-				celdaT.setCellValue(element.getCantidadPaquete());
+				Cell cantidadPaquete = filaData.createCell(3);
+				cantidadPaquete.setCellValue(element.getCantidadPaquete());
 
-				celdaT = filaT.createCell(4);
-				celdaT.setCellValue(element.getDescFechaInicio());
+				Cell descfechaInicio = filaData.createCell(4);
+				descfechaInicio.setCellValue(element.getDescFechaInicio());
 
-				celdaT = filaT.createCell(5);
-				celdaT.setCellValue(element.getDescFechaFin());
+				Cell descfechaFin = filaData.createCell(5);
+				descfechaFin.setCellValue(element.getDescFechaFin());
 
-				celdaT = filaT.createCell(6);
-				celdaT.setCellValue(element.getObservacion());
+				Cell observacion = filaData.createCell(6);
+				observacion.setCellValue(element.getObservacion());
 
-				celdaT.setCellStyle(style2);
+				fechaRegistro.setCellStyle(style2);
+				horno.setCellStyle(style2);
+				cantidadPaquete.setCellStyle(style2);
+				descfechaInicio.setCellStyle(style2);
+				descfechaFin.setCellStyle(style2);
+				observacion.setCellStyle(style2);
 
 				Integer numero = 0;
 				for (ListarQuemaProductoPersonaOutputDto persona : element.getListaPersona()) {
 
 					if (numero != 0) {
-						filaT = sheet.createRow(numeroFila);
+						filaData = sheet.createRow(numeroFila);
 					}
 
-					celdaT = filaT.createCell(7);
-					if (persona.getNombres().equals("") || persona.getApellidoPaterno().equals("")
-							|| persona.getApellidoMaterno().equals("")) {
-						celdaT.setCellValue("POR DEFINIR");
-					} else {
-						celdaT.setCellValue(persona.getNombres() + " " + persona.getApellidoPaterno() + " "
-								+ persona.getApellidoMaterno());
-					}
+					Cell descPersona = filaData.createCell(7);
+					descPersona.setCellValue(persona.getNombres() + " " + persona.getApellidoPaterno() + " "
+							+ persona.getApellidoMaterno());
 
-					celdaT.setCellStyle(style2);
+					descPersona.setCellStyle(style2);
 
 					CellRangeAddress cellRangeAddress = new CellRangeAddress(numeroFila,
 							element.getListaPersona().size() + numeroFila - 1, 1, 1);
-
-					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					sheet.addMergedRegion(cellRangeAddress);
-
-					cellRangeAddress = new CellRangeAddress(numeroFila,
+					CellRangeAddress cellRangeAddress2 = new CellRangeAddress(numeroFila,
 							element.getListaPersona().size() + numeroFila - 1, 2, 2);
-
-					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					sheet.addMergedRegion(cellRangeAddress);
-
-					cellRangeAddress = new CellRangeAddress(numeroFila,
+					CellRangeAddress cellRangeAddress3 = new CellRangeAddress(numeroFila,
 							element.getListaPersona().size() + numeroFila - 1, 3, 3);
-
-					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					sheet.addMergedRegion(cellRangeAddress);
-
-					cellRangeAddress = new CellRangeAddress(numeroFila,
+					CellRangeAddress cellRangeAddress4 = new CellRangeAddress(numeroFila,
 							element.getListaPersona().size() + numeroFila - 1, 4, 4);
-
-					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					sheet.addMergedRegion(cellRangeAddress);
-
-					cellRangeAddress = new CellRangeAddress(numeroFila,
+					CellRangeAddress cellRangeAddress5 = new CellRangeAddress(numeroFila,
 							element.getListaPersona().size() + numeroFila - 1, 5, 5);
+					CellRangeAddress cellRangeAddress6 = new CellRangeAddress(numeroFila,
+					element.getListaPersona().size() + numeroFila - 1, 6, 6);		
 
 					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
 					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
@@ -1389,14 +1395,35 @@ public class ReportesServiceImpl implements ReportesService {
 					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
 					sheet.addMergedRegion(cellRangeAddress);
 
-					cellRangeAddress = new CellRangeAddress(numeroFila,
-							element.getListaPersona().size() + numeroFila - 1, 6, 6);
+					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
+					sheet.addMergedRegion(cellRangeAddress2);
 
-					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-					sheet.addMergedRegion(cellRangeAddress);
+					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress3, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress3, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress3, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress3, sheet, sheet.getWorkbook());
+					sheet.addMergedRegion(cellRangeAddress3);
+
+					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress4, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress4, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress4, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress4, sheet, sheet.getWorkbook());
+					sheet.addMergedRegion(cellRangeAddress4);
+
+					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress5, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress5, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress5, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress5, sheet, sheet.getWorkbook());
+					sheet.addMergedRegion(cellRangeAddress5);
+
+					RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress6, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress6, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress6, sheet, sheet.getWorkbook());
+					RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress6, sheet, sheet.getWorkbook());
+					sheet.addMergedRegion(cellRangeAddress6);
 
 					numeroFila++;
 					numero++;
@@ -1547,7 +1574,7 @@ public class ReportesServiceImpl implements ReportesService {
 			style2.setBorderRight(XSSFCellStyle.BORDER_MEDIUM);
 			style2.setBorderLeft(XSSFCellStyle.BORDER_MEDIUM);
 			style2.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-
+			
 			style.setFont(blueFont);
 
 			// centrar
@@ -1794,7 +1821,7 @@ public class ReportesServiceImpl implements ReportesService {
 
 	@Override
 	public Respuesta<?> reporteProductoInicialPdf(ProductoInicialInputDto param) throws Exception {
-
+		
 			ReporteProductoInicial listProductoInicial = new ReporteProductoInicial();
 			listProductoInicial.setIdProductoInicial(param.getIdProductoInicial());
 			listProductoInicial.setFechaInicio(param.getFechaInicio());
@@ -1819,29 +1846,12 @@ public class ReportesServiceImpl implements ReportesService {
 				listaReporteInicial.add(lista);
 			}
 
-			byte[] fileContent = null;
-
-			// Ahora almacenaremos el archivo en disco
-			try {
-
-				File archivo = File.createTempFile("formatoProgramaInversiones", ".pdf");
-
-				FileOutputStream out = new FileOutputStream(archivo);
-				//workbook.write(out);
-				out.close();
-				fileContent = Files.readAllBytes(archivo.toPath());
-
-			} catch (IOException o) {
-				System.err.println("ERROR AL CREAR EL ARCHIVO!");
-				o.printStackTrace();
-			}
-
-			System.out.println("Reporte generado");
+		
 
 			Respuesta resp = new Respuesta<>();
 			resp.setSuccess(true);
             resp.setMessage("Se creo el reporte correctamente");
-            resp.setDato(fileContent);
+            //resp.setDato(fileContent);
             return resp;
 		} else {	
 			Respuesta resp = new Respuesta<>();

@@ -21,6 +21,7 @@ public class ListaProductoInicialOutputDto {
     private String tipoLadrilloDesc;
     private String prensaDesc;
     private String cCodigo;
+    private String logo;
 
     private String fechaInicioDesc;
     private String fechaFinDesc;
