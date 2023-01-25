@@ -1,6 +1,7 @@
 package com.prueba.demo.core.model;
 
-import java.math.BigDecimal;
+
+
 import java.util.List;
 
 import lombok.Getter;
@@ -8,25 +9,20 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class ReporteVenta {
-
+public class ReporteProductoTerminado {
+    
     private String fechaInicio;
     private String fechaFin;
     private String logo;
-    private List<ListaVenta> lista;
+    private List<ListaProductoTerminado> lista;
 
     @Setter
     @Getter
-    public static class ListaVenta {
-
+    public static class ListaProductoTerminado {
         private String codigo;
-        private String fecha;
-        private String tipoDocumento;
-        private String numeroDocumento;
-        private String descripcion;
-        private String total;
-        private BigDecimal nTotal;
-        private String estado;
+        private String horno;
+        private String fechaRegistro;
+        private String paquete;
         private List<Contenido> contenido;
     }
 
@@ -38,4 +34,6 @@ public class ReporteVenta {
         private String tipoLadrillo;
         private String estadoLadrillo;
     }
+    
+
 }

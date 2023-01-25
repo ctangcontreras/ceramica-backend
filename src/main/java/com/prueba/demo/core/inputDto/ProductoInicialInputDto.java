@@ -20,7 +20,5 @@ public class ProductoInicialInputDto {
     private Date fechaInicio;
     private Date fechaFin;
 
-    private String fechaInicioDesc;
-    private String fechaFinDesc;
 
 }
