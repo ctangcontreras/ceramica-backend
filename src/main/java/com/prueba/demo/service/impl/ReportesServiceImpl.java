@@ -1316,11 +1316,6 @@ public class ReportesServiceImpl implements ReportesService {
 			}
  
 			CellRangeAddress cellRangeAddress2 = null;
-			/*sheet.addMergedRegion(cellRangeAddress2);
-			RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
-			RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
-			RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
-			RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());*/
 			 
 			int numeroFila = 6;
 			int numeroFila2 = 6;
