@@ -46,6 +46,7 @@ import com.prueba.demo.core.model.ProductoTerminado;
 import com.prueba.demo.core.model.QuemaProducto;
 import com.prueba.demo.core.model.QuemaProductoPersona;
 import com.prueba.demo.core.model.ReporteProductoInicial;
+import com.prueba.demo.core.model.ReporteProductoTerminado;
 import com.prueba.demo.core.model.ReporteQuemaProducto;
 import com.prueba.demo.core.model.ReporteVenta;
 import com.prueba.demo.core.model.Venta;
@@ -1818,56 +1819,53 @@ public class ReportesServiceImpl implements ReportesService {
 
 	@Override
 	public Respuesta<?> reporteProductoInicialPdf(ProductoInicialInputDto param) throws Exception {
-			ReporteProductoInicial listProductoInicial = new ReporteProductoInicial();
-			listProductoInicial.setIdProductoInicial(param.getIdProductoInicial());
-			listProductoInicial.setFechaInicio(param.getFechaInicio());
-			listProductoInicial.setFechaFin(param.getFechaFin());
-			listProductoInicial.setPrensa(param.getPrensa());
-			listProductoInicial.setTipoLadrillo(param.getTipoLadrillo());
-			List<ReporteProductoInicial> listaProductoInicial = reportesMapper.getReporteProductoInicial(listProductoInicial);
+
+			String strLogo = auxReporteService.obtenerImagenOnpeEncode();
+
+			ProductoInicial productoInicial = new ProductoInicial();
+			productoInicial.setIdProductoInicial(param.getIdProductoInicial());
+			productoInicial.setFechaInicio(param.getFechaInicio());
+			productoInicial.setFechaFin(param.getFechaFin());
+			productoInicial.setPrensa(param.getPrensa());
+			productoInicial.setTipoLadrillo(param.getTipoLadrillo());
+			List<ProductoInicial> lista = productoInicialMapper.getListarProductoInicial(productoInicial);
+
+			ReporteProductoInicial reporteProductoInicial = new ReporteProductoInicial();
+			List<ReporteProductoInicial.ListaProductoInicial> listaProductoInicial = new ArrayList<>();
+
+			DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+			if (param.getFechaInicio() != null && param.getFechaFin() != null) {
+				reporteProductoInicial.setFechaInicio(formatter.format(param.getFechaInicio()));
+				reporteProductoInicial.setFechaFin(formatter.format(param.getFechaFin()));
+			}
+
+			reporteProductoInicial.setLogo(strLogo);
 		
-			List<ListaProductoInicialOutputDto> listaReporteInicial = new ArrayList<>();
-			if (!listaProductoInicial.isEmpty()) {
-				ListaProductoInicialOutputDto lista = new ListaProductoInicialOutputDto();
+			if (lista != null && !lista.isEmpty()) {
+				ReporteProductoInicial.ListaProductoInicial e = new ReporteProductoInicial.ListaProductoInicial();
 
-			for (ReporteProductoInicial element : listaProductoInicial) {
-				// Date date = new
-				// SimpleDateFormat("dd/mm/yyyy").parse(element.getFechaRegistroDate());
-				lista = new ListaProductoInicialOutputDto();
-				lista.setIdProductoInicial(element.getIdProductoInicial());
-				lista.setFechaRegistroDesc(element.getFechaRegistroDesc());
-				lista.setPrensaDesc(element.getPrensaDesc());
-				lista.setCantidadProducido(element.getCantidadProducido());
-				lista.setCantidadEstimada(element.getCantidadEstimada());
-				lista.setCodigoProductoInicial(element.getCodigoProductoInicial());
-				lista.setTipoLadrilloDesc(element.getTipoLadrilloDesc());
-				listaReporteInicial.add(lista);
+			for (ProductoInicial element : lista) {
+
+				e = new ReporteProductoInicial.ListaProductoInicial();
+				e.setCodigo(element.getCodigoProductoInicial());
+				e.setFechaRegistro(element.getFechaRegistroDesc());
+				e.setPrensa(element.getPrensaDesc());
+				e.setTipoLadrillo(element.getTipoLadrilloDesc());
+				e.setCantidadProducida(element.getCantidadProducido());
+				e.setCantidadEstimada(element.getCantidadEstimada());
+				e.setDiferencia(element.getCantidadEstimada() - element.getCantidadProducido());
+				listaProductoInicial.add(e);
 			}
+				reporteProductoInicial.setListaProductoInicial(listaProductoInicial);
 
-			
-			byte[] fileContent = null;
-
-			// Ahora almacenaremos el archivo en disco
-			try {
-
-				File archivo = File.createTempFile("formatoProgramaInversiones", ".pdf");
-
-				FileOutputStream out = new FileOutputStream(archivo);
-				// workbook.write(out);
-				out.close();
-				fileContent = Files.readAllBytes(archivo.toPath());
-
-			} catch (IOException o) {
-				System.err.println("ERROR AL CREAR EL ARCHIVO!");
-				o.printStackTrace();
-			}
-
-			System.out.println("Reporte generado");
+		
+			String print = auxReporteService.generarReporte(reporteProductoInicial, VariablesReporte.PRODUCTO_INICIAL);
 
 			Respuesta resp = new Respuesta<>();
 			resp.setSuccess(true);
 			resp.setMessage("Se creo el reporte correctamente");
-			resp.setDato(fileContent);
+			resp.setDato(print);
 			return resp;
 		} else {
 			Respuesta resp = new Respuesta<>();
@@ -2025,6 +2023,79 @@ public class ReportesServiceImpl implements ReportesService {
             reporteVenta.setLista(listaVenta);
 
 			String print = auxReporteService.generarReporte(reporteVenta, VariablesReporte.VENTA);
+            
+			Respuesta resp = new Respuesta<>();
+			resp.setSuccess(true);
+			resp.setMessage("Se creo el reporte correctamente");
+			resp.setDato(print);
+			return resp;
+		} else {
+			Respuesta resp = new Respuesta<>();
+			resp.setSuccess(false);
+			resp.setMessage("No se encontró registros");
+			return resp;
+		}
+
+	}
+
+@Override
+	public Respuesta<?> reporteProductoTerminadoPdf(ProductoTerminadoInputDto param) throws Exception {
+
+		String strLogo = auxReporteService.obtenerImagenOnpeEncode();
+
+		ProductoTerminado productoTerminado = new ProductoTerminado();
+		productoTerminado.setIdProductoTerminado(param.getIdProductoTerminado());
+        productoTerminado.setFechaInicio(param.getFechaInicio());
+        productoTerminado.setFechaFin(param.getFechaFin());
+		productoTerminado.setHorno(param.getHorno());
+		List<ProductoTerminado> productoTerminadoOutput = productoTerminadoMapper.listarProductoTerminado(productoTerminado);
+
+		ReporteProductoTerminado reporteProductoTerminado = new ReporteProductoTerminado();
+		List<ReporteProductoTerminado.ListaProductoTerminado> lista = new ArrayList<>();
+
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+		if (param.getFechaInicio() != null && param.getFechaFin() != null) {
+			reporteProductoTerminado.setFechaInicio(formatter.format(param.getFechaInicio()));
+			reporteProductoTerminado.setFechaFin(formatter.format(param.getFechaFin()));
+		}
+
+		reporteProductoTerminado.setLogo(strLogo);
+
+        if (productoTerminadoOutput != null && !productoTerminadoOutput.isEmpty()) {
+            ReporteProductoTerminado.ListaProductoTerminado e = new ReporteProductoTerminado.ListaProductoTerminado();
+            for (ProductoTerminado element : productoTerminadoOutput) {
+                e = new ReporteProductoTerminado.ListaProductoTerminado();
+                e.setCodigo(element.getCodigo());
+				e.setHorno(element.getDescHorno());
+				e.setFechaRegistro(element.getDescFechaRegistro());
+				e.setPaquete(element.getPaquete().toString());
+
+                DetalleProductoTerminado detalleProductoTerminado = new DetalleProductoTerminado();
+                detalleProductoTerminado.setIdProductoTerminado(element.getIdProductoTerminado());
+                List<DetalleProductoTerminado> listaDetalle = detProductoTerminadoMapper.listarDetProductoTerminado(detalleProductoTerminado);
+
+                List<ReporteProductoTerminado.Contenido> listaContenido = new ArrayList<>();
+
+                if (listaDetalle != null && !listaDetalle.isEmpty()) {
+                    ReporteProductoTerminado.Contenido c = new ReporteProductoTerminado.Contenido();
+                    for (DetalleProductoTerminado element2 : listaDetalle) {
+                        c = new ReporteProductoTerminado.Contenido();
+						c.setCantidadTotal(element2.getTotal().toString());
+						c.setTipoLadrillo(element2.getDescripcionTipoLadrillo());
+						c.setEstadoLadrillo(element2.getDescripcionEstado());
+						listaContenido.add(c);
+                    }
+                    e.setContenido(listaContenido);
+                }
+
+				lista.add(e);
+
+            }
+
+            reporteProductoTerminado.setLista(lista);
+
+			String print = auxReporteService.generarReporte(reporteProductoTerminado, VariablesReporte.PRODUCTO_TERMINADO);
             
 			Respuesta resp = new Respuesta<>();
 			resp.setSuccess(true);

@@ -8,4 +8,6 @@ public class VariablesReporte {
 	
 	public static final String QUEMA_PRODUCTO = "/REPORTE_QUEMA_PRODUCTO.jasper";
 	public static final String VENTA = "/REPORTE_VENTA.jasper";
+	public static final String PRODUCTO_INICIAL = "/REPORTE_PRODUCTO_INICIAL.jasper";
+	public static final String PRODUCTO_TERMINADO = "/REPORTE_PRODUCTO_TERMINADO.jasper";
 }

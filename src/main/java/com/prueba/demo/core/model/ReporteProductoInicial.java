@@ -2,32 +2,34 @@ package com.prueba.demo.core.model;
 
 
 
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class ReporteProductoInicial extends ModeloBase{
+public class ReporteProductoInicial {
     
-    private Integer idProductoInicial;
-    private String codigoProductoInicial;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
-    private Date fechaRegistro;
-    private String fechaRegistroDesc;
-    private String prensa;
-    private String prensaDesc;
-    private String tipoLadrilloDesc;
-    private String tipoLadrillo;
-    private Integer cantidadProducido;
-    private Integer cantidadEstimada;
-    private Integer diferencia;
+    private String fechaInicio;
+    private String fechaFin;
     private String logo;
+    private List<ListaProductoInicial> listaProductoInicial;
 
-    private Date fechaInicio;
-    private Date fechaFin;
+    @Setter
+    @Getter
+    public static class ListaProductoInicial {
+        private String codigo;
+        private String fechaRegistro;
+        private String prensa;
+        private String tipoLadrillo;
+        private Integer cantidadProducida;
+        private Integer cantidadEstimada;
+        private Integer diferencia;
+
+   
+    
+    }
+    
 
 }
