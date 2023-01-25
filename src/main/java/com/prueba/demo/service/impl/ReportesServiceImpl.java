@@ -46,6 +46,8 @@ import com.prueba.demo.core.model.ProductoTerminado;
 import com.prueba.demo.core.model.QuemaProducto;
 import com.prueba.demo.core.model.QuemaProductoPersona;
 import com.prueba.demo.core.model.ReporteProductoInicial;
+import com.prueba.demo.core.model.ReporteQuemaProducto;
+import com.prueba.demo.core.model.ReporteVenta;
 import com.prueba.demo.core.model.Venta;
 import com.prueba.demo.core.outputDto.ListaProductoInicialOutputDto;
 import com.prueba.demo.core.outputDto.ListaProductoTerminadoOutputDto;
@@ -66,14 +68,19 @@ import com.prueba.demo.mapper.QuemaProductoMapper;
 import com.prueba.demo.mapper.QuemaProductoPersonaMapper;
 import com.prueba.demo.mapper.ReportesMapper;
 import com.prueba.demo.mapper.VentaMapper;
+import com.prueba.demo.service.AuxReporteService;
 import com.prueba.demo.service.ReportesService;
 import com.prueba.demo.support.dto.Respuesta;
+import com.prueba.demo.support.dto.VariablesReporte;
 
 @Service
 public class ReportesServiceImpl implements ReportesService {
 	private static final Logger log = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
 	
+
+	@Autowired
+	private AuxReporteService auxReporteService;
 
 	@Autowired
 	private ProductoInicialMapper productoInicialMapper;
@@ -689,17 +696,14 @@ public class ReportesServiceImpl implements ReportesService {
 				int numeroColumna = 6;
 				int tamano = 8000;
 
-		
 				HSSFSheet sheet = workbook.createSheet("Reporte Producto Terminado");
 
 				sheet.setColumnWidth(numeroColumna, tamano);
 
 				CreationHelper helper = workbook.getCreationHelper();
 
-	
 				Drawing drawing = sheet.createDrawingPatriarch();
 
-		
 				ClientAnchor anchor = helper.createClientAnchor();
 				// set top-left corner for the image
 				anchor.setCol1(0); // Column B
@@ -719,19 +723,15 @@ public class ReportesServiceImpl implements ReportesService {
 				celda.setCellValue("REPORTE PRODUCTO TERMINADO");
 				// combinar y centrar
 				final int borderMediumDashed = CellStyle.BORDER_MEDIUM;
-				
 
 				celda.setCellStyle(style);
 				// sheet.addMergedRegion(cellRangeAddress);
 
-		
-
 				Row filaReporte = sheet.createRow(5);
 				String[] meses = { "", "Codigo", "Horno", "Fecha Registro", "Paquete", "Contenido" };
-				
 
 				for (int i = 1; i < meses.length; i++) {
-			
+
 					Cell celdaMes = filaReporte.createCell(i);
 					// Indicamos que valor debe tener
 					celdaMes.setCellValue(meses[i]);
@@ -981,14 +981,12 @@ public class ReportesServiceImpl implements ReportesService {
 				anchor.setRow2(1); // Row 4
 				double scale = 0.1;
 
-
 				// sheet.addMergedRegion(new CellRangeAddress(1,1,1,3));
 				Row filaTitulo = sheet.createRow(1);
 				Cell celda = filaTitulo.createCell(3);
 				celda.setCellValue("REPORTE PRODUCTO TERMINADO");
 				// combinar y centrar
 				final int borderMediumDashed = CellStyle.BORDER_MEDIUM;
-				
 
 				celda.setCellStyle(style);
 				// sheet.addMergedRegion(cellRangeAddress);
@@ -1008,7 +1006,6 @@ public class ReportesServiceImpl implements ReportesService {
 
 				Row filaReporte = sheet.createRow(6);
 				String[] meses = { "", "Codigo", "Horno", "Fecha Registro", "Paquete", "Contenido" };
-			
 
 				for (int i = 1; i < meses.length; i++) {
 					// Creamos una fila en la posicion indicada por el contador del ciclo
@@ -1821,7 +1818,6 @@ public class ReportesServiceImpl implements ReportesService {
 
 	@Override
 	public Respuesta<?> reporteProductoInicialPdf(ProductoInicialInputDto param) throws Exception {
-		
 			ReporteProductoInicial listProductoInicial = new ReporteProductoInicial();
 			listProductoInicial.setIdProductoInicial(param.getIdProductoInicial());
 			listProductoInicial.setFechaInicio(param.getFechaInicio());
@@ -1833,8 +1829,10 @@ public class ReportesServiceImpl implements ReportesService {
 			List<ListaProductoInicialOutputDto> listaReporteInicial = new ArrayList<>();
 			if (!listaProductoInicial.isEmpty()) {
 				ListaProductoInicialOutputDto lista = new ListaProductoInicialOutputDto();
+
 			for (ReporteProductoInicial element : listaProductoInicial) {
-				//Date date = new SimpleDateFormat("dd/mm/yyyy").parse(element.getFechaRegistroDate());
+				// Date date = new
+				// SimpleDateFormat("dd/mm/yyyy").parse(element.getFechaRegistroDate());
 				lista = new ListaProductoInicialOutputDto();
 				lista.setIdProductoInicial(element.getIdProductoInicial());
 				lista.setFechaRegistroDesc(element.getFechaRegistroDesc());
@@ -1846,22 +1844,198 @@ public class ReportesServiceImpl implements ReportesService {
 				listaReporteInicial.add(lista);
 			}
 
-		
+			
+			byte[] fileContent = null;
+
+			// Ahora almacenaremos el archivo en disco
+			try {
+
+				File archivo = File.createTempFile("formatoProgramaInversiones", ".pdf");
+
+				FileOutputStream out = new FileOutputStream(archivo);
+				// workbook.write(out);
+				out.close();
+				fileContent = Files.readAllBytes(archivo.toPath());
+
+			} catch (IOException o) {
+				System.err.println("ERROR AL CREAR EL ARCHIVO!");
+				o.printStackTrace();
+			}
+
+			System.out.println("Reporte generado");
 
 			Respuesta resp = new Respuesta<>();
 			resp.setSuccess(true);
-            resp.setMessage("Se creo el reporte correctamente");
-            //resp.setDato(fileContent);
-            return resp;
-		} else {	
+			resp.setMessage("Se creo el reporte correctamente");
+			resp.setDato(fileContent);
+			return resp;
+		} else {
 			Respuesta resp = new Respuesta<>();
-            resp.setSuccess(false);
-            resp.setMessage("No se encontró registros");
-            return resp;
-		} 
+			resp.setSuccess(false);
+			resp.setMessage("No se encontró registros");
+			return resp;
+		}
 
-		
-		
+	}
+
+	@Override
+	public Respuesta<?> reporteQuemaProductoPdf(ListarQuemaProductoInputDto param) throws Exception {
+
+		String strLogo = auxReporteService.obtenerImagenOnpeEncode();
+
+		QuemaProducto quemaProducto = new QuemaProducto();
+		quemaProducto.setIdQuemaProducto(param.getIdQuemaProducto());
+		quemaProducto.setFechaInicio(param.getFechaInicio());
+		quemaProducto.setFechaFin(param.getFechaFin());
+		quemaProducto.setHorno(param.getHorno());
+		List<QuemaProducto> lista = quemaProductoMapper.listarQuemaProducto(quemaProducto);
+
+		ReporteQuemaProducto reporteQuemaProducto = new ReporteQuemaProducto();
+		List<ReporteQuemaProducto.ListaQuema> listaQuema = new ArrayList<>();
+
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+		if (param.getFechaInicio() != null && param.getFechaFin() != null) {
+			reporteQuemaProducto.setFechaInicio(formatter.format(param.getFechaInicio()));
+			reporteQuemaProducto.setFechaFin(formatter.format(param.getFechaFin()));
+		}
+
+		reporteQuemaProducto.setLogo(strLogo);
+
+		if (lista != null && !lista.isEmpty()) {
+			ReporteQuemaProducto.ListaQuema e = new ReporteQuemaProducto.ListaQuema();
+			for (QuemaProducto element : lista) {
+				e = new ReporteQuemaProducto.ListaQuema();
+				e.setFechaRegistro(element.getDescFechaRegistro());
+				e.setHorno(element.getDescHorno());
+				e.setCantidadPaquete(element.getCantidadPaquete().toString());
+				e.setFechaInicioQuema(element.getDescFechaInicio());
+				e.setFechaFinQuema(element.getDescFechaFin());
+				e.setObservacion(element.getObservacion());
+
+				QuemaProductoPersona quemaProductoPersona = new QuemaProductoPersona();
+				quemaProductoPersona.setIdQuemaProducto(element.getIdQuemaProducto());
+				List<QuemaProductoPersona> listaQuemaProductoPersona = quemaProductoPersonaMapper
+						.listarQuemaProductoPersona(quemaProductoPersona);
+
+				if (listaQuemaProductoPersona != null && !listaQuemaProductoPersona.isEmpty()) {
+					ListarQuemaProductoPersonaOutputDto per = new ListarQuemaProductoPersonaOutputDto();
+					for (QuemaProductoPersona element2 : listaQuemaProductoPersona) {
+						if (element2.getTipoPersona().equals("TIPPERENC")) {
+							e.setPersonaEncargada(element2.getNombres() + " " + element2.getApellidoPaterno() + " "+ element2.getApellidoMaterno());
+						}
+
+						if (element2.getTipoPersona().equals("TIPPERAYU")) {
+							e.setPersonaAyudante(element2.getNombres() + " " + element2.getApellidoPaterno() + " "+ element2.getApellidoMaterno());
+							if (element2.getNombres().equals("") && element2.getApellidoPaterno().equals("") && element2.getApellidoMaterno().equals("")) {
+								e.setPersonaAyudante("POR DEFINIR");
+							}
+						}
+
+						if (element2.getTipoPersona().equals("TIPPERAYU2")) {
+							e.setPersonaAyudante2(element2.getNombres() + " " + element2.getApellidoPaterno() + " "+ element2.getApellidoMaterno());
+							if (element2.getNombres().equals("") && element2.getApellidoPaterno().equals("") && element2.getApellidoMaterno().equals("")) {
+								e.setPersonaAyudante2("POR DEFINIR");
+							}
+						}
+
+					}
+				}
+
+				listaQuema.add(e);
+			}
+
+			reporteQuemaProducto.setLista(listaQuema);
+
+			String print = auxReporteService.generarReporte(reporteQuemaProducto, VariablesReporte.QUEMA_PRODUCTO);
+
+			Respuesta resp = new Respuesta<>();
+			resp.setSuccess(true);
+			resp.setMessage("Se creo el reporte correctamente");
+			resp.setDato(print);
+			return resp;
+		} else {
+			Respuesta resp = new Respuesta<>();
+			resp.setSuccess(false);
+			resp.setMessage("No se encontró registros");
+			return resp;
+		}
+
+	}
+
+	@Override
+	public Respuesta<?> reporteVentaPdf(ListarVentaInputDto param) throws Exception {
+
+		String strLogo = auxReporteService.obtenerImagenOnpeEncode();
+
+		Venta venta = new Venta();
+        venta.setIdVenta(param.getIdVenta());
+        venta.setFechaInicio(param.getFechaInicio());
+        venta.setFechaFin(param.getFechaFin());
+        venta.setEstadoVenta(param.getEstadoVenta());
+        List<Venta> ouputDto = ventaMapper.listarVenta(venta);
+
+		ReporteVenta reporteVenta = new ReporteVenta();
+		List<ReporteVenta.ListaVenta> listaVenta = new ArrayList<>();
+
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+		if (param.getFechaInicio() != null && param.getFechaFin() != null) {
+			reporteVenta.setFechaInicio(formatter.format(param.getFechaInicio()));
+			reporteVenta.setFechaFin(formatter.format(param.getFechaFin()));
+		}
+
+		reporteVenta.setLogo(strLogo);
+
+        if (ouputDto != null && !ouputDto.isEmpty()) {
+            ReporteVenta.ListaVenta e = new ReporteVenta.ListaVenta();
+            for (Venta element : ouputDto) {
+                e = new ReporteVenta.ListaVenta();
+                e.setCodigo(element.getCodigo());
+				e.setFecha(element.getDescFechaRegistro());
+				e.setTipoDocumento(element.getDescTipoDocumento1());
+				e.setNumeroDocumento(element.getNumeroDocumento());
+				e.setDescripcion(element.getDescTipoDocumento2());
+				e.setTotal(element.getCostoTotal().toString());
+				e.setEstado(element.getDescEstadoVenta());
+                
+                DetalleVenta detalleVenta = new DetalleVenta();
+                detalleVenta.setIdVenta(element.getIdVenta());
+                List<DetalleVenta> listaDetalle = detVentaMapper.listarDetalleVenta(detalleVenta);
+
+                List<ReporteVenta.Contenido> listaContenido = new ArrayList<>();
+
+                if (listaDetalle != null && !listaDetalle.isEmpty()) {
+                    ReporteVenta.Contenido c = new ReporteVenta.Contenido();
+                    for (DetalleVenta element2 : listaDetalle) {
+                        c = new ReporteVenta.Contenido();
+						c.setCantidadTotal(element2.getCantidadTotal().toString());
+						c.setTipoLadrillo(element2.getDescTipoLadrillo());
+						c.setEstadoLadrillo(element2.getDescEstadoLadrillo());
+						listaContenido.add(c);
+                    }
+                    e.setContenido(listaContenido);
+                }
+
+				listaVenta.add(e);
+
+            }
+
+            reporteVenta.setLista(listaVenta);
+
+			String print = auxReporteService.generarReporte(reporteVenta, VariablesReporte.VENTA);
+            
+			Respuesta resp = new Respuesta<>();
+			resp.setSuccess(true);
+			resp.setMessage("Se creo el reporte correctamente");
+			resp.setDato(print);
+			return resp;
+		} else {
+			Respuesta resp = new Respuesta<>();
+			resp.setSuccess(false);
+			resp.setMessage("No se encontró registros");
+			return resp;
+		}
 
 	}
 

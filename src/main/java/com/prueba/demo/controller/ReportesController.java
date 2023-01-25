@@ -78,5 +78,25 @@ public class ReportesController {
 			}
 		}
 
+		@PostMapping("/generarReportePdfQuemaProducto")
+		public ResponseEntity<?> listarQuemaProductoPdf(@RequestBody ListarQuemaProductoInputDto input){
+			try {
+				return ResponseEntity.ok(reportesService.reporteQuemaProductoPdf(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+		}
+
+		@PostMapping("/generarReportePdfVenta")
+		public ResponseEntity<?> listarVentaPdf(@RequestBody ListarVentaInputDto input){
+			try {
+				return ResponseEntity.ok(reportesService.reporteVentaPdf(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+		}
+		
 	
 }

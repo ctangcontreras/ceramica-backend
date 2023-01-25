@@ -16,5 +16,6 @@ public interface ReportesService {
 	Respuesta<?> listarQuemaProductoExcel(ListarQuemaProductoInputDto param) throws Exception;
 	Respuesta<?> listarVentaExcel(ListarVentaInputDto param) throws Exception;
 	Respuesta<?> reporteProductoInicialPdf(ProductoInicialInputDto param) throws Exception;
-	
+	Respuesta<?> reporteQuemaProductoPdf(ListarQuemaProductoInputDto param) throws Exception;
+	Respuesta<?> reporteVentaPdf(ListarVentaInputDto param) throws Exception;
 }
