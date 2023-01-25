@@ -1997,6 +1997,7 @@ public class ReportesServiceImpl implements ReportesService {
 				e.setNumeroDocumento(element.getNumeroDocumento());
 				e.setDescripcion(element.getDescTipoDocumento2());
 				e.setTotal(element.getCostoTotal().toString());
+				e.setNTotal(element.getCostoTotal());
 				e.setEstado(element.getDescEstadoVenta());
                 
                 DetalleVenta detalleVenta = new DetalleVenta();

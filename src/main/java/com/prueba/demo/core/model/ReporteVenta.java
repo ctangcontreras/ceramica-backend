@@ -1,5 +1,6 @@
 package com.prueba.demo.core.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class ReporteVenta {
         private String numeroDocumento;
         private String descripcion;
         private String total;
+        private BigDecimal nTotal;
         private String estado;
         private List<Contenido> contenido;
     }
