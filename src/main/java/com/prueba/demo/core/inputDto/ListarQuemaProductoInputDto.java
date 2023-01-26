@@ -17,5 +17,7 @@ public class ListarQuemaProductoInputDto {
     private String horno;
     private Date fechaInicio;
     private Date fechaFin;
+
+    private String descHorno;
     
 }

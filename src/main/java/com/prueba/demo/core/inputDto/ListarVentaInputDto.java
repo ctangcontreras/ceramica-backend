@@ -17,4 +17,6 @@ public class ListarVentaInputDto {
     private String estadoVenta;
     private Date fechaInicio;
     private Date fechaFin;
+
+    private String descEstadoVenta;
 }
