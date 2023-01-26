@@ -382,7 +382,6 @@ public class ReportesServiceImpl implements ReportesService {
 
 							d.setIdDetalleProductoTerminado(element2.getIdDetalleProductoTerminado());
 							d.setIdProductoTerminado(element2.getIdProductoTerminado());
-							d.setNro(element2.getNro());
 							d.setCodigoLadrillo(element2.getCodigoLadrillo());
 							d.setDescripcionTipoLadrillo(element2.getDescripcionTipoLadrillo());
 							d.setCodigoEstado(element2.getCodigoEstado());
