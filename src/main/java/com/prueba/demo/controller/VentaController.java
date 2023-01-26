@@ -44,10 +44,10 @@ public class VentaController {
 			}
 	}
 
-	@PostMapping("/listarDetProdTerminadoVenta")
-		public ResponseEntity<?> listarDetProductoTerminadoVenta(@RequestBody DetProdTerminadoVentaInputDto input){
+	@PostMapping("/listarDetProductoVenta1")
+		public ResponseEntity<?> listarDetProductoVenta1(@RequestBody DetProdTerminadoVentaInputDto input){
 			try {
-				return ResponseEntity.ok(ventaService.listarDetProdTerminadoVenta(input));
+				return ResponseEntity.ok(ventaService.listarDetProductoVenta1(input));
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 				return ResponseEntity.ok(e);
@@ -55,7 +55,7 @@ public class VentaController {
 	}
 
 	@PostMapping("/listarDetProductoVenta2")
-		public ResponseEntity<?> listarDetProductoVenta(@RequestBody DetProdTerminadoVentaInputDto input){
+		public ResponseEntity<?> listarDetProductoVenta2(@RequestBody DetProdTerminadoVentaInputDto input){
 			try {
 				return ResponseEntity.ok(ventaService.listarDetProductoVenta2(input));
 			} catch (Exception e) {
@@ -64,6 +64,16 @@ public class VentaController {
 			}
 	}
 
+	@PostMapping("/listarDetProductoVenta3")
+		public ResponseEntity<?> listarDetProductoVenta3(@RequestBody DetProdTerminadoVentaInputDto input){
+			try {
+				return ResponseEntity.ok(ventaService.listarDetProductoVenta3(input));
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				return ResponseEntity.ok(e);
+			}
+	}
+	
 	@PostMapping("/eliminarVenta")
 		public ResponseEntity<?> eliminarVenta(@RequestBody EliminarVentaInputDto input){
 			try {

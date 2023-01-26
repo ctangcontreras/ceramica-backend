@@ -329,6 +329,52 @@ public class VentaServiceImpl implements VentaService {
     }
 
     @Override
+    public Respuesta<?> listarDetProductoVenta1(DetProdTerminadoVentaInputDto param) throws Exception {
+
+        DetalleProductoTerminado detalleProducto = new DetalleProductoTerminado();
+        detalleProducto.setIdDetalleProductoTerminado(param.getIdDetalleProductoTerminado());
+        detalleProducto.setIdProductoTerminado(param.getIdProductoTerminado());
+        detalleProducto.setCodigoEstado(param.getCodigoEstado());
+        detalleProducto.setCodigoLadrillo(param.getCodigoLadrillo());
+        List<DetalleProductoTerminado> lista = detProductoTerminadoMapper.listarDetProductoTerminadoVenta1(detalleProducto);
+
+        List<DetProdTerminadoVentaOuputDto> listaDet = new ArrayList<>();
+
+        if (lista != null && !lista.isEmpty()) {
+            DetProdTerminadoVentaOuputDto detalle = new DetProdTerminadoVentaOuputDto();
+            for (DetalleProductoTerminado element : lista) {
+                detalle = new DetProdTerminadoVentaOuputDto();
+                detalle.setIdDetalleProductoTerminado(element.getIdDetalleProductoTerminado());
+                detalle.setIdProductoTerminado(element.getIdProductoTerminado());
+                detalle.setCantidadPaquete(element.getCantidadPaquete());
+                detalle.setCantidadCrudo(element.getCantidadCrudo());
+                detalle.setCrudo(element.getCrudo());
+                detalle.setTotal(element.getTotal());
+                detalle.setCodigoEstado(element.getCodigoEstado());
+                detalle.setCodigoTipoLadrillo(element.getCodigoLadrillo());
+                detalle.setDescripcionEstado(element.getDescripcionEstado());
+                detalle.setDescripcionTipoLadrillo(element.getDescripcionTipoLadrillo());
+                detalle.setCodigo(element.getCodigo());
+                listaDet.add(detalle);
+            }
+
+            Respuesta resp = new Respuesta<>();
+            resp.setSuccess(true);
+            resp.setMessage("Se listó correctamente");
+            resp.setDato(listaDet);
+            return resp;
+        } else {
+
+            Respuesta resp = new Respuesta<>();
+            resp.setSuccess(false);
+            resp.setMessage("No se encontró registros");
+            return resp;
+
+        }
+
+    }
+
+    @Override
     public Respuesta<?> listarDetProductoVenta2(DetProdTerminadoVentaInputDto param) throws Exception {
 
         DetalleProductoTerminado detalleProducto = new DetalleProductoTerminado();
@@ -371,15 +417,15 @@ public class VentaServiceImpl implements VentaService {
     }
 
     @Override
-    public Respuesta<?> listarDetProdTerminadoVenta(DetProdTerminadoVentaInputDto param) throws Exception {
+    public Respuesta<?> listarDetProductoVenta3(DetProdTerminadoVentaInputDto param) throws Exception {
 
         DetalleProductoTerminado detalleProducto = new DetalleProductoTerminado();
         detalleProducto.setIdDetalleProductoTerminado(param.getIdDetalleProductoTerminado());
         detalleProducto.setIdProductoTerminado(param.getIdProductoTerminado());
         detalleProducto.setCodigoEstado(param.getCodigoEstado());
         detalleProducto.setCodigoLadrillo(param.getCodigoLadrillo());
-        List<DetalleProductoTerminado> lista = detProductoTerminadoMapper
-                .listarDetProductoTerminadoVenta(detalleProducto);
+        detalleProducto.setIdDetalleVenta(param.getIdDetalleVenta());
+        List<DetalleProductoTerminado> lista = detProductoTerminadoMapper.listarDetProductoTerminadoVenta3(detalleProducto);
 
         List<DetProdTerminadoVentaOuputDto> listaDet = new ArrayList<>();
 

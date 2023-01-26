@@ -10,7 +10,8 @@ public interface VentaService {
 
     Respuesta<?> registrarVenta(RegistrarVentaInputDto param) throws Exception;
     Respuesta<?> listarVenta(ListarVentaInputDto param) throws Exception;
+    Respuesta<?> listarDetProductoVenta1(DetProdTerminadoVentaInputDto param) throws Exception;
     Respuesta<?> listarDetProductoVenta2(DetProdTerminadoVentaInputDto param) throws Exception;
-    Respuesta<?> listarDetProdTerminadoVenta(DetProdTerminadoVentaInputDto param) throws Exception;
+    Respuesta<?> listarDetProductoVenta3(DetProdTerminadoVentaInputDto param) throws Exception;
     Respuesta<?> eliminarVenta(EliminarVentaInputDto param) throws Exception;
 }

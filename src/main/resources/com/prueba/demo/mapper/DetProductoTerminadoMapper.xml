@@ -17,7 +17,7 @@
 			<result property="idVenta"			  			column="ID_VENTA" />
 	</resultMap>
 
-	<resultMap id="resListarDetProductoTerminadoVenta" type="DetalleProductoTerminado">
+	<resultMap id="resListarDetProductoTerminadoVenta1" type="DetalleProductoTerminado">
 			<result property="idDetalleProductoTerminado" 	column="N_DET_PRODUCTO_TERMINADO_PK" />
 			<result property="idProductoTerminado" 			column="N_PRODUCTO_TERMINADO" />
 			<result property="cantidadPaquete" 				column="N_CANTIDAD_PAQUETE" />
@@ -35,6 +35,21 @@
 	<resultMap id="resListarDetProductoTerminadoVenta2" type="DetalleProductoTerminado">
 			<result property="idDetalleProductoTerminado" 	column="N_DET_PRODUCTO_TERMINADO_PK" />
 			<result property="idProductoTerminado" 			column="N_PRODUCTO_TERMINADO" />
+			<result property="utilizado"				    column="N_UTILIZADO"/>
+	</resultMap>
+
+	<resultMap id="resListarDetProductoTerminadoVenta3" type="DetalleProductoTerminado">
+			<result property="idDetalleProductoTerminado" 	column="N_DET_PRODUCTO_TERMINADO_PK" />
+			<result property="idProductoTerminado" 			column="N_PRODUCTO_TERMINADO" />
+			<result property="cantidadPaquete" 				column="N_CANTIDAD_PAQUETE" />
+			<result property="crudo"        				column="N_CRUDO" />
+			<result property="cantidadCrudo"        		column="N_CANTIDAD_CRUDO" />
+			<result property="total"			  			column="N_TOTAL" />
+			<result property="codigoLadrillo"      			column="CODIGO_TIPO" />
+			<result property="descripcionTipoLadrillo"      column="DESC_TIPO" />
+			<result property="codigoEstado" 		 		column="CODIGO_ESTADO" />
+			<result property="descripcionEstado"			column="DESC_ESTADO" />
+			<result property="codigo"						column="C_CODIGO" />
 			<result property="utilizado"				    column="N_UTILIZADO"/>
 	</resultMap>
 	
@@ -74,8 +89,8 @@
 		}
 	</select>
 
-	<select id="listarDetProductoTerminadoVenta" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
-			resultMap="resListarDetProductoTerminadoVenta">
+	<select id="listarDetProductoTerminadoVenta1" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
+			resultMap="resListarDetProductoTerminadoVenta1">
 		{CALL sp_det_producto_terminado_lisVenta(
 			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
 			#{idProductoTerminado, jdbcType = INTEGER, mode = IN},
@@ -88,6 +103,18 @@
 	<select id="listarDetProductoTerminadoVenta2" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
 			resultMap="resListarDetProductoTerminadoVenta2">
 		{CALL sp_det_producto_terminado_lisVenta2(
+			#{idDetalleVenta, jdbcType = INTEGER, mode = IN}
+		)
+		}
+	</select>
+
+	<select id="listarDetProductoTerminadoVenta3" parameterType="com.prueba.demo.core.model.DetalleProductoTerminado" statementType="CALLABLE"
+			resultMap="resListarDetProductoTerminadoVenta3">
+		{CALL sp_det_producto_terminado_lisVenta3(
+			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{idProductoTerminado, jdbcType = INTEGER, mode = IN},
+			#{codigoLadrillo, jdbcType = VARCHAR, mode = IN},
+			#{codigoEstado, jdbcType = VARCHAR, mode = IN},
 			#{idDetalleVenta, jdbcType = INTEGER, mode = IN}
 		)
 		}
