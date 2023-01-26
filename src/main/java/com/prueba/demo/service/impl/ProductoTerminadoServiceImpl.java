@@ -61,7 +61,6 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                 for (DetProductoTerminadoInputDto element : param.getRegistrarDetalle()) {
                     detalle.setIdDetalleProductoTerminado(element.getIdDetalleProductoTerminado());
                     detalle.setIdProductoTerminado(productoTerminado.getIdProductoTerminado());
-                    detalle.setNro(element.getNro());
                     detalle.setDescripcionTipoLadrillo(element.getTipoLadrillo());
                     detalle.setCantidadPaquete(element.getCantidadPaquete());
                     detalle.setCantidadCrudo(element.getCantidadCrudo());
@@ -125,7 +124,6 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
                            
                             d.setIdDetalleProductoTerminado(element2.getIdDetalleProductoTerminado());
                             d.setIdProductoTerminado(element2.getIdProductoTerminado());
-                            d.setNro(element2.getNro());
                             d.setCodigoLadrillo(element2.getCodigoLadrillo());
                             d.setDescripcionTipoLadrillo(element2.getDescripcionTipoLadrillo());
                             d.setCodigoEstado(element2.getCodigoEstado());

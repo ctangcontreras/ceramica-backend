@@ -17,7 +17,6 @@ public class DetProductoTerminadoInputDto {
     
     private Integer idDetalleProductoTerminado;
     private Integer idProductoTerminado;
-    private Integer nro;
     private String tipoLadrillo;
     private String estado;
     private Integer cantidadPaquete;

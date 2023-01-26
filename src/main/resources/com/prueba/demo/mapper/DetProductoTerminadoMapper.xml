@@ -4,7 +4,6 @@
 	<resultMap id="resListarDetProductoTerminado" type="DetalleProductoTerminado">
 			<result property="idDetalleProductoTerminado" 	column="N_DET_PRODUCTO_TERMINADO_PK" />
 			<result property="idProductoTerminado" 			column="N_PRODUCTO_TERMINADO" />
-			<result property="nro"  	    				column="N_NRO" />
 			<result property="codigoLadrillo"      			column="CODIGO_LADRILLO" />
 			<result property="descripcionTipoLadrillo"      column="C_TIPO_LADRILLO" />
 			<result property="codigoEstado" 		 		column="CODIGO_ESTADO_LADRILLO" />
@@ -44,7 +43,6 @@
 		{CALL sp_det_producto_terminado_ins(
 			#{idDetalleProductoTerminado, jdbcType = INTEGER, mode = IN},
 			#{idProductoTerminado, jdbcType = INTEGER, mode = IN},
-			#{nro, jdbcType = INTEGER, mode = IN},
 			#{descripcionTipoLadrillo, jdbcType = VARCHAR, mode = IN},
 			#{estado, jdbcType = VARCHAR, mode = IN},
 			#{cantidadPaquete, jdbcType = INTEGER, mode = IN},

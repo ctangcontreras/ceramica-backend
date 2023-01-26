@@ -11,7 +11,6 @@ public class DetalleProductoTerminado extends ModeloBase{
     
     private Integer idDetalleProductoTerminado;
     private Integer idProductoTerminado;
-    private Integer nro;
     private String codigoLadrillo;
     private String descripcionTipoLadrillo;
     private String codigoEstado;

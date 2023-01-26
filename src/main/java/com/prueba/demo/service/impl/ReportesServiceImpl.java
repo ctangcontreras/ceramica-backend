@@ -201,8 +201,8 @@ public class ReportesServiceImpl implements ReportesService {
 				double scale = 0.1;
 
 				// sheet.addMergedRegion(new CellRangeAddress(1,1,1,3));
-				Row filaTitulo = sheet.createRow(1);
-				Cell celda = filaTitulo.createCell(2);
+				Row fila = sheet.createRow(1);
+				Cell celda = fila.createCell(2);
 				celda.setCellValue("REPORTE PRODUCTO INICIAL");
 
 				// combinar y centrar
@@ -215,65 +215,65 @@ public class ReportesServiceImpl implements ReportesService {
 
 				// sheet.addMergedRegion(cellRangeAddress);
 				if (param.getFechaInicio() != null && param.getFechaFin() != null) {
-				Row filaTitulo2 = sheet.createRow(3);
-				Cell celda2 = filaTitulo2.createCell(0);
-				celda2.setCellValue("Fecha Inicio: " + ' ' + param.getFechaInicio().toString());
+					fila = sheet.createRow(3);
+					celda = fila.createCell(0);
+					celda.setCellValue("Fecha Inicio: " + ' ' + param.getFechaInicio().toString());
 
-				Row filaTitulo3 = sheet.createRow(4);
-				Cell celda3 = filaTitulo3.createCell(0);
-				celda3.setCellValue("Fecha Fin: " + ' ' + param.getFechaFin().toString());
+					fila = sheet.createRow(4);
+				 celda = fila.createCell(0);
+				 celda.setCellValue("Fecha Fin: " + ' ' + param.getFechaFin().toString());
 				}
 				// iniciamos variables
 
 				// Un arreglo con los nombres de los meses del año
 
-				Row filaReporte = sheet.createRow(6);
+				fila = sheet.createRow(6);
 				String[] meses = { "", "Codigo", "Fecha Registro", "Prensa", "Tipo Ladrillo", "Cantidad Producida",
 						"Cantidad Estimada", "Diferencia" };
 
 				for (int i = 1; i < meses.length; i++) {
 
-					Cell celdaMes = filaReporte.createCell(i);
+					celda = fila.createCell(i);
 					// Indicamos que valor debe tener
-					celdaMes.setCellValue(meses[i]);
-					celdaMes.setCellStyle(style);
+					celda.setCellValue(meses[i]);
+					celda.setCellStyle(style);
 					sheet.setColumnWidth(i, tamano);
 
 				}
 
 				int numeroFila = 7;
 				for (ListaProductoInicialOutputDto getListaProductoInicial : listaInicial) {
-					Row filaData = sheet.createRow(numeroFila);
+					fila = sheet.createRow(numeroFila);
 
-					Cell codigo = filaData.createCell(1);
-					codigo.setCellValue(getListaProductoInicial.getCodigoProductoInicial());
+					celda = fila.createCell(1);
+					celda.setCellValue(getListaProductoInicial.getCodigoProductoInicial());
+					celda.setCellStyle(style2);
 
-					Cell fechaRegistro = filaData.createCell(2);
-					fechaRegistro.setCellValue(getListaProductoInicial.getFechaRegistroDesc());
+					celda = fila.createCell(2);
+					celda.setCellValue(getListaProductoInicial.getFechaRegistroDesc());
+					celda.setCellStyle(style2);
 
-					Cell prensa = filaData.createCell(3);
-					prensa.setCellValue(getListaProductoInicial.getPrensaDesc());
+					celda = fila.createCell(3);
+					celda.setCellValue(getListaProductoInicial.getPrensaDesc());
+					celda.setCellStyle(style2);
 
-					Cell tipoLadrillo = filaData.createCell(4);
-					tipoLadrillo.setCellValue(getListaProductoInicial.getTipoLadrilloDesc());
+					celda = fila.createCell(4);
+					celda.setCellValue(getListaProductoInicial.getTipoLadrilloDesc());
+					celda.setCellStyle(style2);
 
-					Cell cantidadProducida = filaData.createCell(5);
-					cantidadProducida.setCellValue(getListaProductoInicial.getCantidadProducido());
+					celda = fila.createCell(5);
+					celda.setCellValue(getListaProductoInicial.getCantidadProducido());
+					celda.setCellStyle(style2);
 
-					Cell cantidadEstimada = filaData.createCell(6);
-					cantidadEstimada.setCellValue(getListaProductoInicial.getCantidadEstimada());
+					celda = fila.createCell(6);
+					celda.setCellValue(getListaProductoInicial.getCantidadEstimada());
+					celda.setCellStyle(style2);
 
-					Cell diferencia = filaData.createCell(7);
-					diferencia.setCellValue(getListaProductoInicial.getCantidadEstimada()
-							- getListaProductoInicial.getCantidadProducido());
+					celda = fila.createCell(7);
+					celda.setCellValue(getListaProductoInicial.getCantidadEstimada() - getListaProductoInicial.getCantidadProducido());
+					celda.setCellStyle(style2);
 
-					codigo.setCellStyle(style2);
-					fechaRegistro.setCellStyle(style2);
-					prensa.setCellStyle(style2);
-					tipoLadrillo.setCellStyle(style2);
-					cantidadProducida.setCellStyle(style2);
-					cantidadEstimada.setCellStyle(style2);
-					diferencia.setCellStyle(style2);
+						
 
 					numeroFila++;
 
@@ -456,8 +456,8 @@ public class ReportesServiceImpl implements ReportesService {
 				double scale = 0.1;
 
 				// sheet.addMergedRegion(new CellRangeAddress(1,1,1,3));
-				Row filaTitulo = sheet.createRow(1);
-				Cell celda = filaTitulo.createCell(3);
+				Row fila = sheet.createRow(1);
+				Cell celda = fila.createCell(3);
 				celda.setCellValue("REPORTE PRODUCTO TERMINADO");
 				// combinar y centrar
 				final int borderMediumDashed = CellStyle.BORDER_MEDIUM;
@@ -466,28 +466,29 @@ public class ReportesServiceImpl implements ReportesService {
 				// sheet.addMergedRegion(cellRangeAddress);
 				if (param.getFechaInicio() != null && param.getFechaFin() != null) {
 				DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-				Row filaTitulo2 = sheet.createRow(3);
-				Cell celda2 = filaTitulo2.createCell(0);
-				celda2.setCellValue("Fecha Inicio: " + ' ' + formatter.format(param.getFechaInicio()));
+				fila = sheet.createRow(3);
+				celda = fila.createCell(0);
+				celda.setCellValue("Fecha Inicio: " + ' ' + formatter.format(param.getFechaInicio()));
 
-				Row filaTitulo3 = sheet.createRow(4);
-				Cell celda3 = filaTitulo3.createCell(0);
-				celda3.setCellValue("Fecha Fin: " + ' ' + formatter.format(param.getFechaFin()));
+				fila = sheet.createRow(4);
+				celda = fila.createCell(0);
+				celda.setCellValue("Fecha Fin: " + ' ' + formatter.format(param.getFechaFin()));
+
 
 				}
 	
 
-				Row filaReporte = sheet.createRow(6);
+				fila = sheet.createRow(6);
 				String[] meses = { "", "Codigo", "Horno", "Fecha Registro", "Paquete", "Contenido" };
 
 				for (int i = 1; i < meses.length; i++) {
 					// Creamos una fila en la posicion indicada por el contador del ciclo
 
 					// Creamos la celda para el nombre del mes, en la primera posicion de la fila
-					Cell celdaMes = filaReporte.createCell(i);
+					celda = fila.createCell(i);
 					// Indicamos que valor debe tener
-					celdaMes.setCellValue(meses[i]);
-					celdaMes.setCellStyle(style);
+					celda.setCellValue(meses[i]);
+					celda.setCellStyle(style);
 					sheet.setColumnWidth(i, tamano);
 
 				}
@@ -499,67 +500,36 @@ public class ReportesServiceImpl implements ReportesService {
 
 				for (ListaProductoTerminadoOutputDto getListaProductoTerminado : lista) {
 					numeroFila2 = numeroFila;
-					Row filaData = sheet.createRow(numeroFila);
+					fila = sheet.createRow(numeroFila);
 
-					Cell codigo = filaData.createCell(1);
-					codigo.setCellValue(getListaProductoTerminado.getCodigo());
+					celda = fila.createCell(1);
+					celda.setCellValue(getListaProductoTerminado.getCodigo());
+					celda.setCellStyle(style2);
 
-					Cell horno = filaData.createCell(2);
-					horno.setCellValue(getListaProductoTerminado.getDescHorno());
+					celda = fila.createCell(2);
+					celda.setCellValue(getListaProductoTerminado.getDescHorno());
+					celda.setCellStyle(style2);
 
-					Cell fechaRegistro = filaData.createCell(3);
-					fechaRegistro.setCellValue(getListaProductoTerminado.getDescFechaRegistro());
+					celda = fila.createCell(3);
+					celda.setCellValue(getListaProductoTerminado.getDescFechaRegistro());
+					celda.setCellStyle(style2);
 
-					Cell paquete = filaData.createCell(4);
-					paquete.setCellValue(getListaProductoTerminado.getPaquete());
+					celda = fila.createCell(4);
+					celda.setCellValue(getListaProductoTerminado.getPaquete());
+					celda.setCellStyle(style2);
 
-					codigo.setCellStyle(style2);
-					horno.setCellStyle(style2);
-					fechaRegistro.setCellStyle(style2);
-					paquete.setCellStyle(style2);
 
 					Integer numero = 0;
 					for (ListarDetProductoTerminadoOutputDto listaDetalle : getListaProductoTerminado.getLista()) {
 						if (numero != 0) {
-							filaData = sheet.createRow(numeroFila);
+							fila = sheet.createRow(numeroFila);
 						}
 
-						Cell contenido = filaData.createCell(5);
-						contenido.setCellValue(listaDetalle.getTotal().toString() + ' ' + ladrillos + ' '
+						celda = fila.createCell(5);
+						celda.setCellValue(listaDetalle.getTotal().toString() + ' ' + ladrillos + ' '
 								+ listaDetalle.getDescripcionTipoLadrillo() + ' '
 								+ listaDetalle.getDescripcionEstado());
-						/* CellRangeAddress cellRangeAddress = new CellRangeAddress(numeroFila,
-								getListaProductoTerminado.getLista().size() + numeroFila - 1, 1, 1);
-						CellRangeAddress cellRangeAddress2 = new CellRangeAddress(numeroFila,
-								getListaProductoTerminado.getLista().size() + numeroFila - 1, 2, 2);
-						CellRangeAddress cellRangeAddress3 = new CellRangeAddress(numeroFila,
-								getListaProductoTerminado.getLista().size() + numeroFila - 1, 3, 3);
-						CellRangeAddress cellRangeAddress4 = new CellRangeAddress(numeroFila,
-								getListaProductoTerminado.getLista().size() + numeroFila - 1, 4, 4); */
-
-						/* RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-						sheet.addMergedRegion(cellRangeAddress);
-
-						RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress2, sheet, sheet.getWorkbook());
-						sheet.addMergedRegion(cellRangeAddress2);
-
-						RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress3, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress3, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress3, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress3, sheet, sheet.getWorkbook());
-						sheet.addMergedRegion(cellRangeAddress3);
-
-						RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress4, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress4, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress4, sheet, sheet.getWorkbook());
-						RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress4, sheet, sheet.getWorkbook());
-						sheet.addMergedRegion(cellRangeAddress4); */
+						celda.setCellStyle(style2);
 
 					cellRangeAddress2 = new CellRangeAddress(numeroFila2, getListaProductoTerminado.getLista().size() + numeroFila2 - 1, 1, 1);
 					sheet.addMergedRegion(cellRangeAddress2);
@@ -578,7 +548,7 @@ public class ReportesServiceImpl implements ReportesService {
 					borderRegionUtil(cellRangeAddress2, sheet, workbook);
 
 
-					contenido.setCellStyle(style2);
+					
 					numeroFila++;
 					numero++;
 
@@ -1148,6 +1118,7 @@ public class ReportesServiceImpl implements ReportesService {
 				celda = fila.createCell(7);
 				celda.setCellValue(element.getDescEstadoVenta());
 				celda.setCellStyle(style2);
+
 
 				Integer numero = 0;
 				for (ListarDetVentaOutputDto detalle : element.getListaDetalle()) {
