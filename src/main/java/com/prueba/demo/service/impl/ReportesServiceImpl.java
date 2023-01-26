@@ -223,11 +223,25 @@ public class ReportesServiceImpl implements ReportesService {
 				 celda = fila.createCell(0);
 				 celda.setCellValue("Fecha Fin: " + ' ' + param.getFechaFin().toString());
 				}
+
+				if (param.getPrensa() != null) {
+
+					fila = sheet.createRow(5);
+					celda = fila.createCell(0);
+					celda.setCellValue("Prensa: " + ' ' + param.getPrensaDesc());
+				}
+
+				if (param.getTipoLadrillo() != null) {
+					fila = sheet.createRow(6);
+					celda = fila.createCell(0);
+					celda.setCellValue("Tipo Ladrillo: " + ' ' + param.getTipoLadrilloDesc());
+				}
+					
 				// iniciamos variables
 
 				// Un arreglo con los nombres de los meses del año
 
-				fila = sheet.createRow(6);
+				fila = sheet.createRow(7);
 				String[] meses = { "", "Codigo", "Fecha Registro", "Prensa", "Tipo Ladrillo", "Cantidad Producida",
 						"Cantidad Estimada", "Diferencia" };
 
@@ -241,7 +255,7 @@ public class ReportesServiceImpl implements ReportesService {
 
 				}
 
-				int numeroFila = 7;
+				int numeroFila = 8;
 				for (ListaProductoInicialOutputDto getListaProductoInicial : listaInicial) {
 					fila = sheet.createRow(numeroFila);
 
@@ -474,6 +488,12 @@ public class ReportesServiceImpl implements ReportesService {
 				celda.setCellValue("Fecha Fin: " + ' ' + formatter.format(param.getFechaFin()));
 
 
+				}
+
+				if (param.getHorno() != null) {
+				fila = sheet.createRow(5);
+				celda = fila.createCell(0);
+				celda.setCellValue("Horno: " + ' ' + param.getDescHorno());
 				}
 	
 
@@ -1220,6 +1240,13 @@ public class ReportesServiceImpl implements ReportesService {
 				reporteProductoInicial.setFechaInicio(formatter.format(param.getFechaInicio()));
 				reporteProductoInicial.setFechaFin(formatter.format(param.getFechaFin()));
 			}
+			if (param.getPrensa() != null) {
+				reporteProductoInicial.setPrensa(param.getPrensaDesc());		
+			}
+
+			if (param.getTipoLadrillo() != null) {
+				reporteProductoInicial.setTipoLadrillo(param.getTipoLadrilloDesc());
+			}
 
 			reporteProductoInicial.setLogo(strLogo);
 		
@@ -1439,6 +1466,10 @@ public class ReportesServiceImpl implements ReportesService {
 		if (param.getFechaInicio() != null && param.getFechaFin() != null) {
 			reporteProductoTerminado.setFechaInicio(formatter.format(param.getFechaInicio()));
 			reporteProductoTerminado.setFechaFin(formatter.format(param.getFechaFin()));
+		}
+
+		if (param.getHorno() != null) {
+			reporteProductoTerminado.setHorno(param.getDescHorno());
 		}
 
 		reporteProductoTerminado.setLogo(strLogo);

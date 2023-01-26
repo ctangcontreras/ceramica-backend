@@ -14,6 +14,8 @@ public class ReporteProductoInicial {
     private String fechaInicio;
     private String fechaFin;
     private String logo;
+    private String prensa;
+    private String tipoLadrillo;
     private List<ListaProductoInicial> listaProductoInicial;
 
     @Setter

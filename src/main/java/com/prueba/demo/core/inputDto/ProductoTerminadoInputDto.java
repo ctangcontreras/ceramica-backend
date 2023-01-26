@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class ProductoTerminadoInputDto {
     private Integer idProductoTerminado;
     private String horno;
+    private String descHorno;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
     private Date fechaRegistro;
     private Integer paquete;

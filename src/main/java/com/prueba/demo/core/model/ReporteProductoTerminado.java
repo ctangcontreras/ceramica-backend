@@ -13,6 +13,7 @@ public class ReporteProductoTerminado {
     
     private String fechaInicio;
     private String fechaFin;
+    private String horno;
     private String logo;
     private List<ListaProductoTerminado> lista;
 

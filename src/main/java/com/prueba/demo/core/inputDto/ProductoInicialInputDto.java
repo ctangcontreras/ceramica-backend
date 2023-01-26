@@ -13,7 +13,9 @@ public class ProductoInicialInputDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
     private Date fechaRegistro;
     private String prensa;
+    private String prensaDesc;
     private String tipoLadrillo;
+    private String tipoLadrilloDesc;
     private Integer cantidadProducido;
     private Integer cantidadEstimada;
     private Integer usuarioCreacion;
