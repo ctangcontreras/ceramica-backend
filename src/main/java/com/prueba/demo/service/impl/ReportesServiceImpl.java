@@ -770,18 +770,22 @@ public class ReportesServiceImpl implements ReportesService {
 				String strFechaFin = formatter.format(param.getFechaFin());
 
 				fila = sheet.createRow(2);
-				celda = fila.createCell(0);
+				celda = fila.createCell(1);
 				celda.setCellValue("Fecha Inicio: " + strFechaInicio);
 
 				fila = sheet.createRow(3);
-				celda = fila.createCell(0);
+				celda = fila.createCell(1);
 				celda.setCellValue("Fecha Fin: " + strFechaFin);
-
 			}
 
-			// sheet.addMergedRegion(cellRangeAddress);
+			if (param.getHorno() != null) {
+				fila = sheet.createRow(4);
+				celda = fila.createCell(1);
+				celda.setCellValue("Horno: " + param.getDescHorno());	
+			}
 
-			fila = sheet.createRow(5);
+
+			fila = sheet.createRow(6);
 			String[] meses = { "", "Fecha Registro", "HORNO", "Cantidad Paquete", "Fecha Inicio Quema",
 					"Fecha Fin Quema", "Observación", "Personas" };
 
@@ -797,8 +801,8 @@ public class ReportesServiceImpl implements ReportesService {
  
 			CellRangeAddress cellRangeAddress2 = null;
 			 
-			int numeroFila = 6;
-			int numeroFila2 = 6;
+			int numeroFila = 7;
+			int numeroFila2 = 7;
 			for (ListaQuemaProductoOutputDto element : lista) {
 				numeroFila2 = numeroFila;
 				fila = sheet.createRow(numeroFila);
@@ -875,8 +879,6 @@ public class ReportesServiceImpl implements ReportesService {
  
 			}
 
-
-			
 			autoSizeColumns(workbook);
 
 			byte[] fileContent = null;
@@ -1084,6 +1086,12 @@ public class ReportesServiceImpl implements ReportesService {
 				celda = fila.createCell(1);
 				celda.setCellValue("Fecha Fin: " + strFechaFin);
 
+			}
+
+			if (param.getEstadoVenta() != null) {
+				fila = sheet.createRow(4);
+				celda = fila.createCell(1);
+				celda.setCellValue("Estado: " + param.getDescEstadoVenta());
 			}
 
 			fila = sheet.createRow(6);
@@ -1306,6 +1314,10 @@ public class ReportesServiceImpl implements ReportesService {
 			reporteQuemaProducto.setFechaFin(formatter.format(param.getFechaFin()));
 		}
 
+		if (param.getHorno()!=null) {
+			reporteQuemaProducto.setHorno(param.getDescHorno());
+		}
+
 		reporteQuemaProducto.setLogo(strLogo);
 
 		if (lista != null && !lista.isEmpty()) {
@@ -1334,14 +1346,14 @@ public class ReportesServiceImpl implements ReportesService {
 						if (element2.getTipoPersona().equals("TIPPERAYU")) {
 							e.setPersonaAyudante(element2.getNombres() + " " + element2.getApellidoPaterno() + " "+ element2.getApellidoMaterno());
 							if (element2.getNombres().equals("") && element2.getApellidoPaterno().equals("") && element2.getApellidoMaterno().equals("")) {
-								e.setPersonaAyudante("POR DEFINIR");
+								e.setPersonaAyudante("");
 							}
 						}
 
 						if (element2.getTipoPersona().equals("TIPPERAYU2")) {
 							e.setPersonaAyudante2(element2.getNombres() + " " + element2.getApellidoPaterno() + " "+ element2.getApellidoMaterno());
 							if (element2.getNombres().equals("") && element2.getApellidoPaterno().equals("") && element2.getApellidoMaterno().equals("")) {
-								e.setPersonaAyudante2("POR DEFINIR");
+								e.setPersonaAyudante2("");
 							}
 						}
 
@@ -1389,6 +1401,10 @@ public class ReportesServiceImpl implements ReportesService {
 		if (param.getFechaInicio() != null && param.getFechaFin() != null) {
 			reporteVenta.setFechaInicio(formatter.format(param.getFechaInicio()));
 			reporteVenta.setFechaFin(formatter.format(param.getFechaFin()));
+		}
+
+		if (param.getEstadoVenta() != null) {
+			reporteVenta.setEstado(param.getDescEstadoVenta());
 		}
 
 		reporteVenta.setLogo(strLogo);

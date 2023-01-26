@@ -13,6 +13,7 @@ public class ReporteQuemaProducto {
     private String fechaFin;
     private List<ListaQuema> lista;
     private String logo;
+    private String horno;
 
     @Setter
     @Getter

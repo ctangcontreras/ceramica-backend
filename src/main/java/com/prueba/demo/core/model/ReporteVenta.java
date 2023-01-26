@@ -13,6 +13,7 @@ public class ReporteVenta {
     private String fechaInicio;
     private String fechaFin;
     private String logo;
+    private String estado;
     private List<ListaVenta> lista;
 
     @Setter
