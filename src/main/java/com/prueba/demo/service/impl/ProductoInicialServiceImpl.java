@@ -54,7 +54,8 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 
 			Respuesta resp = new Respuesta<>();
 			resp.setSuccess(true);
-            resp.setMessage("Se registraron correctamente los datos");
+            resp.setMessage(param.getEditarProductoInicial()? "Se actualizó correctamente el registro " + productoInicial.getCCodigo() : 
+			"Se registró correctamente el registro " + productoInicial.getCCodigo());
             return resp;
 		
   }

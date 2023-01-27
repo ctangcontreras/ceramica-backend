@@ -27,7 +27,7 @@ public class ProductoTerminadoInputDto {
     private Date fechaInicio;
     private Date fechaFin;
     //private Integer crudo;
-    
+    private Boolean editarProductoTerminado;
 
 
     private List<DetProductoTerminadoInputDto> registrarDetalle;

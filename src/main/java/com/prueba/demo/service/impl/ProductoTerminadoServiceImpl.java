@@ -75,7 +75,11 @@ public class ProductoTerminadoServiceImpl implements ProductoTerminadoService{
             
 			Respuesta resp = new Respuesta<>();
 			resp.setSuccess(productoTerminado.getResultado().equals(1)?true:false);
-            resp.setMessage("Se registraron correctamente los datos");
+            resp.setMessage(param.getEditarProductoTerminado() ?"Se actualizó correctamente el registro " + productoTerminado.getCodigo() : 
+            "Se registró correctamente el registro "+productoTerminado.getCodigo());
+
+           
+            
             return resp;
 		
   }

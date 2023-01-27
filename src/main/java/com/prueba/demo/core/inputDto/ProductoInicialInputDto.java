@@ -22,5 +22,7 @@ public class ProductoInicialInputDto {
     private Date fechaInicio;
     private Date fechaFin;
 
+    private Boolean editarProductoInicial;
+
 
 }
