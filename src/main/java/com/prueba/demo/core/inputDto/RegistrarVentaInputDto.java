@@ -37,4 +37,6 @@ public class RegistrarVentaInputDto {
     private List<RegistrarDetVentaInputDto> detallesEliminados;
 
     private List<RegistrarDetVentaInputDto> listaPendienteRecojo;
+
+    private Boolean editarVenta;
 }

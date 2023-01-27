@@ -30,4 +30,5 @@ public class RegistrarQuemaProductoInputDto {
 
     private Date fechaInicio;
     private Date fechaFin;
+    private Boolean editarQuema;
 }

@@ -26,7 +26,8 @@
 			#{observacion, jdbcType = VARCHAR, mode = IN},
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
-			#{resultado, jdbcType = INTEGER, mode = OUT}
+			#{resultado, jdbcType = INTEGER, mode = OUT},
+			#{codigo, jdbcType = VARCHAR, mode = INOUT}
 		)
 		}
 	</select>

@@ -85,7 +85,8 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
             
 			Respuesta resp = new Respuesta<>();
 			resp.setSuccess(quemaProducto.getResultado().equals(1)?true:false);
-            resp.setMessage("Se registraron correctamente los datos");
+            resp.setMessage(param.getEditarQuema()?"Se actualizó correctamente el registro "+quemaProducto.getCodigo():
+            "Se registró correctamente el registro "+quemaProducto.getCodigo());
             return resp;
 		
   }

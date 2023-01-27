@@ -710,7 +710,7 @@ public class ReportesServiceImpl implements ReportesService {
 			HSSFFont blueFont = workbook.createFont();
 
 			blueFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
-    
+			//blueFont.setFontHeightInPoints((short)24.5);
 
 			HSSFCellStyle style = workbook.createCellStyle();
 			HSSFCellStyle style2 = workbook.createCellStyle();

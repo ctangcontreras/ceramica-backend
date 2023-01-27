@@ -220,7 +220,8 @@ public class VentaServiceImpl implements VentaService {
 
         Respuesta resp = new Respuesta<>();
         resp.setSuccess(venta.getResultado().equals(1) ? true : false);
-        resp.setMessage("Se registraron correctamente los datos");
+        resp.setMessage(param.getEditarVenta()?"Se actualizó correctamente el registro "+venta.getCodigo():
+        "Se registró correctamente el registro "+venta.getCodigo());
         return resp;
 
     }
