@@ -44,7 +44,7 @@ public class QuemaProductoController {
 	}
 
 	@PostMapping("/listaQuemaProducto")
-		public ResponseEntity<?> getListaUsuario(@RequestBody ListarQuemaProductoInputDto input){
+		public ResponseEntity<?> listarQuemaProducto(@RequestBody ListarQuemaProductoInputDto input){
 			try {
 				return ResponseEntity.ok(quemaProductoService.listarQuemaProducto(input));
 			} catch (Exception e) {
