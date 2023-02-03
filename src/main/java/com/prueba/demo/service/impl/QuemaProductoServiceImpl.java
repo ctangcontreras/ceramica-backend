@@ -139,6 +139,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     e.setFechaRegistro(element.getFechaRegistro());
                     e.setDescFechaInicio(element.getDescFechaInicio());
                     e.setDescFechaFin(element.getDescFechaFin());
+                    e.setDescTurno(element.getDescTurno());
 
                     DetalleQuemaProducto detalle = new DetalleQuemaProducto();
                     detalle.setIdQuemaProducto(element.getIdQuemaProducto());
