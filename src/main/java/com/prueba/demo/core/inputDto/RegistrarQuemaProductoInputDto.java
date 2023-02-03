@@ -18,6 +18,7 @@ public class RegistrarQuemaProductoInputDto {
     private Integer idQuemaProducto;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Lima")
     private Date fechaRegistro;
+    private String turno;
     private String horno;
     private Integer cantidadPaquete;
     private String observacion;

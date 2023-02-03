@@ -10,6 +10,7 @@ import lombok.Setter;
 public class QuemaProducto extends ModeloBase{
     private Integer idQuemaProducto;
     private Date fechaRegistro;
+    private String turno;
     private String horno;
     private Integer cantidadPaquete;
     private String codigo;

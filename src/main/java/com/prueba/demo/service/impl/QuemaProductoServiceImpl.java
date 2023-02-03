@@ -44,6 +44,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
             QuemaProducto quemaProducto = new QuemaProducto();
             quemaProducto.setIdQuemaProducto(param.getIdQuemaProducto());
             quemaProducto.setFechaRegistro(param.getFechaRegistro());
+            quemaProducto.setTurno(param.getTurno());
             quemaProducto.setHorno(param.getHorno());
             quemaProducto.setCantidadPaquete(param.getCantidadPaquete());
             quemaProducto.setObservacion(param.getObservacion());
@@ -133,6 +134,7 @@ public class QuemaProductoServiceImpl implements QuemaProductoService{
                     e.setDescripcionEstado(element.getDescripcionEstado());
                     e.setCodigo(element.getCodigo());
                     e.setActivo(element.getActivo());
+                    e.setTurno(element.getTurno());
                     e.setHorno(element.getHorno());
                     e.setFechaRegistro(element.getFechaRegistro());
                     e.setDescFechaInicio(element.getDescFechaInicio());

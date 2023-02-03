@@ -786,7 +786,7 @@ public class ReportesServiceImpl implements ReportesService {
 
 
 			fila = sheet.createRow(6);
-			String[] meses = { "", "Fecha Registro", "HORNO", "Cantidad Paquete", "Fecha Inicio Quema",
+			String[] meses = { "", "Fecha Registro", "Horno", "Cantidad Paquete", "Fecha Inicio Quema",
 					"Fecha Fin Quema", "Observación", "Personas" };
 
 			for (int i = 1; i < meses.length; i++) {

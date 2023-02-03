@@ -15,6 +15,7 @@ public class ListaQuemaProductoOutputDto {
     private String observacion;
     private String codigo;
     private Integer activo;
+    private String turno;
     private String horno;
     private Date fechaRegistro;
     private String descFechaRegistro;
