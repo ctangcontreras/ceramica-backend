@@ -144,6 +144,12 @@ public class ReportesServiceImpl implements ReportesService {
 					lista.setPrensa(element.getPrensa());
 					lista.setCodigoProductoInicial(element.getCodigoProductoInicial());
 					lista.setTipoLadrilloDesc(element.getTipoLadrilloDesc());
+					lista.setPesoLadrillo(element.getPesoLadrillo());
+					lista.setRoturaAlambre(element.getRoturaAlambre());
+					lista.setMezcla(element.getMezcla());
+					lista.setAmperaje(element.getAmperaje());
+					lista.setFallaMecanica(element.getFallaMecanica());
+					lista.setObservaciones(element.getObservaciones());
 					listaInicial.add(lista);
 				}
 				// Creamos nuestro libro de excel
@@ -186,31 +192,31 @@ public class ReportesServiceImpl implements ReportesService {
 
 				sheet.addMergedRegion(cellRangeAddress);
 
-				CreationHelper helper = workbook.getCreationHelper();
+				//CreationHelper helper = workbook.getCreationHelper();
 
 				// Creates the top-level drawing patriarch.
 				Drawing drawing = sheet.createDrawingPatriarch();
 
 	
-				ClientAnchor anchor = helper.createClientAnchor();
+				//ClientAnchor anchor = helper.createClientAnchor();
 			
-				anchor.setCol1(0); // Column B
-				anchor.setRow1(0); // Row 3 abajo
-				anchor.setCol2(0); // Column C
-				anchor.setRow2(1); // Row 4
+				//anchor.setCol1(0); // Column B
+				//anchor.setRow1(0); // Row 3 abajo
+				//anchor.setCol2(0); // Column C
+				//anchor.setRow2(1); // Row 4
 				double scale = 0.1;
 
 				// sheet.addMergedRegion(new CellRangeAddress(1,1,1,3));
 				Row fila = sheet.createRow(1);
-				Cell celda = fila.createCell(2);
+				Cell celda = fila.createCell(7);
 				celda.setCellValue("REPORTE PRODUCTO INICIAL");
 
 				// combinar y centrar
-				final int borderMediumDashed = CellStyle.BORDER_MEDIUM;
-				RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-				RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-				RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
-				RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
+				//final int borderMediumDashed = CellStyle.BORDER_MEDIUM;
+				//RegionUtil.setBorderTop(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
+				//RegionUtil.setBorderBottom(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
+				//RegionUtil.setBorderLeft(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
+				//RegionUtil.setBorderRight(borderMediumDashed, cellRangeAddress, sheet, sheet.getWorkbook());
 				celda.setCellStyle(style);
 
 				// sheet.addMergedRegion(cellRangeAddress);
@@ -241,9 +247,9 @@ public class ReportesServiceImpl implements ReportesService {
 
 				// Un arreglo con los nombres de los meses del año
 
-				fila = sheet.createRow(7);
-				String[] meses = { "", "Codigo", "Fecha Registro", "Prensa", "Tipo Ladrillo", "Cantidad Producida",
-						"Cantidad Estimada", "Diferencia" };
+				fila = sheet.createRow(5);
+				String[] meses = { "", "Codigo", "Fecha Registro", "Prensa", "Tipo Ladrillo", "Peso Ladrillo", "Rotura Alambre", "Mezcla", "Amperaje", "Cantidad Producida",
+						"Cantidad Estimada", "Diferencia", "Falla Mecánica", "Observaciones" };
 
 				for (int i = 1; i < meses.length; i++) {
 
@@ -255,7 +261,7 @@ public class ReportesServiceImpl implements ReportesService {
 
 				}
 
-				int numeroFila = 8;
+				int numeroFila = 6;
 				for (ListaProductoInicialOutputDto getListaProductoInicial : listaInicial) {
 					fila = sheet.createRow(numeroFila);
 
@@ -276,18 +282,43 @@ public class ReportesServiceImpl implements ReportesService {
 					celda.setCellStyle(style2);
 
 					celda = fila.createCell(5);
-					celda.setCellValue(getListaProductoInicial.getCantidadProducido());
+					celda.setCellValue("" + getListaProductoInicial.getPesoLadrillo());
 					celda.setCellStyle(style2);
+					
 
 					celda = fila.createCell(6);
+					celda.setCellValue(getListaProductoInicial.getRoturaAlambre());
+					celda.setCellStyle(style2);
+					
+
+					celda = fila.createCell(7);
+					celda.setCellValue(getListaProductoInicial.getMezcla());
+					celda.setCellStyle(style2);
+
+					celda = fila.createCell(8);
+					celda.setCellValue(getListaProductoInicial.getAmperaje());
+					celda.setCellStyle(style2);
+					
+
+					celda = fila.createCell(9);
+					celda.setCellValue(getListaProductoInicial.getCantidadProducido());
+					celda.setCellStyle(style2);
+					
+					celda = fila.createCell(10);
 					celda.setCellValue(getListaProductoInicial.getCantidadEstimada());
 					celda.setCellStyle(style2);
 
-					celda = fila.createCell(7);
+					celda = fila.createCell(11);
 					celda.setCellValue(getListaProductoInicial.getCantidadEstimada() - getListaProductoInicial.getCantidadProducido());
 					celda.setCellStyle(style2);
 
-						
+					celda = fila.createCell(12);
+					celda.setCellValue(getListaProductoInicial.getFallaMecanica());
+					celda.setCellStyle(style2);
+
+					celda = fila.createCell(13);
+					celda.setCellValue(getListaProductoInicial.getObservaciones());
+					celda.setCellStyle(style2);
 
 					numeroFila++;
 
@@ -1271,6 +1302,10 @@ public class ReportesServiceImpl implements ReportesService {
 				e.setCantidadProducida(element.getCantidadProducido());
 				e.setCantidadEstimada(element.getCantidadEstimada());
 				e.setDiferencia(element.getCantidadEstimada() - element.getCantidadProducido());
+				e.setPesoLadrillo(element.getPesoLadrillo());
+				e.setRoturaAlambre(element.getRoturaAlambre());
+				e.setMezcla(element.getMezcla());
+				e.setAmperaje(element.getAmperaje());
 				listaProductoInicial.add(e);
 			}
 				reporteProductoInicial.setListaProductoInicial(listaProductoInicial);

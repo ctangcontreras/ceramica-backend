@@ -48,6 +48,12 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 			productoInicial.setCantidadEstimada(param.getCantidadEstimada());
 			productoInicial.setUsuarioCreacion(param.getUsuarioCreacion());
 			productoInicial.setActivo(1);
+			productoInicial.setPesoLadrillo(param.getPesoLadrillo());
+			productoInicial.setRoturaAlambre(param.getRoturaAlambre());
+			productoInicial.setMezcla(param.getMezcla());
+			productoInicial.setAmperaje(param.getAmperaje());
+			productoInicial.setFallaMecanica(param.getFallaMecanica());
+			productoInicial.setObservaciones(param.getObservaciones());
 			
 			productoInicialMapper.getRegistrarProductoInicial(productoInicial);
 
@@ -91,6 +97,13 @@ public class ProductoInicialServiceImpl implements ProductoInicialService {
 				lista.setPrensa(element.getPrensa());
 				lista.setCodigoProductoInicial(element.getCodigoProductoInicial());
 				lista.setTipoLadrilloDesc(element.getTipoLadrilloDesc());
+				lista.setPesoLadrillo(element.getPesoLadrillo());
+				lista.setRoturaAlambre(element.getRoturaAlambre());
+				lista.setMezcla(element.getMezcla());
+				lista.setAmperaje(element.getAmperaje());
+				lista.setFallaMecanica(element.getFallaMecanica());
+				lista.setObservaciones(element.getObservaciones());
+				
 				listaInicial.add(lista);
 			}
 

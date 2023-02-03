@@ -1,4 +1,5 @@
 package com.prueba.demo.core.inputDto;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -21,6 +22,13 @@ public class ProductoInicialInputDto {
     private Integer usuarioCreacion;
     private Date fechaInicio;
     private Date fechaFin;
+    
+    private BigDecimal pesoLadrillo;
+    private Integer roturaAlambre;
+    private String mezcla;
+    private Integer amperaje;
+    private String fallaMecanica;
+    private String observaciones;
 
     private Boolean editarProductoInicial;
 

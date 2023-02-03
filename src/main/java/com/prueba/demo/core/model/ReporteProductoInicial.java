@@ -2,6 +2,7 @@ package com.prueba.demo.core.model;
 
 
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import lombok.Getter;
@@ -28,6 +29,10 @@ public class ReporteProductoInicial {
         private Integer cantidadProducida;
         private Integer cantidadEstimada;
         private Integer diferencia;
+        private BigDecimal pesoLadrillo;
+        private Integer roturaAlambre;
+        private String mezcla;
+        private Integer amperaje;
 
    
     

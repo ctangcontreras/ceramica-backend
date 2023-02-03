@@ -13,6 +13,12 @@
 			<result property="tipoLadrillo"  			column="CODIGO_TIPO_LADRILLO" />
 			<result property="codigoProductoInicial"  	column="CODIGO_PRODUCTO_INICIAL" />
 			<result property="prensa"  					column="C_CODIGO_PRENSA" />
+			<result property="pesoLadrillo"  			column="N_PESO_LADRILLO" />
+			<result property="roturaAlambre"  			column="N_ROTURA_ALAMBRE" />
+			<result property="mezcla"  					column="C_MEZCLA" />
+			<result property="amperaje"  				column="N_AMPERAJE" />
+			<result property="fallaMecanica"  			column="C_FALLA_MECANICA" />
+			<result property="observaciones"  			column="C_OBSERVACIONES" />
 	</resultMap>
 
 	<select id="getRegistrarProductoInicial" parameterType="com.prueba.demo.core.model.ProductoInicial" statementType="CALLABLE"
@@ -27,7 +33,13 @@
 			#{activo, jdbcType = INTEGER, mode = IN},
 			#{usuarioCreacion, jdbcType = INTEGER, mode = IN},
 			#{resultado, jdbcType = INTEGER, mode = OUT},
-			#{cCodigo, jdbcType = VARCHAR, mode = INOUT}
+			#{cCodigo, jdbcType = VARCHAR, mode = INOUT},
+			#{pesoLadrillo, jdbcType = DECIMAL, mode = IN},
+			#{roturaAlambre, jdbcType = INTEGER, mode = IN},
+			#{mezcla, jdbcType = VARCHAR, mode = IN},
+			#{amperaje, jdbcType = INTEGER, mode = IN},
+			#{fallaMecanica, jdbcType = VARCHAR, mode = IN},
+			#{observaciones, jdbcType = VARCHAR, mode = IN}
 		)
 		}
 	</select>

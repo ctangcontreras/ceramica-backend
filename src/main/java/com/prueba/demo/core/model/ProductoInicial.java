@@ -2,6 +2,7 @@ package com.prueba.demo.core.model;
 
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import lombok.Getter;
@@ -30,4 +31,11 @@ public class ProductoInicial extends ModeloBase{
 
     private String fechaInicioDesc;
     private String fechaFinDesc;
+
+    private BigDecimal pesoLadrillo;
+    private Integer roturaAlambre;
+    private String mezcla;
+    private Integer amperaje;
+    private String fallaMecanica;
+    private String observaciones;
 }
