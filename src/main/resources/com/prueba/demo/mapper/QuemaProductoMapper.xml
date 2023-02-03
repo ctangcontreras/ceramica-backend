@@ -15,6 +15,7 @@
 			<result property="descFechaFin"  	    column="C_FECHA_FIN" />
 			<result property="observacion"  	    column="C_OBSERVACION" />
 			<result property="turno"  	    		column="C_TURNO" />
+			<result property="descTurno"  	    	column="DESC_TURNO" />
 	</resultMap>
 
 	<select id="registrarQuemaProducto" parameterType="com.prueba.demo.core.model.QuemaProducto" statementType="CALLABLE"

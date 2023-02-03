@@ -23,4 +23,5 @@ public class QuemaProducto extends ModeloBase{
     private String descFechaInicio;
     private String descFechaFin;
     private String descripcionEstado;
+    private String descTurno;
 }

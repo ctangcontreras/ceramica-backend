@@ -23,6 +23,7 @@ public class ListaQuemaProductoOutputDto {
     private String descFechaInicio;
     private String descFechaFin;
     private String descripcionEstado;
+    private String descTurno;
 
     private ListarDetQuemaProductoOutputDto inicio;
     private ListarDetQuemaProductoOutputDto fin;

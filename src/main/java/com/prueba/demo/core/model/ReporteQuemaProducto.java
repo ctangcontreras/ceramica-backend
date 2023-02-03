@@ -20,6 +20,7 @@ public class ReporteQuemaProducto {
     public static class ListaQuema {
         private String fechaRegistro;
         private String horno;
+        private String turno;
         private String cantidadPaquete;
         private String fechaInicioQuema;
         private String fechaFinQuema;

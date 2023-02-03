@@ -663,6 +663,7 @@ public class ReportesServiceImpl implements ReportesService {
 			for (QuemaProducto element : listaQuemaProducto) {
 				e = new ListaQuemaProductoOutputDto();
 				e.setIdQuemaProducto(element.getIdQuemaProducto());
+				e.setDescTurno(element.getDescTurno());
 				e.setDescHorno(element.getDescHorno());
 				e.setDescFechaRegistro(element.getDescFechaRegistro());
 				e.setCantidadPaquete(element.getCantidadPaquete());
@@ -674,7 +675,7 @@ public class ReportesServiceImpl implements ReportesService {
 				e.setFechaRegistro(element.getFechaRegistro());
 				e.setDescFechaInicio(element.getDescFechaInicio());
 				e.setDescFechaFin(element.getDescFechaFin());
-
+				
 				DetalleQuemaProducto detalle = new DetalleQuemaProducto();
 				detalle.setIdQuemaProducto(element.getIdQuemaProducto());
 				List<DetalleQuemaProducto> listaDetalle = detQuemaProductoMapper.listarDetQuemaProducto(detalle);
@@ -817,7 +818,7 @@ public class ReportesServiceImpl implements ReportesService {
 
 
 			fila = sheet.createRow(6);
-			String[] meses = { "", "Fecha Registro", "Horno", "Cantidad Paquete", "Fecha Inicio Quema",
+			String[] meses = { "", "Fecha Registro", "Horno","Turno", "Cantidad Paquete", "Fecha Inicio Quema",
 					"Fecha Fin Quema", "Observación", "Personas" };
 
 			for (int i = 1; i < meses.length; i++) {
@@ -847,18 +848,22 @@ public class ReportesServiceImpl implements ReportesService {
 				celda.setCellStyle(style2);
 
 				celda = fila.createCell(3);
-				celda.setCellValue(element.getCantidadPaquete());		
+				celda.setCellValue(element.getDescTurno());			
 				celda.setCellStyle(style2);
 
 				celda = fila.createCell(4);
+				celda.setCellValue(element.getCantidadPaquete());		
+				celda.setCellStyle(style2);
+
+				celda = fila.createCell(5);
 				celda.setCellValue(element.getDescFechaInicio());	
 				celda.setCellStyle(style2);			
 
-				celda = fila.createCell(5);
+				celda = fila.createCell(6);
 				celda.setCellValue(element.getDescFechaFin());
 				celda.setCellStyle(style2);
 			
-				celda = fila.createCell(6);
+				celda = fila.createCell(7);
 				celda.setCellValue(element.getObservacion());
 				celda.setCellStyle(style2);
 				
@@ -872,7 +877,7 @@ public class ReportesServiceImpl implements ReportesService {
 
 	
 
-					celda = fila.createCell(7);
+					celda = fila.createCell(8);
 					celda.setCellValue(persona.getNombres() + " " + persona.getApellidoPaterno() + " "
 							+ persona.getApellidoMaterno());
 					celda.setCellStyle(style2);
@@ -905,6 +910,10 @@ public class ReportesServiceImpl implements ReportesService {
 				borderRegionUtil(cellRangeAddress2, sheet, workbook);
 
 				cellRangeAddress2 = new CellRangeAddress(numeroFila2, element.getListaPersona().size() + numeroFila2 - 1, 6, 6);
+				sheet.addMergedRegion(cellRangeAddress2);
+				borderRegionUtil(cellRangeAddress2, sheet, workbook);
+
+				cellRangeAddress2 = new CellRangeAddress(numeroFila2, element.getListaPersona().size() + numeroFila2 - 1, 7, 7);
 				sheet.addMergedRegion(cellRangeAddress2);
 				borderRegionUtil(cellRangeAddress2, sheet, workbook);
  
@@ -1361,6 +1370,7 @@ public class ReportesServiceImpl implements ReportesService {
 				e = new ReporteQuemaProducto.ListaQuema();
 				e.setFechaRegistro(element.getDescFechaRegistro());
 				e.setHorno(element.getDescHorno());
+				e.setTurno(element.getDescTurno());
 				e.setCantidadPaquete(element.getCantidadPaquete().toString());
 				e.setFechaInicioQuema(element.getDescFechaInicio());
 				e.setFechaFinQuema(element.getDescFechaFin());
