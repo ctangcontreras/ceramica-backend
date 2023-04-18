@@ -9,11 +9,11 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.prueba</groupId>
-	<artifactId>proyecto-base</artifactId>
+	<artifactId>ceramica-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>proyecto-base</name>
-	<description>proyecto-base for Spring Boot</description>
+	<name>ceramica-backend</name>
+	<description>ceramica-backend</description>
 	<properties>
 		<java.version>1.11</java.version>
 	</properties>
@@ -115,8 +115,12 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+				</configuration>
 			</plugin>
 		</plugins>
 
